@@ -1,0 +1,20 @@
+id: ms_018f0000-0000-7000-8000-000000000001
+schema_version: 0.1.0
+project_id: prj_018f0000-0000-7000-8000-000000000001
+title: The Glass Orchard
+kind: novel
+root_nodes:
+  - id: nd_018f0000-0000-7000-8000-000000000001
+    type: sheet_ref
+    sheet_id: sh_018f0000-0000-7000-8000-000000000001
+    title: Opening Scene
+    include: true
+    role: scene
+    children: []
+  - id: nd_018f0000-0000-7000-8000-000000000002
+    type: sheet_ref
+    sheet_id: sh_018f0000-0000-7000-8000-000000000002
+    title: The Letter in the Wall
+    include: true
+    role: scene
+    children: []

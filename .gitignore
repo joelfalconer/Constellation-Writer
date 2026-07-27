@@ -1,0 +1,12 @@
+node_modules/
+dist/
+build/
+target/
+coverage/
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# Reference project derived state
+fixtures/**/.workbench/

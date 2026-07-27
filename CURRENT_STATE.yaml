@@ -2,7 +2,7 @@ project_id: constellation_writer
 project_name: Constellation Writer
 repository: joelfalconer/Constellation-Writer
 status: foundation_in_progress
-phase: F0_project_definition
+phase: F0_project_definition_and_F1_contract_kernel
 updated_at: 2026-07-27
 
 product_identity: local_first_professional_writing_workbench
@@ -13,15 +13,24 @@ active_foundation_branch: foundation/project-establishment
 
 completed:
   - repository_bootstrapped
-  - foundation_branch_created
-  - initial_project_doctrine_recorded
+  - programme_charter_created
+  - run_contract_created
+  - deliverables_registered_and_mapped
+  - product_constitution_created
+  - canonicality_and_authority_matrices_created
+  - invariant_registry_created
+  - initial_adrs_created
+  - mutation_envelope_candidate_created
+  - common_contract_kernel_started
+  - integrated_specification_candidates_started
+  - minimal_reference_novel_fixture_started
 
 in_progress:
-  - programme_definition
-  - architecture_constitution
-  - deliverables_mapping
-  - shared_contract_kernel
-  - integrated_spec_reconciliation
+  - compile_contract_expansion
+  - schema_kernel_completion
+  - cross_spec_reconciliation
+  - reference_fixture_expansion
+  - foundation_backlog
 
 next_gate:
   id: F0
@@ -34,8 +43,9 @@ next_gate:
     - foundation_backlog_exists
 
 known_gaps:
-  - compile_contract_not_yet_integrated
+  - product_thesis_and_user_profiles_not_yet_written
+  - source_and_evidence_registry_not_yet_materialized
   - prototype_stress_assay_not_yet_written
-  - reference_vault_not_yet_materialized
-  - schema_validator_not_yet_implemented
+  - validator_not_yet_implemented
   - technology_stack_adrs_not_yet_selected
+  - draft_specs_not_yet_machine_validated

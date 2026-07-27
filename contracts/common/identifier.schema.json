@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constellation-writer.local/contracts/common/identifier.schema.json",
+  "title": "Constellation Writer Identifiers",
+  "type": "object",
+  "$defs": {
+    "ObjectId": {
+      "type": "string",
+      "pattern": "^[a-z]{2,8}_[0-9a-fA-F-]{20,40}$",
+      "description": "Typed UUIDv7 candidate identifier. Exact formatting remains proposed until ADR acceptance."
+    },
+    "ProjectId": {"$ref": "#/$defs/ObjectId"},
+    "SheetId": {"$ref": "#/$defs/ObjectId"},
+    "ManuscriptId": {"$ref": "#/$defs/ObjectId"},
+    "PlacementId": {"$ref": "#/$defs/ObjectId"},
+    "RevisionId": {"$ref": "#/$defs/ObjectId"},
+    "EntityId": {"$ref": "#/$defs/ObjectId"},
+    "ClaimId": {"$ref": "#/$defs/ObjectId"},
+    "EvidenceId": {"$ref": "#/$defs/ObjectId"},
+    "OperationId": {"$ref": "#/$defs/ObjectId"}
+  }
+}

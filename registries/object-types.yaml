@@ -1,0 +1,24 @@
+version: 0.1.0
+status: candidate
+
+object_types:
+  - project
+  - sheet
+  - sheet_metadata
+  - annotation
+  - manuscript
+  - placement
+  - compile_profile
+  - compile_artifact
+  - entity
+  - relation
+  - claim
+  - evidence
+  - source
+  - mutation
+  - patch_session
+  - snapshot
+  - archive
+  - conflict
+  - migration
+  - publication_state

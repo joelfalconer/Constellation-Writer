@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constellation-writer.local/contracts/common/revision.schema.json",
+  "title": "Revision Identity",
+  "type": "object",
+  "required": ["revision_id", "content_hash", "created_at"],
+  "properties": {
+    "revision_id": {"type": "string"},
+    "content_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "parent_revision_id": {"type": ["string", "null"]},
+    "operation_id": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}
