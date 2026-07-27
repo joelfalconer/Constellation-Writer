@@ -1,0 +1,45 @@
+version: 0.1.0
+status: candidate
+
+rules:
+  - each_field_has_exactly_one_canonical_owner
+  - mirrors_must_name_their_rebuild_source
+  - ephemeral_user_state_must_not_churn_canonical_files
+  - no_cache_may_overwrite_canonical_state_without_revision_validation
+
+authorities:
+  sheet:
+    id: sheet_frontmatter
+    body: sheet_markdown_body
+    title: sheet_sidecar
+    kind: sheet_frontmatter
+    status: sheet_sidecar
+    labels: sheet_sidecar
+    goal: sheet_sidecar
+    revision: revision_service_and_logged_mutation
+  manuscript:
+    id: manuscript_manifest
+    order: manuscript_manifest
+    nesting: manuscript_manifest
+    inclusion: manuscript_manifest_with_compile_profile_override
+    placement_title: manuscript_manifest_node
+    structural_role: manuscript_manifest_node
+  compile:
+    profile: compile_profile_file
+    resolved_plan: derived_compile_plan
+    output_source_map: compile_artifact_record
+  compendium:
+    entity: entity_record
+    relation: relation_record
+    claim: claim_record
+    evidence: evidence_record
+    canon_state: canon_state_record_or_claim_field_per_final_schema
+  mutation:
+    proposed_change: patch_session
+    applied_outcome: mutation_event_log
+    recovery_reference: mutation_envelope
+  user_state:
+    cursor: local_user_state
+    scroll: local_user_state
+    pane_layout: local_user_state
+    recent_items: local_user_state

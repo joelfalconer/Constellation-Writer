@@ -1,0 +1,41 @@
+project_id: constellation_writer
+project_name: Constellation Writer
+repository: joelfalconer/Constellation-Writer
+status: foundation_in_progress
+phase: F0_project_definition
+updated_at: 2026-07-27
+
+product_identity: local_first_professional_writing_workbench
+core_promise: calm_editor_brutal_recall_governed_transformation
+
+canonical_branch: main
+active_foundation_branch: foundation/project-establishment
+
+completed:
+  - repository_bootstrapped
+  - foundation_branch_created
+  - initial_project_doctrine_recorded
+
+in_progress:
+  - programme_definition
+  - architecture_constitution
+  - deliverables_mapping
+  - shared_contract_kernel
+  - integrated_spec_reconciliation
+
+next_gate:
+  id: F0
+  name: Project Defined
+  acceptance:
+    - project_identity_is_clear
+    - scope_and_non_goals_are_explicit
+    - canonical_authority_is_defined
+    - deliverables_have_destinations
+    - foundation_backlog_exists
+
+known_gaps:
+  - compile_contract_not_yet_integrated
+  - prototype_stress_assay_not_yet_written
+  - reference_vault_not_yet_materialized
+  - schema_validator_not_yet_implemented
+  - technology_stack_adrs_not_yet_selected

@@ -1,0 +1,17 @@
+version: 0.1.0
+status: candidate
+
+decisions:
+  - {id: ADR-0001, title: Contract-first foundation programme, status: proposed, file: ADR-0001-architecture-method.md}
+  - {id: ADR-0002, title: File-owned canonical state and rebuildable projections, status: proposed, file: ADR-0002-canonical-state.md}
+  - {id: ADR-0003, title: Four-part identity model, status: proposed, file: ADR-0003-identity-model.md}
+
+pending:
+  - desktop_shell_tauri_vs_electron
+  - editor_engine_codemirror_vs_prosemirror_vs_native
+  - canonical_id_format_uuidv7
+  - yaml_vs_json_for_manifests
+  - annotation_log_format
+  - compile_engine_architecture
+  - sqlite_fts5_vs_tantivy_upgrade_path
+  - snapshot_storage_location

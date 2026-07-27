@@ -1,0 +1,60 @@
+run_id: CW-FOUNDATION-001
+profile: system_design_strategy
+depth: deep
+status: active
+
+project_descriptor: >-
+  Establish Constellation Writer as a governed, local-first professional writing
+  workbench project and turn the existing research and candidate specifications
+  into a coherent architecture, executable reference vault, and build programme.
+
+decision_context: >-
+  The repository is new. Existing research and component drafts are valuable but
+  must be reconciled against shared authority, identity, mutation, recovery, and
+  validation contracts before promotion.
+
+primary_outcomes:
+  - coherent_architecture_constitution
+  - executable_reference_vault_and_vertical_slice
+  - governed_specification_and_delivery_package
+
+research_corpus:
+  - deep_research_professional_writing_workbench_report
+  - candidate_editor_vault_sheet_manifest_compendium_patch_recovery_specs
+  - research_os_v0_4_1_runtime_projection
+
+constraints:
+  - editor_remains_sovereign
+  - canonical_manuscript_text_remains_plain_text
+  - no_database_only_durable_truth
+  - no_silent_nonhuman_mutation
+  - core_writing_requires_no_network_or_account
+  - derived_layers_cannot_be_foundational_dependencies
+
+non_goals:
+  - realtime_collaboration_v1
+  - plugin_marketplace_v1
+  - full_graph_workspace_v1
+  - complete_franchise_management_ui_v1
+  - final_visual_design_system
+
+forbidden_inferences:
+  - feature_presence_proves_professional_usability
+  - plain_text_alone_proves_portability
+  - provenance_alone_proves_ai_trustworthiness
+  - plausible_schema_examples_are_validated_contracts
+
+acceptance_tests:
+  - all_canonical_schemas_validate
+  - each_field_has_one_canonical_owner
+  - project_rebuilds_after_derived_state_deletion
+  - manuscript_compiles_deterministically
+  - forced_crash_loses_no_acknowledged_text
+  - governed_patch_can_be_partially_accepted_and_reversed
+  - no_unresolved_critical_cross_spec_conflicts
+
+destination:
+  - architecture_decision
+  - reference_implementation
+  - implementation_backlog
+  - governed_specification_package
