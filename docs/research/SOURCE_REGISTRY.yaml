@@ -1,0 +1,61 @@
+version: 0.1.0
+status: initial
+
+sources:
+  - id: SRC-DR-001
+    title: Deep Research report on professional writing workbenches
+    type: deep_research_report
+    role: primary_product_and_benchmark_evidence
+    availability: conversation_attachment
+    validation_state: human_reviewed_in_conversation
+    notes: Strategic basis for editor sovereignty, assembly, local-first architecture, derived intelligence, and governed AI.
+
+  - id: SRC-CAND-EDITOR-001
+    title: Editor Doctrine v0.1 candidate
+    type: design_proposal
+    role: candidate_specification_input
+    validation_state: unreviewed
+
+  - id: SRC-CAND-VAULT-001
+    title: Project Vault Schema v0.1 candidate
+    type: design_proposal
+    role: candidate_specification_input
+    validation_state: unreviewed
+
+  - id: SRC-CAND-SHEET-001
+    title: Sheet Schema v0.1 candidate
+    type: design_proposal
+    role: candidate_specification_input
+    validation_state: unreviewed
+
+  - id: SRC-CAND-MANIFEST-001
+    title: Manuscript Manifest v0.1 candidate
+    type: design_proposal
+    role: candidate_specification_input
+    validation_state: unreviewed
+
+  - id: SRC-CAND-COMPENDIUM-001
+    title: Compendium Claim Ledger v0.1 candidate
+    type: design_proposal
+    role: candidate_specification_input
+    validation_state: unreviewed
+
+  - id: SRC-CAND-PATCH-001
+    title: PatchSession Spec v0.1 candidate
+    type: design_proposal
+    role: candidate_specification_input
+    validation_state: unreviewed
+
+  - id: SRC-CAND-RECOVERY-001
+    title: Recovery and Backup Spec v0.1 candidate
+    type: design_proposal
+    role: candidate_specification_input
+    validation_state: unreviewed
+
+  - id: SRC-ROS-041
+    title: Research OS v0.4.1 runtime projection
+    type: governance_runtime
+    role: process_and_lineage_governance
+    validation_state: provisional_operational_candidate
+
+source_rule: Candidate specifications are design proposals, not evidence of implementation fitness.

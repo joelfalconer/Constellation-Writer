@@ -1,8 +1,8 @@
 project_id: constellation_writer
 project_name: Constellation Writer
 repository: joelfalconer/Constellation-Writer
-status: foundation_in_progress
-phase: F0_project_definition_and_F1_contract_kernel
+status: foundation_review_ready
+phase: F0_candidate_ready_for_review
 updated_at: 2026-07-27
 
 product_identity: local_first_professional_writing_workbench
@@ -10,41 +10,43 @@ core_promise: calm_editor_brutal_recall_governed_transformation
 
 canonical_branch: main
 active_foundation_branch: foundation/project-establishment
+draft_pull_request: 1
+foundation_issue: 2
 
 completed:
   - repository_bootstrapped
   - programme_charter_created
   - run_contract_created
+  - product_thesis_created
+  - primary_user_and_anti_persona_profiles_created
+  - success_definition_created
   - deliverables_registered_and_mapped
   - product_constitution_created
   - canonicality_and_authority_matrices_created
   - invariant_registry_created
-  - initial_adrs_created
+  - initial_adrs_and_risks_created
   - mutation_envelope_candidate_created
   - common_contract_kernel_started
   - integrated_specification_candidates_started
   - minimal_reference_novel_fixture_started
+  - initial_backlog_and_sprint_zero_created
+  - run_receipt_and_context_manifest_created
 
 in_progress:
-  - compile_contract_expansion
+  - human_review_of_foundation_pr
   - schema_kernel_completion
-  - cross_spec_reconciliation
-  - reference_fixture_expansion
-  - foundation_backlog
+  - validator_implementation
+  - fixture_expansion
+  - prototype_stress_assay
+  - technology_adrs
 
 next_gate:
   id: F0
   name: Project Defined
-  acceptance:
-    - project_identity_is_clear
-    - scope_and_non_goals_are_explicit
-    - canonical_authority_is_defined
-    - deliverables_have_destinations
-    - foundation_backlog_exists
+  state: candidate_ready_for_human_review
 
 known_gaps:
-  - product_thesis_and_user_profiles_not_yet_written
-  - source_and_evidence_registry_not_yet_materialized
+  - source_evidence_units_not_yet_atomized
   - prototype_stress_assay_not_yet_written
   - validator_not_yet_implemented
   - technology_stack_adrs_not_yet_selected

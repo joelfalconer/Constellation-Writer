@@ -1,0 +1,34 @@
+id: CBM-CW-FOUNDATION-001
+run_id: CW-FOUNDATION-001
+built_at: 2026-07-27T21:15:00+10:00
+
+instruction_files_and_versions:
+  - Research OS v0.4.1 Project Runtime instruction
+  - research_os_v0_4_1.pipeline.yaml
+  - research_os_v0_4_1.profiles.yaml
+  - research_os_v0_4_1.controls.yaml
+  - research_os_v0_4_1.context_lineage.yaml
+  - research_os_v0_3.methods.yaml as degraded method reference
+
+model_and_harness:
+  model_family: GPT-5.6 Thinking
+  harness: ChatGPT with GitHub connector
+
+tool_availability:
+  - GitHub repository read and write
+  - local container file inspection
+
+selected_context:
+  - Deep Research workbench report synthesis from conversation
+  - Existing candidate component specifications from conversation
+  - Research OS v0.4.1 runtime projection
+
+omissions:
+  - research_os_v0_4_1.methods.yaml unavailable
+  - research_os_v0_4_1.records.yaml unavailable
+  - research_os_v0_4_1.criteria.yaml unavailable
+  - full original candidate documents were not available as repository files
+
+expected_effect: >-
+  Foundation documents preserve the major decisions and revisions from the
+  conversation but require later source atomization and deterministic validation.

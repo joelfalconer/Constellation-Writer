@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.2-candidate — 2026-07-27
+
+- Added product thesis, user profiles, anti-personas, and success definition.
+- Added initial source and contradiction registries.
+- Added prioritized backlog and Sprint Zero plan.
+- Added Research OS context build manifest and run receipt.
+- Marked the F0 package ready for human review.
+
 ## 0.1.1-candidate — 2026-07-27
 
 - Added the Mutation Envelope as the shared transformation substrate.
