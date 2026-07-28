@@ -1,12 +1,11 @@
-version: 0.1.0
+version: 0.2.0
 status: candidate
-
 sheet_kinds: [manuscript, material, note, research, source_extract, script, poem, fragment, outline, synopsis, appendix, frontmatter, backmatter]
 manuscript_kinds: [novel, nonfiction_book, essay, essay_collection, article, screenplay, poetry_collection, research_report, editorial_package, serial, anthology, excerpt, custom]
 compile_roles: [part, chapter, scene, section, subsection, title_page, copyright, dedication, epigraph, preface, toc, acknowledgements, appendix, bibliography, glossary, notes, script_act, script_sequence, script_scene, poem, divider, material]
-canonicality_classes: [canonical, logged, derived, ephemeral]
-mutation_states: [proposed, preflight, reviewing, accepted, rejected, partial, applying, applied, failed, stale, superseded, reverted]
-consequence_levels: [transient, canonical_low, canonical_high, destructive]
+canonicality_classes: [canonical_state, canonical_event, derived, ephemeral, external_reference]
+mutation_states: [proposed, reviewing, accepted, partially_accepted, rejected, applying, applied, failed, stale, rebased, superseded, reverted, archived]
+consequence_levels: [safe, reversible_local, canonical_low, canonical_high, destructive, ai_mutating]
 canon_states: [candidate, active, locked, publication_locked, contradicted, deprecated, alternate, rejected]
 evidence_bases: [manual, observed, inferred, imported, uncertain]
 validation_states: [unreviewed, machine_checked, human_reviewed, tested, replicated, contradicted, falsified, superseded]

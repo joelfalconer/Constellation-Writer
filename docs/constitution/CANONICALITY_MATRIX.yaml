@@ -1,33 +1,33 @@
-version: 0.1.0
+version: 0.2.0
 status: candidate
-
 classes:
-  canonical: durable_project_truth
-  logged: durable_event_or_history_truth
+  canonical_state: current_durable_project_truth
+  canonical_event: durable_history_or_governance_truth
   derived: rebuildable_projection
   ephemeral: session_or_preview_state
-
+  external_reference: durable_locator_outside_vault_with_explicit_risk
 entries:
-  - {state: sheet_identity, owner: sheet_frontmatter, class: canonical, mirrors: [sqlite_catalog]}
-  - {state: sheet_prose, owner: sheet_markdown_body, class: canonical, mirrors: [editor_buffer, full_text_index]}
-  - {state: sheet_local_metadata, owner: sheet_sidecar, class: canonical, mirrors: [sqlite_catalog]}
-  - {state: annotations, owner: annotation_log, class: canonical, mirrors: [sqlite_catalog]}
-  - {state: manuscript_identity, owner: manuscript_manifest, class: canonical, mirrors: [sqlite_catalog]}
-  - {state: manuscript_order, owner: manuscript_manifest, class: canonical, mirrors: [binder_projection, sqlite_catalog]}
-  - {state: manuscript_placement, owner: manuscript_manifest_node, class: canonical, mirrors: [sqlite_catalog]}
-  - {state: compile_profile, owner: compile_profile_file, class: canonical, mirrors: [compile_cache]}
-  - {state: entity, owner: entity_record, class: canonical, mirrors: [sqlite_catalog, graph_projection]}
-  - {state: claim, owner: claim_record, class: canonical, mirrors: [sqlite_catalog, graph_projection]}
-  - {state: evidence, owner: evidence_record, class: canonical, mirrors: [sqlite_catalog]}
-  - {state: transformation_history, owner: mutation_and_patch_logs, class: logged, mirrors: [sqlite_catalog]}
-  - {state: migration_history, owner: migration_logs, class: logged, mirrors: [sqlite_catalog]}
-  - {state: snapshot_state, owner: snapshot_manifest, class: logged, mirrors: [backup_status_index]}
-  - {state: conflict_resolution, owner: conflict_and_mutation_logs, class: logged, mirrors: [sqlite_catalog]}
+  - {state: sheet_identity, owner: sheet_frontmatter, class: canonical_state, mirrors: [sqlite_catalog]}
+  - {state: sheet_prose, owner: sheet_markdown_body, class: canonical_state, mirrors: [editor_buffer, full_text_index]}
+  - {state: sheet_local_metadata, owner: sheet_sidecar, class: canonical_state, mirrors: [sqlite_catalog]}
+  - {state: annotations, owner: annotation_log, class: canonical_state, mirrors: [sqlite_catalog]}
+  - {state: manuscript_identity, owner: manuscript_manifest, class: canonical_state, mirrors: [sqlite_catalog]}
+  - {state: manuscript_order, owner: manuscript_manifest, class: canonical_state, mirrors: [binder_projection, sqlite_catalog]}
+  - {state: manuscript_placement, owner: manuscript_manifest_node, class: canonical_state, mirrors: [sqlite_catalog]}
+  - {state: compile_profile, owner: compile_profile_file, class: canonical_state, mirrors: [compile_cache]}
+  - {state: entity, owner: entity_record, class: canonical_state, mirrors: [sqlite_catalog, graph_projection]}
+  - {state: claim, owner: claim_record, class: canonical_state, mirrors: [sqlite_catalog, graph_projection]}
+  - {state: evidence, owner: evidence_record, class: canonical_state, mirrors: [sqlite_catalog]}
+  - {state: transformation_history, owner: mutation_and_patch_logs, class: canonical_event, mirrors: [sqlite_catalog]}
+  - {state: migration_history, owner: migration_logs, class: canonical_event, mirrors: [sqlite_catalog]}
+  - {state: snapshot_state, owner: snapshot_manifest, class: canonical_event, mirrors: [backup_status_index]}
+  - {state: conflict_resolution, owner: conflict_and_mutation_logs, class: canonical_event, mirrors: [sqlite_catalog]}
+  - {state: publication_state, owner: publication_state_record, class: canonical_event, mirrors: [sqlite_catalog]}
+  - {state: external_asset_locator, owner: asset_or_source_record, class: external_reference, mirrors: [availability_cache]}
   - {state: cursor_and_scroll, owner: local_user_state, class: ephemeral, mirrors: []}
   - {state: recent_context, owner: local_user_state, class: ephemeral, mirrors: []}
   - {state: search_results, owner: search_index, class: derived, mirrors: []}
   - {state: graph_view, owner: graph_projection, class: derived, mirrors: []}
   - {state: semantic_index, owner: embedding_cache, class: derived, mirrors: []}
   - {state: compile_preview, owner: preview_cache, class: derived, mirrors: []}
-
 invariant: deleting_all_derived_and_ephemeral_state_must_not_destroy_project_truth
