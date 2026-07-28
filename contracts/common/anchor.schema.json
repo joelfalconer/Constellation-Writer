@@ -5,14 +5,15 @@
   "type": "object",
   "required": ["object_id", "revision_id", "exact"],
   "properties": {
-    "object_id": {"type": "string"},
-    "revision_id": {"type": "string"},
-    "exact": {"type": "string"},
+    "object_id": {"$ref": "identifier.schema.json#/$defs/SheetId"},
+    "revision_id": {"$ref": "identifier.schema.json#/$defs/RevisionId"},
+    "exact": {"type": "string", "minLength": 1},
     "prefix": {"type": "string", "default": ""},
     "suffix": {"type": "string", "default": ""},
     "structural_path": {"type": "array", "items": {"type": "string"}},
     "line_start_hint": {"type": ["integer", "null"], "minimum": 1},
-    "line_end_hint": {"type": ["integer", "null"], "minimum": 1}
+    "line_end_hint": {"type": ["integer", "null"], "minimum": 1},
+    "confidence": {"enum": ["exact", "high", "medium", "low", "failed"]}
   },
   "additionalProperties": false
 }

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constellation-writer.local/contracts/common/timestamp.schema.json",
+  "title": "Constellation Writer Timestamps",
+  "$defs": {
+    "Instant": {"type": "string", "format": "date-time"},
+    "TimeZone": {"type": "string", "minLength": 1},
+    "TemporalRecord": {
+      "type": "object",
+      "required": ["created_at", "modified_at"],
+      "properties": {
+        "created_at": {"$ref": "#/$defs/Instant"},
+        "modified_at": {"$ref": "#/$defs/Instant"}
+      },
+      "additionalProperties": true
+    }
+  }
+}

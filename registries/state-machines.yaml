@@ -1,0 +1,64 @@
+version: 0.1.0
+status: candidate
+machines:
+  save:
+    initial: clean
+    states: [clean, dirty, saving, saved, failed_recoverable, conflict_detected, suspended]
+    transitions:
+      - {from: clean, event: edit, to: dirty}
+      - {from: saved, event: edit, to: dirty}
+      - {from: dirty, event: autosave_due, to: saving}
+      - {from: saving, event: write_verified, to: saved}
+      - {from: saving, event: write_failed_buffered, to: failed_recoverable}
+      - {from: saving, event: external_change_detected, to: conflict_detected}
+      - {from: failed_recoverable, event: retry_success, to: saved}
+  mutation:
+    initial: proposed
+    states: [proposed, reviewing, accepted, partially_accepted, rejected, applying, applied, failed, stale, superseded, reverted]
+    transitions:
+      - {from: proposed, event: open_review, to: reviewing}
+      - {from: reviewing, event: accept_all, to: accepted}
+      - {from: reviewing, event: accept_some, to: partially_accepted}
+      - {from: reviewing, event: reject, to: rejected}
+      - {from: accepted, event: apply, to: applying}
+      - {from: partially_accepted, event: apply, to: applying}
+      - {from: applying, event: verified, to: applied}
+      - {from: applying, event: application_error, to: failed}
+      - {from: proposed, event: base_changed, to: stale}
+      - {from: applied, event: inverse_applied, to: reverted}
+  compile:
+    initial: requested
+    states: [requested, resolving, validated, planned, transforming, rendering, verifying, completed, failed, stale]
+    transitions:
+      - {from: requested, event: freeze_inputs, to: resolving}
+      - {from: resolving, event: resolution_valid, to: validated}
+      - {from: validated, event: plan_built, to: planned}
+      - {from: planned, event: transform, to: transforming}
+      - {from: transforming, event: render, to: rendering}
+      - {from: rendering, event: artifact_written, to: verifying}
+      - {from: verifying, event: checks_pass, to: completed}
+      - {from: [resolving, validated, planned, transforming, rendering, verifying], event: error, to: failed}
+      - {from: [validated, planned], event: canonical_input_changed, to: stale}
+  canon:
+    initial: candidate
+    states: [candidate, active, locked, publication_locked, contradicted, alternate, deprecated, rejected]
+    transitions:
+      - {from: candidate, event: accept, to: active}
+      - {from: candidate, event: reject, to: rejected}
+      - {from: active, event: lock, to: locked}
+      - {from: locked, event: publish, to: publication_locked}
+      - {from: [active, locked, publication_locked], event: contradiction_detected, to: contradicted}
+      - {from: contradicted, event: scope_as_alternate, to: alternate}
+      - {from: [active, contradicted, alternate], event: retire, to: deprecated}
+  recovery:
+    initial: detected
+    states: [detected, preserved, assessed, previewed, restoring, restored, validated, failed, deferred]
+    transitions:
+      - {from: detected, event: preserve_versions, to: preserved}
+      - {from: preserved, event: assess, to: assessed}
+      - {from: assessed, event: show_preview, to: previewed}
+      - {from: previewed, event: confirm_restore, to: restoring}
+      - {from: restoring, event: writes_complete, to: restored}
+      - {from: restored, event: validation_passes, to: validated}
+      - {from: [assessed, previewed], event: defer, to: deferred}
+      - {from: restoring, event: error, to: failed}

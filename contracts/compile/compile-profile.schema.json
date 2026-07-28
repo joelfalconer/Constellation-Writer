@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constellation-writer.local/contracts/compile/compile-profile.schema.json",
+  "title": "Compile Profile",
+  "type": "object",
+  "required": ["id", "schema_version", "name", "target", "manuscript_id", "output"],
+  "properties": {
+    "id": {"$ref": "../common/identifier.schema.json#/$defs/CompileProfileId"},
+    "schema_version": {"type": "string"},
+    "name": {"type": "string"},
+    "target": {"enum": ["markdown", "html", "docx", "epub", "pdf", "fountain"]},
+    "manuscript_id": {"$ref": "../common/identifier.schema.json#/$defs/ManuscriptId"},
+    "output": {"type": "object", "required": ["path"], "properties": {"path": {"type": "string"}, "standalone": {"type": "boolean"}}, "additionalProperties": true},
+    "include_comments": {"type": "boolean"},
+    "fail_on": {"type": "array", "items": {"type": "string"}},
+    "role_transforms": {"type": "object"}
+  },
+  "additionalProperties": true
+}

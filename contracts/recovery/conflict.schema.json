@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constellation-writer.local/contracts/recovery/conflict.schema.json",
+  "title": "File Conflict Manifest",
+  "type": "object",
+  "required": ["id", "schema_version", "object_type", "object_id", "path", "created_at", "base", "current_app_version", "external_version", "status"],
+  "properties": {
+    "id": {"$ref": "../common/identifier.schema.json#/$defs/ConflictId"},
+    "schema_version": {"type": "string"},
+    "object_type": {"type": "string"},
+    "object_id": {"type": "string"},
+    "path": {"type": "string"},
+    "created_at": {"$ref": "../common/timestamp.schema.json#/$defs/Instant"},
+    "base": {"type": "object"},
+    "current_app_version": {"type": "object"},
+    "external_version": {"type": "object"},
+    "status": {"enum": ["unresolved", "resolved", "deferred"]},
+    "resolution": {"type": ["object", "null"]}
+  },
+  "additionalProperties": true
+}

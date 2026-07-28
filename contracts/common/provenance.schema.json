@@ -1,20 +1,23 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://constellation-writer.local/contracts/common/provenance.schema.json",
-  "title": "Transformation Provenance",
+  "title": "Provenance Record",
   "type": "object",
   "required": ["source_kind", "actor_id", "created_at", "user_initiated"],
   "properties": {
     "source_kind": {"enum": ["human", "ai", "script", "import", "migration", "recovery", "system"]},
-    "actor_id": {"type": "string"},
-    "created_at": {"type": "string", "format": "date-time"},
+    "actor_id": {"type": "string", "minLength": 1},
+    "created_at": {"$ref": "timestamp.schema.json#/$defs/Instant"},
     "user_initiated": {"type": "boolean"},
     "model": {"type": ["string", "null"]},
     "provider": {"type": ["string", "null"]},
     "prompt_id": {"type": ["string", "null"]},
     "context_pack_id": {"type": ["string", "null"]},
     "script_id": {"type": ["string", "null"]},
-    "source_hash": {"type": ["string", "null"]}
+    "script_version": {"type": ["string", "null"]},
+    "source_locator": {"type": ["string", "null"]},
+    "reviewed_by": {"type": ["string", "null"]},
+    "reviewed_at": {"anyOf": [{"$ref": "timestamp.schema.json#/$defs/Instant"}, {"type": "null"}]}
   },
   "additionalProperties": false
 }

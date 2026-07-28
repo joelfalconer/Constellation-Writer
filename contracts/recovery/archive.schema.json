@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constellation-writer.local/contracts/recovery/archive.schema.json",
+  "title": "Archive Manifest",
+  "type": "object",
+  "required": ["id", "schema_version", "project_id", "created_at", "archive_kind", "included", "privacy", "checksums"],
+  "properties": {
+    "id": {"$ref": "../common/identifier.schema.json#/$defs/ArchiveId"},
+    "schema_version": {"type": "string"},
+    "project_id": {"$ref": "../common/identifier.schema.json#/$defs/ProjectId"},
+    "created_at": {"$ref": "../common/timestamp.schema.json#/$defs/Instant"},
+    "archive_kind": {"enum": ["full_private_archive", "editor_handoff_archive", "migration_archive", "publication_archive"]},
+    "included": {"type": "object"},
+    "privacy": {"type": "object"},
+    "checksums": {"type": "string"}
+  },
+  "additionalProperties": true
+}

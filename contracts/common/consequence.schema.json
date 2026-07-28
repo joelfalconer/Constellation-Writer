@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constellation-writer.local/contracts/common/consequence.schema.json",
+  "title": "Operation Consequence",
+  "$defs": {
+    "ConsequenceLevel": {"enum": ["safe", "reversible_local", "canonical_low", "canonical_high", "destructive", "ai_mutating"]},
+    "ConsequencePolicy": {
+      "type": "object",
+      "required": ["level", "review_required", "snapshot_policy"],
+      "properties": {
+        "level": {"$ref": "#/$defs/ConsequenceLevel"},
+        "review_required": {"type": "boolean"},
+        "snapshot_policy": {"enum": ["none", "recommended", "required"]},
+        "network_allowed": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    }
+  }
+}

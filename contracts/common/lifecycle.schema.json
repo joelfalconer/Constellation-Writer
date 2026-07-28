@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constellation-writer.local/contracts/common/lifecycle.schema.json",
+  "title": "Shared Lifecycles",
+  "$defs": {
+    "ArtifactStatus": {"enum": ["planned", "draft", "candidate", "validated", "accepted", "superseded", "deprecated", "archived"]},
+    "ReviewState": {"enum": ["unreviewed", "machine_checked", "human_reviewed", "tested", "contradicted", "falsified", "superseded"]},
+    "CanonState": {"enum": ["candidate", "active", "locked", "publication_locked", "contradicted", "deprecated", "alternate", "rejected"]},
+    "EntityState": {"enum": ["stub", "candidate", "active", "locked", "deprecated", "merged"]},
+    "PatchState": {"enum": ["proposed", "reviewing", "accepted", "partially_accepted", "rejected", "applying", "applied", "failed", "stale", "rebased", "superseded", "reverted", "archived"]}
+  }
+}

@@ -5,11 +5,11 @@
   "type": "object",
   "required": ["revision_id", "content_hash", "created_at"],
   "properties": {
-    "revision_id": {"type": "string"},
+    "revision_id": {"$ref": "identifier.schema.json#/$defs/RevisionId"},
     "content_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
-    "created_at": {"type": "string", "format": "date-time"},
-    "parent_revision_id": {"type": ["string", "null"]},
-    "operation_id": {"type": ["string", "null"]}
+    "created_at": {"$ref": "timestamp.schema.json#/$defs/Instant"},
+    "parent_revision_id": {"anyOf": [{"$ref": "identifier.schema.json#/$defs/RevisionId"}, {"type": "null"}]},
+    "operation_id": {"anyOf": [{"$ref": "identifier.schema.json#/$defs/OperationId"}, {"type": "null"}]}
   },
   "additionalProperties": false
 }

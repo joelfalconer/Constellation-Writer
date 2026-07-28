@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constellation-writer.local/contracts/compendium/entity.schema.json",
+  "title": "Compendium Entity",
+  "type": "object",
+  "required": ["id", "schema_version", "type", "canonical_name", "status", "created_at", "modified_at"],
+  "properties": {
+    "id": {"$ref": "../common/identifier.schema.json#/$defs/EntityId"},
+    "schema_version": {"type": "string"},
+    "type": {"enum": ["character", "place", "organization", "faction", "artifact", "object", "event", "motif", "theme", "concept", "species", "culture", "language", "work", "publication", "custom"]},
+    "canonical_name": {"type": "string"},
+    "aliases": {"type": "array", "items": {"type": "string"}},
+    "status": {"enum": ["stub", "candidate", "active", "locked", "deprecated", "merged"]},
+    "summary": {"type": ["string", "null"]},
+    "created_at": {"$ref": "../common/timestamp.schema.json#/$defs/Instant"},
+    "modified_at": {"$ref": "../common/timestamp.schema.json#/$defs/Instant"}
+  },
+  "additionalProperties": true
+}

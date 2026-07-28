@@ -1,22 +1,28 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://constellation-writer.local/contracts/common/identifier.schema.json",
-  "title": "Constellation Writer Identifiers",
-  "type": "object",
+  "title": "Constellation Writer Typed UUIDv7 Identifiers",
   "$defs": {
-    "ObjectId": {
-      "type": "string",
-      "pattern": "^[a-z]{2,8}_[0-9a-fA-F-]{20,40}$",
-      "description": "Typed UUIDv7 candidate identifier. Exact formatting remains proposed until ADR acceptance."
-    },
-    "ProjectId": {"$ref": "#/$defs/ObjectId"},
-    "SheetId": {"$ref": "#/$defs/ObjectId"},
-    "ManuscriptId": {"$ref": "#/$defs/ObjectId"},
-    "PlacementId": {"$ref": "#/$defs/ObjectId"},
-    "RevisionId": {"$ref": "#/$defs/ObjectId"},
-    "EntityId": {"$ref": "#/$defs/ObjectId"},
-    "ClaimId": {"$ref": "#/$defs/ObjectId"},
-    "EvidenceId": {"$ref": "#/$defs/ObjectId"},
-    "OperationId": {"$ref": "#/$defs/ObjectId"}
+    "ProjectId": {"type": "string", "pattern": "^prj_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "SheetId": {"type": "string", "pattern": "^sh_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "ManuscriptId": {"type": "string", "pattern": "^ms_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "PlacementId": {"type": "string", "pattern": "^nd_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "RevisionId": {"type": "string", "pattern": "^rev_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "EntityId": {"type": "string", "pattern": "^ent_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "ClaimId": {"type": "string", "pattern": "^clm_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "EvidenceId": {"type": "string", "pattern": "^ev_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "OperationId": {"type": "string", "pattern": "^op_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "PatchSessionId": {"type": "string", "pattern": "^ps_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "PatchId": {"type": "string", "pattern": "^pch_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "SnapshotId": {"type": "string", "pattern": "^snap_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "ConflictId": {"type": "string", "pattern": "^cf_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "ArchiveId": {"type": "string", "pattern": "^arch_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "AnnotationId": {"type": "string", "pattern": "^ann_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "SourceId": {"type": "string", "pattern": "^src_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "CompileProfileId": {"type": "string", "pattern": "^cp_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "StyleMapId": {"type": "string", "pattern": "^sty_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+    "ObjectId": {"oneOf": [
+      {"$ref": "#/$defs/ProjectId"}, {"$ref": "#/$defs/SheetId"}, {"$ref": "#/$defs/ManuscriptId"}, {"$ref": "#/$defs/PlacementId"}, {"$ref": "#/$defs/RevisionId"}, {"$ref": "#/$defs/EntityId"}, {"$ref": "#/$defs/ClaimId"}, {"$ref": "#/$defs/EvidenceId"}, {"$ref": "#/$defs/OperationId"}, {"$ref": "#/$defs/PatchSessionId"}, {"$ref": "#/$defs/PatchId"}, {"$ref": "#/$defs/SnapshotId"}, {"$ref": "#/$defs/ConflictId"}, {"$ref": "#/$defs/ArchiveId"}, {"$ref": "#/$defs/AnnotationId"}, {"$ref": "#/$defs/SourceId"}, {"$ref": "#/$defs/CompileProfileId"}, {"$ref": "#/$defs/StyleMapId"}
+    ]}
   }
 }
