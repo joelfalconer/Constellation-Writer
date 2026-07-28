@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.0-candidate — 2026-07-28
+
+- Added product information architecture, core workflow catalogue, command palette, typography, modes, navigation-return, Inspector, accessibility, and professional ergonomics contracts.
+- Added Search and Recall, Import and Interoperability, Assets and Sources, Annotations, Local User State, Privacy and Security, Sync-Neutral Files, and Publication State specifications.
+- Reconciled canonicality, lifecycle, consequence, mutation, and validation enums.
+- Upgraded the foundation validator with authority drift, enum drift, duplicate Sheet ID, missing reference, annotation, and Compendium checks.
+- Added negative validator tests and CI test execution.
+- Added external editor, accessibility, and privacy validation matrices.
+- Added F0/F1 gate reports, development setup, release policy, workstreams, milestones, and decision calendar.
+- Opened technology spike issues #3–#5 and durable substrate vertical slice #6.
+
 ## 0.2.0-candidate — 2026-07-28
 
 - Completed the first common JSON Schema kernel and typed UUIDv7 definitions.

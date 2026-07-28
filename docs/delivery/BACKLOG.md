@@ -1,42 +1,50 @@
-# Initial Backlog
+# Prioritized Backlog
 
-## P0: Foundation gate blockers
+## P0: Current gate blockers
 
-1. Accept or revise the Product Constitution.
-2. Decide typed UUIDv7 format and update identifier schema.
-3. Complete timestamp, lifecycle, consequence, validation, and recovery-error schemas.
-4. Define state-machine registry.
-5. Implement validator CLI skeleton.
-6. Add cross-spec enum and canonical-owner checks.
-7. Expand reference fixture with compile profile, excluded Sheet, annotation, entity, claim, evidence, patch, snapshot, conflict, and archive.
-8. Write Prototype Stress Assay and failure-injection matrix.
-9. Create ADRs for desktop shell, editor engine, and compile architecture.
-10. Validate draft PR contents before promotion.
+1. Confirm GitHub Actions executes the validator and tests on PR #1.
+2. Repair any schema, reference, or negative-test failures.
+3. Human-review and accept or revise F0 Constitution, scope, canonicality, and authority package.
+4. Atomize the original product research into evidence units and coverage records.
+5. Execute Tauri/Electron shell spike #3.
+6. Execute CodeMirror/rival editor spike #4.
+7. Execute Workbench AST/Pandoc compile spike #5.
+8. Emit F0 decision receipt and F1 machine-validation receipt.
 
-## P1: Executable substrate
+## P1: Durable substrate vertical slice #6
 
 1. Project scanner and canonical file loader.
-2. Atomic Sheet write and recovery buffer.
-3. SQLite catalog builder and rebuild command.
-4. Manuscript manifest renderer.
-5. Minimal Markdown/HTML compiler with source map.
-6. Mutation Envelope application service.
-7. Snapshot and archive service.
-8. Conflict preservation and comparison fixture.
+2. Atomic Sheet write and revision receipt.
+3. Recovery buffer and forced-termination test.
+4. SQLite catalog builder, deletion, and rebuild command.
+5. Manuscript manifest renderer and reorder operation.
+6. Mutation Envelope preconditions and application service.
+7. Snapshot, archive, and restore service.
+8. External conflict preservation and three-version compare model.
 
-## P2: Writer chair
+## P2: Manuscript machine
 
-1. Editor shell prototype.
-2. Draft and Revise modes.
-3. Quick open and project search.
-4. Keyboard command registry.
-5. Pane return-state preservation.
-6. Typography and fatigue study.
+1. Resolved compile plan and Workbench AST.
+2. Markdown and HTML direct renderers.
+3. DOCX/EPUB adapter candidate.
+4. QA report and output source map.
+5. Golden compile tests.
+6. Publication archive.
 
-## P3: Governed transformation and continuity boundary
+## P3: Writer chair
+
+1. Desktop editor shell after spike decision.
+2. Draft, Revise, and Focus modes.
+3. Quick open, command palette, and literal search.
+4. Keyboard command implementation.
+5. Return-token and pane-state preservation.
+6. Typography, IME, accessibility, and fatigue assay.
+
+## P4: Governed transformation and continuity boundary
 
 1. PatchSession review UI.
-2. Whole-patch then hunk-level acceptance.
-3. Reversal workflow.
-4. Entity, claim, and evidence inspector.
-5. Minimal continuity conflict record.
+2. Whole-patch and hunk-level acceptance.
+3. Stale patch detection and rebase review.
+4. Inverse patch and snapshot rollback.
+5. Entity, claim, evidence, and conflict Inspector.
+6. Candidate extraction only after privacy/context controls exist.
