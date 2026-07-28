@@ -1,0 +1,16 @@
+version: 0.1.0
+status: candidate
+relationship: implementation_evidence_register_for_ANTI_FEATURE_CONSTITUTION
+items:
+  - {id: AF-001, anti_feature: dashboard_primary_shell, protected_value: editor_sovereignty, test: editor_is_dominant_default_surface}
+  - {id: AF-002, anti_feature: block_manuscript_storage, protected_value: plain_text_portability, test: Sheet_opens_in_generic_editor}
+  - {id: AF-003, anti_feature: cloud_only_projects, protected_value: local_first_operation, test: core_loop_offline}
+  - {id: AF-004, anti_feature: account_required_for_local_writing, protected_value: durable_access, test: create_and_open_without_login}
+  - {id: AF-005, anti_feature: graph_first_navigation, protected_value: manuscript_centrality, test: graph_absence_does_not_reduce_core_workflow}
+  - {id: AF-006, anti_feature: silent_AI_mutation, protected_value: author_sovereignty, test: proposed_patch_leaves_source_unchanged}
+  - {id: AF-007, anti_feature: database_only_canonical_state, protected_value: app_death_resilience, test: delete_catalog_and_rebuild}
+  - {id: AF-008, anti_feature: hidden_export_loss, protected_value: output_trust, test: QA_reports_every_lossy_transform}
+  - {id: AF-009, anti_feature: worldbuilding_before_drafting, protected_value: writing_priority, test: Compendium_can_be_disabled}
+  - {id: AF-010, anti_feature: plugin_dependency_for_core, protected_value: reliable_baseline, test: core_loop_works_with_zero_plugins}
+  - {id: AF-011, anti_feature: realtime_collaboration_first, protected_value: solo_reliability, test: F2_closes_before_collaboration_design}
+  - {id: AF-012, anti_feature: opaque_project_package, protected_value: writer_ownership, test: archive_and_vault_inspectable_as_files}

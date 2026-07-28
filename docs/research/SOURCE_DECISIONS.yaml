@@ -1,0 +1,42 @@
+version: 0.1.0
+status: candidate
+updated_at: 2026-07-28
+decisions:
+  - id: SD-001
+    source_id: SRC-DR-001
+    decision: include
+    role: primary_product_and_workflow_synthesis
+    reason: directly addresses benchmark tools, workflows, architecture, and product doctrine
+    limitations:
+      - exact evidence spans need re-ingestion and stable locators
+      - vendor behavior may change after report capture
+  - id: SD-002
+    source_id: SRC-CONV-001
+    decision: include_as_design_lineage
+    role: candidate_specification_history
+    reason: preserves architectural reasoning and revisions from the design conversation
+    limitations:
+      - model-generated design is not market evidence
+      - repeated principles do not increase evidentiary weight
+  - id: SD-003
+    source_id: SRC-ROS-001
+    decision: include_as_control_authority
+    role: research_process_and_governance
+    reason: governs Run Contract, epistemic annotation, lineage, validation, and routing
+  - id: SD-004
+    source_id: official_technology_documentation
+    decision: include_on_demand
+    role: technical_candidate_verification
+    policy: use primary official sources and record version/date
+  - id: SD-005
+    source_id: general_web_reviews
+    decision: conditional
+    role: complaint_switching_and_real_world_friction_only
+    policy: corroborate critical technical claims with primary sources
+exclusions:
+  - category: generic_AI_writing_tool_roundups
+    reason: low workflow precision and commercial ranking bias
+  - category: unsourced_feature_tables
+    reason: feature presence does not establish professional usability
+  - category: generated_architecture_summaries_as_evidence
+    reason: design proposals remain inference or recommendation until tested
