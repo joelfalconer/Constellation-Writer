@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.0-candidate — 2026-07-28
+
+- Completed the first common JSON Schema kernel and typed UUIDv7 definitions.
+- Added save, mutation, compile, canon, and recovery state-machine registries.
+- Added sovereignty, surface jurisdiction, dependency, anti-feature, trust, and reversal-cost contracts.
+- Added project, Sheet, manuscript, compile, annotation, Compendium, PatchSession, snapshot, conflict, and archive schemas.
+- Implemented the first deterministic validator and GitHub Actions workflow.
+- Expanded the reference novel with alternate assembly, excluded material, annotations, claims, evidence, patch, snapshot, conflict, compile, and archive fixtures.
+- Added Prototype Stress Assay, 20,000-Word Day protocol, performance budget, functional tests, recovery drills, and adversarial review.
+- Added candidate ADRs for Tauri 2, CodeMirror 6, and a Pandoc output adapter.
+
 ## 0.1.2-candidate — 2026-07-27
 
 - Added product thesis, user profiles, anti-personas, and success definition.

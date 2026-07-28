@@ -1,9 +1,9 @@
 project_id: constellation_writer
 project_name: Constellation Writer
 repository: joelfalconer/Constellation-Writer
-status: foundation_review_ready
-phase: F0_candidate_ready_for_review
-updated_at: 2026-07-27
+status: sprint_zero_execution
+phase: F1_contract_kernel_and_validation
+updated_at: 2026-07-28
 
 product_identity: local_first_professional_writing_workbench
 core_promise: calm_editor_brutal_recall_governed_transformation
@@ -14,40 +14,34 @@ draft_pull_request: 1
 foundation_issue: 2
 
 completed:
-  - repository_bootstrapped
-  - programme_charter_created
-  - run_contract_created
-  - product_thesis_created
-  - primary_user_and_anti_persona_profiles_created
-  - success_definition_created
-  - deliverables_registered_and_mapped
-  - product_constitution_created
-  - canonicality_and_authority_matrices_created
-  - invariant_registry_created
-  - initial_adrs_and_risks_created
-  - mutation_envelope_candidate_created
-  - common_contract_kernel_started
-  - integrated_specification_candidates_started
-  - minimal_reference_novel_fixture_started
-  - initial_backlog_and_sprint_zero_created
-  - run_receipt_and_context_manifest_created
+  - repository_and_F0_candidate_package
+  - product_constitution_and_authority_matrices
+  - integrated_component_specification_candidates
+  - mutation_envelope_candidate
+  - common_contract_kernel_v0_1_candidate
+  - state_machine_and_command_registries
+  - reference_fixture_expansion
+  - validator_cli_implementation
+  - validation_ci_workflow
+  - prototype_stress_and_recovery_assays
+  - desktop_editor_and_compile_ADR_candidates
 
 in_progress:
-  - human_review_of_foundation_pr
-  - schema_kernel_completion
-  - validator_implementation
-  - fixture_expansion
-  - prototype_stress_assay
-  - technology_adrs
+  - run_validator_in_ci
+  - reconcile_validation_failures
+  - human_review_of_F0_and_F1_candidates
+  - expand_invalid_and_golden_fixture_sets
+  - executable_vertical_slice
 
 next_gate:
-  id: F0
-  name: Project Defined
-  state: candidate_ready_for_human_review
+  id: F1
+  name: Architecture Coherent
+  state: machine_validation_pending
 
 known_gaps:
   - source_evidence_units_not_yet_atomized
-  - prototype_stress_assay_not_yet_written
-  - validator_not_yet_implemented
-  - technology_stack_adrs_not_yet_selected
-  - draft_specs_not_yet_machine_validated
+  - contracts_cover_foundation_subset_not_full_product
+  - validator_does_not_yet_check_every_authority_or_enum_drift
+  - compile_and_recovery_are_not_executable_implementations
+  - technology_ADRs_are_proposed_not_accepted
+  - professional_workflow_assay_not_yet_run_with_users
