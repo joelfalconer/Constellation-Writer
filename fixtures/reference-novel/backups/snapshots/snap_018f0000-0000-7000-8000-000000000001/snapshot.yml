@@ -1,0 +1,10 @@
+id: snap_018f0000-0000-7000-8000-000000000001
+schema_version: 0.1.0
+project_id: prj_018f0000-0000-7000-8000-000000000001
+type: pre_ai_apply
+scope: object
+created_at: 2026-07-27T00:19:00+10:00
+included_files:
+  - path: sheets/sh_018f0000-0000-7000-8000-000000000001-opening-scene.md
+    object_id: sh_018f0000-0000-7000-8000-000000000001
+    sha256: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

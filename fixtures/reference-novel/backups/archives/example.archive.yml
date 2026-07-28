@@ -1,0 +1,17 @@
+id: arch_018f0000-0000-7000-8000-000000000001
+schema_version: 0.1.0
+project_id: prj_018f0000-0000-7000-8000-000000000001
+created_at: 2026-07-27T00:40:00+10:00
+archive_kind: full_private_archive
+included:
+  canonical_files: true
+  patch_logs: true
+  session_logs: false
+  recovery_buffers: false
+  derived_indexes: false
+  ai_context_packs: false
+privacy:
+  contains_sensitive_text: true
+  contains_ai_context: false
+  encrypted: false
+checksums: checksums.sha256

@@ -1,0 +1,9 @@
+id: ent_018f0000-0000-7000-8000-000000000001
+schema_version: 0.1.0
+type: place
+canonical_name: The Glass Orchard House
+aliases: [the house, Glass Orchard]
+status: active
+summary: A house that appears to respond to Mara's arrival.
+created_at: 2026-07-27T00:00:00+10:00
+modified_at: 2026-07-27T00:00:00+10:00

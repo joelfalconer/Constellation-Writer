@@ -1,0 +1,13 @@
+id: clm_018f0000-0000-7000-8000-000000000001
+schema_version: 0.1.0
+type: rule
+status: active
+confidence: observed
+statement: The Glass Orchard House responds when Mara crosses its threshold.
+subject_entity_id: ent_018f0000-0000-7000-8000-000000000001
+predicate: responds_to
+object: threshold_crossing
+evidence_ids:
+  - ev_018f0000-0000-7000-8000-000000000001
+created_at: 2026-07-27T00:00:00+10:00
+modified_at: 2026-07-27T00:00:00+10:00
