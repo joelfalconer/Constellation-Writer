@@ -1,145 +1,134 @@
 id: constellation_writer.deliverables
-version: 0.2.0
+version: 0.3.0
 status: candidate
 updated_at: 2026-07-28
 status_values: [planned, draft, candidate, machine_checked, human_reviewed, tested, accepted, superseded]
 
 categories:
   programme_definition:
-    path: docs/programme
-    deliverables:
-      - {id: DEL-PROG-001, name: Project Charter, file: PROJECT_CHARTER.md, status: candidate}
-      - {id: DEL-PROG-002, name: Research OS Run Contract, file: RUN_CONTRACT.yaml, status: candidate}
-      - {id: DEL-PROG-003, name: Product Thesis, file: PRODUCT_THESIS.md, status: candidate}
-      - {id: DEL-PROG-004, name: Vision and North Star, file: VISION.md, status: candidate}
-      - {id: DEL-PROG-005, name: Primary User Profiles, file: USER_PROFILES.md, status: candidate}
-      - {id: DEL-PROG-006, name: Anti-Personas, file: ANTI_PERSONAS.md, status: candidate}
-      - {id: DEL-PROG-007, name: Scope and Non-Goals, file: SCOPE_AND_NON_GOALS.md, status: candidate}
-      - {id: DEL-PROG-008, name: Success Definition, file: SUCCESS_DEFINITION.md, status: candidate}
-      - {id: DEL-PROG-009, name: Project Glossary, file: ../constitution/CONCEPT_GLOSSARY.md, status: candidate}
+    destination: docs/programme
+    items:
+      DEL-PROG-001: {name: Project Charter, file: PROJECT_CHARTER.md, status: candidate}
+      DEL-PROG-002: {name: Research OS Run Contract, file: RUN_CONTRACT.yaml, status: candidate}
+      DEL-PROG-003: {name: Product Thesis, file: PRODUCT_THESIS.md, status: candidate}
+      DEL-PROG-004: {name: Vision and North Star, file: VISION.md, status: candidate}
+      DEL-PROG-005: {name: Primary User Profiles, file: USER_PROFILES.md, status: candidate}
+      DEL-PROG-006: {name: Anti-Personas, file: ANTI_PERSONAS.md, status: candidate}
+      DEL-PROG-007: {name: Scope and Non-Goals, file: SCOPE_AND_NON_GOALS.md, status: candidate}
+      DEL-PROG-008: {name: Success Definition, file: SUCCESS_DEFINITION.md, status: candidate}
+      DEL-PROG-009: {name: Concept Glossary, file: ../constitution/CONCEPT_GLOSSARY.md, status: candidate}
   research_and_evidence:
-    path: docs/research
-    deliverables:
-      - {id: DEL-RES-001, name: Source Registry, file: SOURCE_REGISTRY.yaml, status: candidate}
-      - {id: DEL-RES-002, name: Inclusion and Exclusion Log, file: SOURCE_DECISIONS.yaml, status: planned}
-      - {id: DEL-RES-003, name: Evidence Unit Ledger, file: EVIDENCE_UNITS.jsonl, status: planned}
-      - {id: DEL-RES-004, name: Benchmark App Dossiers, file: benchmarks/, status: planned}
-      - {id: DEL-RES-005, name: Feature Atomicity Ledger, file: FEATURE_ATOMICITY.yaml, status: planned}
-      - {id: DEL-RES-006, name: Anti-Feature Register, file: ANTI_FEATURES.yaml, status: planned}
-      - {id: DEL-RES-007, name: Complaint and Switching Map, file: SWITCHING_MAP.md, status: planned}
-      - {id: DEL-RES-008, name: Workflow and Friction Map, file: WORKFLOW_FRICTION_MAP.md, status: planned}
-      - {id: DEL-RES-009, name: Contradiction Register, file: CONTRADICTIONS.yaml, status: candidate}
-      - {id: DEL-RES-010, name: Evidence Coverage Report, file: COVERAGE_REPORT.md, status: planned}
+    destination: docs/research
+    items:
+      DEL-RES-001: {name: Source Registry, file: SOURCE_REGISTRY.yaml, status: candidate}
+      DEL-RES-002: {name: Inclusion and Exclusion Log, file: SOURCE_DECISIONS.yaml, status: planned}
+      DEL-RES-003: {name: Evidence Unit Ledger, file: EVIDENCE_UNITS.jsonl, status: planned}
+      DEL-RES-004: {name: Benchmark App Dossiers, file: benchmarks/, status: planned}
+      DEL-RES-005: {name: Feature Atomicity Ledger, file: FEATURE_ATOMICITY.yaml, status: planned}
+      DEL-RES-006: {name: Anti-Feature Register, file: ANTI_FEATURES.yaml, status: planned}
+      DEL-RES-007: {name: Complaint and Switching Map, file: SWITCHING_MAP.md, status: planned}
+      DEL-RES-008: {name: Workflow and Friction Map, file: WORKFLOW_FRICTION_MAP.md, status: planned}
+      DEL-RES-009: {name: Contradiction Register, file: CONTRADICTIONS.yaml, status: candidate}
+      DEL-RES-010: {name: Evidence Coverage Report, file: COVERAGE_REPORT.md, status: planned}
   architecture_governance:
-    path: docs/constitution
-    deliverables:
-      - {id: DEL-CON-001, name: Product Constitution, file: PRODUCT_CONSTITUTION.md, status: candidate}
-      - {id: DEL-CON-002, name: Sovereignty Model, file: SOVEREIGNTY_MODEL.md, status: candidate}
-      - {id: DEL-CON-003, name: Surface Jurisdiction Map, file: SURFACE_JURISDICTIONS.md, status: candidate}
-      - {id: DEL-CON-004, name: Canonicality Matrix, file: CANONICALITY_MATRIX.yaml, status: candidate}
-      - {id: DEL-CON-005, name: State Authority Matrix, file: STATE_AUTHORITY_MATRIX.yaml, status: candidate}
-      - {id: DEL-CON-006, name: Invariant Registry, file: INVARIANT_REGISTRY.yaml, status: candidate}
-      - {id: DEL-CON-007, name: System Boundary Map, file: ../architecture/SYSTEM_OVERVIEW.md, status: candidate}
-      - {id: DEL-CON-008, name: Dependency Direction Rules, file: DEPENDENCY_RULES.md, status: candidate}
-      - {id: DEL-CON-009, name: Anti-Feature Constitution, file: ANTI_FEATURE_CONSTITUTION.md, status: candidate}
-      - {id: DEL-CON-010, name: Trust Laws, file: TRUST_LAWS.md, status: candidate}
-      - {id: DEL-CON-011, name: Reversal Cost Map, file: REVERSAL_COSTS.yaml, status: candidate}
-      - {id: DEL-CON-012, name: ADR Registry, file: ../decisions/DECISION_LEDGER.yaml, status: candidate}
+    destination: docs/constitution|docs/architecture|docs/decisions
+    items:
+      DEL-CON-001: {name: Product Constitution, file: docs/constitution/PRODUCT_CONSTITUTION.md, status: candidate}
+      DEL-CON-002: {name: Sovereignty Model, file: docs/constitution/SOVEREIGNTY_MODEL.md, status: candidate}
+      DEL-CON-003: {name: Surface Jurisdictions, file: docs/constitution/SURFACE_JURISDICTIONS.md, status: candidate}
+      DEL-CON-004: {name: Canonicality Matrix, file: docs/constitution/CANONICALITY_MATRIX.yaml, status: candidate}
+      DEL-CON-005: {name: State Authority Matrix, file: docs/constitution/STATE_AUTHORITY_MATRIX.yaml, status: candidate}
+      DEL-CON-006: {name: Invariant Registry, file: docs/constitution/INVARIANT_REGISTRY.yaml, status: candidate}
+      DEL-CON-007: {name: System Boundary Map, file: docs/architecture/SYSTEM_OVERVIEW.md, status: candidate}
+      DEL-CON-008: {name: Dependency Rules, file: docs/constitution/DEPENDENCY_RULES.md, status: candidate}
+      DEL-CON-009: {name: Anti-Feature Constitution, file: docs/constitution/ANTI_FEATURE_CONSTITUTION.md, status: candidate}
+      DEL-CON-010: {name: Trust Laws, file: docs/constitution/TRUST_LAWS.md, status: candidate}
+      DEL-CON-011: {name: Reversal Cost Map, file: docs/constitution/REVERSAL_COSTS.yaml, status: candidate}
+      DEL-CON-012: {name: ADR Registry, file: docs/decisions/DECISION_LEDGER.yaml, status: candidate}
+      DEL-CON-013: {name: Mutation Envelope, file: docs/architecture/MUTATION_ENVELOPE.md, status: candidate}
+      DEL-CON-014: {name: Module Boundary Map, file: docs/architecture/MODULE_BOUNDARIES.md, status: candidate}
   shared_contracts:
-    path: contracts
-    deliverables:
-      - {id: DEL-CTR-001, name: Identifier Schema, file: common/identifier.schema.json, status: candidate}
-      - {id: DEL-CTR-002, name: Revision Schema, file: common/revision.schema.json, status: candidate}
-      - {id: DEL-CTR-003, name: Anchor Schema, file: common/anchor.schema.json, status: candidate}
-      - {id: DEL-CTR-004, name: Provenance Schema, file: common/provenance.schema.json, status: candidate}
-      - {id: DEL-CTR-005, name: Timestamp Schema, file: common/timestamp.schema.json, status: candidate}
-      - {id: DEL-CTR-006, name: Canonicality Schema, file: common/canonicality.schema.json, status: candidate}
-      - {id: DEL-CTR-007, name: Lifecycle Schema, file: common/lifecycle.schema.json, status: candidate}
-      - {id: DEL-CTR-008, name: Consequence Schema, file: common/consequence.schema.json, status: candidate}
-      - {id: DEL-CTR-009, name: Validation Result Schema, file: common/validation.schema.json, status: candidate}
-      - {id: DEL-CTR-010, name: Error and Recovery Schema, file: common/recovery-error.schema.json, status: candidate}
-      - {id: DEL-CTR-011, name: Enum Registry, file: ../registries/enums.yaml, status: candidate}
-      - {id: DEL-CTR-012, name: State Machine Registry, file: ../registries/state-machines.yaml, status: candidate}
-      - {id: DEL-CTR-013, name: Object Type Registry, file: ../registries/object-types.yaml, status: candidate}
-      - {id: DEL-CTR-014, name: Domain Contract Kernel, file: project|sheet|manuscript|compile|mutation|recovery|compendium, status: candidate}
-  product_and_experience:
-    path: docs/product
-    deliverables:
-      - {id: DEL-UX-001, name: Editor Doctrine, file: ../specifications/editor-doctrine-v0.2.md, status: candidate}
-      - {id: DEL-UX-002, name: Information Architecture, file: INFORMATION_ARCHITECTURE.md, status: planned}
-      - {id: DEL-UX-003, name: Core Workflow Catalogue, file: WORKFLOWS.md, status: planned}
-      - {id: DEL-UX-004, name: Writer Journey Maps, file: journeys/, status: planned}
-      - {id: DEL-UX-005, name: Interaction Jurisdiction Spec, file: ../constitution/SURFACE_JURISDICTIONS.md, status: candidate}
-      - {id: DEL-UX-006, name: Keyboard and Command Registry, file: ../../registries/commands.yaml, status: candidate}
-      - {id: DEL-UX-007, name: Command Palette Contract, file: COMMAND_PALETTE.md, status: planned}
-      - {id: DEL-UX-008, name: Typography and Reading System, file: TYPOGRAPHY.md, status: planned}
-      - {id: DEL-UX-009, name: Focus and Revision Contract, file: MODES.md, status: planned}
-      - {id: DEL-UX-010, name: Navigation and Return Contract, file: NAVIGATION_RETURN.md, status: planned}
-      - {id: DEL-UX-011, name: Search and Recall Contract, file: ../specifications/search-recall-v0.1.md, status: planned}
-      - {id: DEL-UX-012, name: Inspector Contract, file: INSPECTOR.md, status: planned}
-      - {id: DEL-UX-013, name: Accessibility Spec, file: ACCESSIBILITY.md, status: planned}
-      - {id: DEL-UX-014, name: Professional Ergonomics Spec, file: ERGONOMICS.md, status: planned}
+    destination: contracts|registries
+    items:
+      DEL-CTR-001: {name: Common Schema Kernel, file: contracts/common/, status: candidate}
+      DEL-CTR-002: {name: Project Schema, file: contracts/project/project.schema.json, status: candidate}
+      DEL-CTR-003: {name: Sheet Sidecar Schema, file: contracts/sheet/sheet-sidecar.schema.json, status: candidate}
+      DEL-CTR-004: {name: Manuscript Schema, file: contracts/manuscript/manuscript.schema.json, status: candidate}
+      DEL-CTR-005: {name: Compile Profile Schema, file: contracts/compile/compile-profile.schema.json, status: candidate}
+      DEL-CTR-006: {name: Annotation Schema, file: contracts/annotations/annotation.schema.json, status: candidate}
+      DEL-CTR-007: {name: Compendium Schemas, file: contracts/compendium/, status: candidate}
+      DEL-CTR-008: {name: PatchSession Schema, file: contracts/mutation/patch-session.schema.json, status: candidate}
+      DEL-CTR-009: {name: Recovery Schemas, file: contracts/recovery/, status: candidate}
+      DEL-CTR-010: {name: Enum Registry, file: registries/enums.yaml, status: candidate}
+      DEL-CTR-011: {name: Object Type Registry, file: registries/object-types.yaml, status: candidate}
+      DEL-CTR-012: {name: State Machine Registry, file: registries/state-machines.yaml, status: candidate}
+      DEL-CTR-013: {name: Command Registry, file: registries/commands.yaml, status: candidate}
+  product_experience:
+    destination: docs/product|docs/specifications
+    items:
+      DEL-UX-001: {name: Editor Doctrine, file: docs/specifications/editor-doctrine-v0.2.md, status: candidate}
+      DEL-UX-002: {name: Information Architecture, file: docs/product/INFORMATION_ARCHITECTURE.md, status: candidate}
+      DEL-UX-003: {name: Core Workflow Catalogue, file: docs/product/WORKFLOWS.md, status: candidate}
+      DEL-UX-004: {name: Writer Journey Maps, file: docs/product/journeys/, status: planned}
+      DEL-UX-005: {name: Command Palette, file: docs/product/COMMAND_PALETTE.md, status: candidate}
+      DEL-UX-006: {name: Typography and Reading System, file: docs/product/TYPOGRAPHY.md, status: candidate}
+      DEL-UX-007: {name: Draft Revise Focus Modes, file: docs/product/MODES.md, status: candidate}
+      DEL-UX-008: {name: Navigation and Return Contract, file: docs/product/NAVIGATION_RETURN.md, status: candidate}
+      DEL-UX-009: {name: Inspector Contract, file: docs/product/INSPECTOR.md, status: candidate}
+      DEL-UX-010: {name: Accessibility Spec, file: docs/product/ACCESSIBILITY.md, status: candidate}
+      DEL-UX-011: {name: Professional Ergonomics, file: docs/product/ERGONOMICS.md, status: candidate}
+      DEL-UX-012: {name: Search and Recall Contract, file: docs/specifications/search-recall-v0.1.md, status: candidate}
   component_specifications:
-    path: docs/specifications
-    deliverables:
-      - {id: DEL-SPEC-001, name: Editor Doctrine v0.2, file: editor-doctrine-v0.2.md, status: candidate}
-      - {id: DEL-SPEC-002, name: Project Vault Schema v0.2, file: project-vault-schema-v0.2.md, status: candidate}
-      - {id: DEL-SPEC-003, name: Sheet Schema v0.2, file: sheet-schema-v0.2.md, status: candidate}
-      - {id: DEL-SPEC-004, name: Manuscript Manifest v0.2, file: manuscript-manifest-v0.2.md, status: candidate}
-      - {id: DEL-SPEC-005, name: Compile Contract v0.1, file: compile-contract-v0.1.md, status: candidate}
-      - {id: DEL-SPEC-006, name: Compendium Claim Ledger v0.2, file: compendium-claim-ledger-v0.2.md, status: candidate}
-      - {id: DEL-SPEC-007, name: PatchSession v0.2, file: patch-session-v0.2.md, status: candidate}
-      - {id: DEL-SPEC-008, name: Recovery and Backup v0.2, file: recovery-backup-v0.2.md, status: candidate}
-      - {id: DEL-SPEC-009, name: Import and Interoperability, file: import-interoperability-v0.1.md, status: planned}
-      - {id: DEL-SPEC-010, name: Asset and Source Spec, file: asset-source-v0.1.md, status: planned}
-      - {id: DEL-SPEC-011, name: Annotation and Comment Spec, file: annotations-v0.1.md, status: planned}
-      - {id: DEL-SPEC-012, name: User State Spec, file: user-state-v0.1.md, status: planned}
-      - {id: DEL-SPEC-013, name: Privacy and Security Spec, file: privacy-security-v0.1.md, status: planned}
-      - {id: DEL-SPEC-014, name: Sync-Neutral File Contract, file: sync-neutral-v0.1.md, status: planned}
-      - {id: DEL-SPEC-015, name: Publication State Spec, file: publication-state-v0.1.md, status: planned}
-  reference_implementation:
-    path: fixtures
-    deliverables:
-      - {id: DEL-REF-001, name: Reference Novel Vault, file: reference-novel/, status: candidate}
-      - {id: DEL-REF-002, name: Reference Essay Project, file: reference-essay/, status: planned}
-      - {id: DEL-REF-003, name: Reference Screenplay, file: reference-screenplay/, status: planned}
-      - {id: DEL-REF-004, name: Reference Transmedia Project, file: reference-transmedia/, status: planned}
-      - {id: DEL-REF-005, name: Invalid Fixture Set, file: invalid/, status: planned}
-      - {id: DEL-REF-006, name: Recovery Fixture Set, file: recovery/, status: draft}
-      - {id: DEL-REF-007, name: Conflict Fixture Set, file: conflicts/, status: draft}
-      - {id: DEL-REF-008, name: Compile Fixture Set, file: compile/, status: draft}
-      - {id: DEL-REF-009, name: Patch Fixture Set, file: patches/, status: draft}
-      - {id: DEL-REF-010, name: Vertical Slice Receipt, file: ../docs/validation/VERTICAL_SLICE_RECEIPT.md, status: planned}
-  validation_and_assurance:
-    path: docs/validation
-    deliverables:
-      - {id: DEL-VAL-001, name: Prototype Stress Assay, file: PROTOTYPE_STRESS_ASSAY.md, status: candidate}
-      - {id: DEL-VAL-002, name: 20000 Word Day Protocol, file: TWENTY_THOUSAND_WORD_DAY.md, status: candidate}
-      - {id: DEL-VAL-003, name: Performance Budget, file: PERFORMANCE_BUDGET.yaml, status: candidate}
-      - {id: DEL-VAL-004, name: Functional Test Matrix, file: FUNCTIONAL_TESTS.yaml, status: candidate}
-      - {id: DEL-VAL-005, name: Schema Validation Suite, file: ../../tools/validator/, status: candidate}
-      - {id: DEL-VAL-006, name: Cross-Spec Consistency Validator, file: ../../tools/validator/, status: draft}
-      - {id: DEL-VAL-007, name: Failure Injection Suite, file: ../../tests/recovery/, status: planned}
-      - {id: DEL-VAL-008, name: Recovery Drill Suite, file: RECOVERY_DRILLS.md, status: candidate}
-      - {id: DEL-VAL-009, name: Compile Golden Tests, file: ../../tests/compile/, status: planned}
-      - {id: DEL-VAL-010, name: External Editor Compatibility, file: EXTERNAL_EDITOR_TESTS.md, status: planned}
-      - {id: DEL-VAL-011, name: Accessibility Matrix, file: ACCESSIBILITY_TESTS.md, status: planned}
-      - {id: DEL-VAL-012, name: Privacy Leakage Tests, file: PRIVACY_TESTS.md, status: planned}
-      - {id: DEL-VAL-013, name: Adversarial Architecture Review, file: ADVERSARIAL_REVIEW.md, status: candidate}
-      - {id: DEL-VAL-014, name: Foundation Gate Report, file: FOUNDATION_GATE_REPORT.md, status: planned}
-  engineering_and_delivery:
-    path: docs/delivery
-    deliverables:
-      - {id: DEL-ENG-001, name: Repository Charter, file: REPOSITORY_CHARTER.md, status: candidate}
-      - {id: DEL-ENG-002, name: Repository Tree, file: REPOSITORY_TREE.md, status: candidate}
-      - {id: DEL-ENG-003, name: Architecture Overview, file: ../architecture/SYSTEM_OVERVIEW.md, status: candidate}
-      - {id: DEL-ENG-004, name: Module Boundary Map, file: ../architecture/MODULE_BOUNDARIES.md, status: candidate}
-      - {id: DEL-ENG-005, name: Technology ADRs, file: ../decisions/ADR-0004..0006, status: proposed}
-      - {id: DEL-ENG-006, name: Development Setup, file: DEVELOPMENT_SETUP.md, status: planned}
-      - {id: DEL-ENG-007, name: CI Validation Pipeline, file: ../../.github/workflows/validate.yml, status: candidate}
-      - {id: DEL-ENG-008, name: Migration Tooling, file: ../../tools/migration/, status: planned}
-      - {id: DEL-ENG-009, name: Risk Register, file: ../../registries/risks.yaml, status: candidate}
-      - {id: DEL-ENG-010, name: Programme Roadmap, file: ../../ROADMAP.md, status: candidate}
-      - {id: DEL-ENG-011, name: Initial Backlog, file: BACKLOG.md, status: candidate}
-      - {id: DEL-ENG-012, name: Sprint Zero Plan, file: SPRINT_ZERO.md, status: candidate}
-      - {id: DEL-ENG-013, name: Release Policy, file: RELEASE_POLICY.md, status: planned}
+    destination: docs/specifications
+    items:
+      DEL-SPEC-001: {name: Project Vault, file: project-vault-schema-v0.2.md, status: candidate}
+      DEL-SPEC-002: {name: Sheet, file: sheet-schema-v0.2.md, status: candidate}
+      DEL-SPEC-003: {name: Manuscript Manifest, file: manuscript-manifest-v0.2.md, status: candidate}
+      DEL-SPEC-004: {name: Compile, file: compile-contract-v0.1.md, status: candidate}
+      DEL-SPEC-005: {name: PatchSession, file: patch-session-v0.2.md, status: candidate}
+      DEL-SPEC-006: {name: Recovery and Backup, file: recovery-backup-v0.2.md, status: candidate}
+      DEL-SPEC-007: {name: Compendium Claim Ledger, file: compendium-claim-ledger-v0.2.md, status: candidate}
+      DEL-SPEC-008: {name: Import and Interoperability, file: import-interoperability-v0.1.md, status: candidate}
+      DEL-SPEC-009: {name: Asset and Source, file: asset-source-v0.1.md, status: candidate}
+      DEL-SPEC-010: {name: Annotations, file: annotations-v0.1.md, status: candidate}
+      DEL-SPEC-011: {name: Local User State, file: user-state-v0.1.md, status: candidate}
+      DEL-SPEC-012: {name: Privacy and Security, file: privacy-security-v0.1.md, status: candidate}
+      DEL-SPEC-013: {name: Sync-Neutral Files, file: sync-neutral-v0.1.md, status: candidate}
+      DEL-SPEC-014: {name: Publication State, file: publication-state-v0.1.md, status: candidate}
+  reference_and_validation:
+    destination: fixtures|tools/validator|tests|docs/validation
+    items:
+      DEL-VAL-001: {name: Reference Novel, file: fixtures/reference-novel/, status: candidate}
+      DEL-VAL-002: {name: Foundation Validator v0.2, file: tools/validator/, status: candidate}
+      DEL-VAL-003: {name: Negative Contract Tests, file: tests/contracts/, status: candidate}
+      DEL-VAL-004: {name: CI Workflow, file: .github/workflows/validate.yml, status: candidate}
+      DEL-VAL-005: {name: Prototype Stress Assay, file: docs/validation/PROTOTYPE_STRESS_ASSAY.md, status: candidate}
+      DEL-VAL-006: {name: 20000 Word Day, file: docs/validation/TWENTY_THOUSAND_WORD_DAY.md, status: candidate}
+      DEL-VAL-007: {name: Performance Budget, file: docs/validation/PERFORMANCE_BUDGET.yaml, status: candidate}
+      DEL-VAL-008: {name: Functional Tests, file: docs/validation/FUNCTIONAL_TESTS.yaml, status: candidate}
+      DEL-VAL-009: {name: Recovery Drills, file: docs/validation/RECOVERY_DRILLS.md, status: candidate}
+      DEL-VAL-010: {name: External Editor Tests, file: docs/validation/EXTERNAL_EDITOR_TESTS.md, status: candidate}
+      DEL-VAL-011: {name: Accessibility Tests, file: docs/validation/ACCESSIBILITY_TESTS.md, status: candidate}
+      DEL-VAL-012: {name: Privacy Tests, file: docs/validation/PRIVACY_TESTS.md, status: candidate}
+      DEL-VAL-013: {name: Adversarial Review, file: docs/validation/ADVERSARIAL_REVIEW.md, status: candidate}
+      DEL-VAL-014: {name: Foundation Gate Report, file: docs/validation/FOUNDATION_GATE_REPORT.md, status: candidate}
+      DEL-VAL-015: {name: F1 Readiness Report, file: docs/validation/F1_READINESS_REPORT.md, status: candidate}
+      DEL-VAL-016: {name: Compile Golden Tests, file: tests/compile/, status: planned}
+      DEL-VAL-017: {name: Failure Injection Suite, file: tests/recovery/, status: planned}
+      DEL-VAL-018: {name: Vertical Slice Receipt, file: docs/validation/VERTICAL_SLICE_RECEIPT.md, status: planned}
+  engineering_delivery:
+    destination: docs/delivery|.github|issues
+    items:
+      DEL-ENG-001: {name: Repository Charter, file: docs/delivery/REPOSITORY_CHARTER.md, status: candidate}
+      DEL-ENG-002: {name: Repository Tree, file: docs/delivery/REPOSITORY_TREE.md, status: candidate}
+      DEL-ENG-003: {name: Development Setup, file: docs/delivery/DEVELOPMENT_SETUP.md, status: candidate}
+      DEL-ENG-004: {name: Release Policy, file: docs/delivery/RELEASE_POLICY.md, status: candidate}
+      DEL-ENG-005: {name: Workstreams, file: docs/delivery/WORKSTREAMS.md, status: candidate}
+      DEL-ENG-006: {name: Milestones, file: docs/delivery/MILESTONES.md, status: candidate}
+      DEL-ENG-007: {name: Decision Calendar, file: docs/delivery/DECISION_CALENDAR.md, status: candidate}
+      DEL-ENG-008: {name: Backlog, file: docs/delivery/BACKLOG.md, status: candidate}
+      DEL-ENG-009: {name: Sprint Zero, file: docs/delivery/SPRINT_ZERO.md, status: candidate}
+      DEL-ENG-010: {name: Sprint One, file: docs/delivery/SPRINT_ONE.md, status: candidate}
+      DEL-ENG-011: {name: Contribution Templates, file: CONTRIBUTING.md|.github/, status: candidate}
+      DEL-ENG-012: {name: Technology Spikes, file: issues/3-5, status: planned}
+      DEL-ENG-013: {name: Durable Substrate Vertical Slice, file: issue/6, status: planned}
