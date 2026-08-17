@@ -1,5 +1,5 @@
 id: constellation_writer.deliverables
-version: 0.4.0
+version: 0.5.0
 status: candidate
 updated_at: 2026-08-17
 status_values: [planned, draft, candidate, machine_checked, human_reviewed, tested, accepted, superseded]
@@ -8,16 +8,17 @@ categories:
   programme_definition:
     destination: docs/programme
     items:
-      DEL-PROG-001: {name: Project Charter, file: PROJECT_CHARTER.md, status: candidate}
-      DEL-PROG-002: {name: Research OS Run Contract, file: RUN_CONTRACT.yaml, status: candidate}
-      DEL-PROG-003: {name: Product Thesis, file: PRODUCT_THESIS.md, status: candidate}
-      DEL-PROG-004: {name: Vision and North Star, file: VISION.md, status: candidate}
-      DEL-PROG-005: {name: Primary User Profiles, file: USER_PROFILES.md, status: candidate}
-      DEL-PROG-006: {name: Anti-Personas, file: ANTI_PERSONAS.md, status: candidate}
-      DEL-PROG-007: {name: Scope and Non-Goals, file: SCOPE_AND_NON_GOALS.md, status: candidate}
-      DEL-PROG-008: {name: Success Definition, file: SUCCESS_DEFINITION.md, status: candidate}
-      DEL-PROG-009: {name: Concept Glossary, file: ../constitution/CONCEPT_GLOSSARY.md, status: candidate}
-      DEL-PROG-010: {name: Foundation Continuation Run Receipt, file: RUN_RECEIPT-CW-FOUNDATION-002.md, status: candidate}
+      DEL-PROG-001: {name: Project Charter, file: PROJECT_CHARTER.md, status: accepted}
+      DEL-PROG-002: {name: Research OS Run Contract, file: RUN_CONTRACT.yaml, status: accepted}
+      DEL-PROG-003: {name: Product Thesis, file: PRODUCT_THESIS.md, status: accepted}
+      DEL-PROG-004: {name: Vision and North Star, file: VISION.md, status: accepted}
+      DEL-PROG-005: {name: Primary User Profiles, file: USER_PROFILES.md, status: accepted}
+      DEL-PROG-006: {name: Anti-Personas, file: ANTI_PERSONAS.md, status: accepted}
+      DEL-PROG-007: {name: Scope and Non-Goals, file: SCOPE_AND_NON_GOALS.md, status: accepted}
+      DEL-PROG-008: {name: Success Definition, file: SUCCESS_DEFINITION.md, status: accepted}
+      DEL-PROG-009: {name: Concept Glossary, file: ../constitution/CONCEPT_GLOSSARY.md, status: accepted}
+      DEL-PROG-010: {name: Foundation Continuation Run Receipt, file: RUN_RECEIPT-CW-FOUNDATION-002.md, status: human_reviewed}
+      DEL-PROG-011: {name: F0 Acceptance Receipt, file: F0_ACCEPTANCE_RECEIPT-2026-08-17.md, status: accepted}
 
   research_and_evidence:
     destination: docs/research
@@ -32,21 +33,22 @@ categories:
       DEL-RES-008: {name: Workflow and Friction Map, file: WORKFLOW_FRICTION_MAP.md, status: candidate}
       DEL-RES-009: {name: Contradiction Register, file: CONTRADICTIONS.yaml, status: candidate}
       DEL-RES-010: {name: Evidence Coverage Report, file: COVERAGE_REPORT.md, status: candidate}
+      DEL-RES-011: {name: Evidence Lineage and Benchmark Refresh, file: issue/7, status: planned}
 
   architecture_governance:
     destination: docs/constitution|docs/architecture|docs/decisions
     items:
-      DEL-CON-001: {name: Product Constitution, file: docs/constitution/PRODUCT_CONSTITUTION.md, status: candidate}
-      DEL-CON-002: {name: Sovereignty Model, file: docs/constitution/SOVEREIGNTY_MODEL.md, status: candidate}
-      DEL-CON-003: {name: Surface Jurisdictions, file: docs/constitution/SURFACE_JURISDICTIONS.md, status: candidate}
-      DEL-CON-004: {name: Canonicality Matrix, file: docs/constitution/CANONICALITY_MATRIX.yaml, status: candidate}
-      DEL-CON-005: {name: State Authority Matrix, file: docs/constitution/STATE_AUTHORITY_MATRIX.yaml, status: candidate}
-      DEL-CON-006: {name: Invariant Registry, file: docs/constitution/INVARIANT_REGISTRY.yaml, status: candidate}
-      DEL-CON-007: {name: System Boundary Map, file: docs/architecture/SYSTEM_OVERVIEW.md, status: candidate}
-      DEL-CON-008: {name: Dependency Rules, file: docs/constitution/DEPENDENCY_RULES.md, status: candidate}
-      DEL-CON-009: {name: Anti-Feature Constitution, file: docs/constitution/ANTI_FEATURE_CONSTITUTION.md, status: candidate}
-      DEL-CON-010: {name: Trust Laws, file: docs/constitution/TRUST_LAWS.md, status: candidate}
-      DEL-CON-011: {name: Reversal Cost Map, file: docs/constitution/REVERSAL_COSTS.yaml, status: candidate}
+      DEL-CON-001: {name: Product Constitution, file: docs/constitution/PRODUCT_CONSTITUTION.md, status: accepted}
+      DEL-CON-002: {name: Sovereignty Model, file: docs/constitution/SOVEREIGNTY_MODEL.md, status: accepted}
+      DEL-CON-003: {name: Surface Jurisdictions, file: docs/constitution/SURFACE_JURISDICTIONS.md, status: accepted}
+      DEL-CON-004: {name: Canonicality Matrix, file: docs/constitution/CANONICALITY_MATRIX.yaml, status: accepted}
+      DEL-CON-005: {name: State Authority Matrix, file: docs/constitution/STATE_AUTHORITY_MATRIX.yaml, status: accepted}
+      DEL-CON-006: {name: Invariant Registry, file: docs/constitution/INVARIANT_REGISTRY.yaml, status: accepted}
+      DEL-CON-007: {name: System Boundary Map, file: docs/architecture/SYSTEM_OVERVIEW.md, status: accepted}
+      DEL-CON-008: {name: Dependency Rules, file: docs/constitution/DEPENDENCY_RULES.md, status: accepted}
+      DEL-CON-009: {name: Anti-Feature Constitution, file: docs/constitution/ANTI_FEATURE_CONSTITUTION.md, status: accepted}
+      DEL-CON-010: {name: Trust Laws, file: docs/constitution/TRUST_LAWS.md, status: accepted}
+      DEL-CON-011: {name: Reversal Cost Map, file: docs/constitution/REVERSAL_COSTS.yaml, status: accepted}
       DEL-CON-012: {name: ADR Registry, file: docs/decisions/DECISION_LEDGER.yaml, status: candidate}
       DEL-CON-013: {name: Mutation Envelope, file: docs/architecture/MUTATION_ENVELOPE.md, status: candidate}
       DEL-CON-014: {name: Module Boundary Map, file: docs/architecture/MODULE_BOUNDARIES.md, status: candidate}
@@ -118,13 +120,16 @@ categories:
       DEL-VAL-011: {name: Accessibility Tests, file: docs/validation/ACCESSIBILITY_TESTS.md, status: candidate}
       DEL-VAL-012: {name: Privacy Tests, file: docs/validation/PRIVACY_TESTS.md, status: candidate}
       DEL-VAL-013: {name: Adversarial Review, file: docs/validation/ADVERSARIAL_REVIEW.md, status: candidate}
-      DEL-VAL-014: {name: Foundation Gate Report, file: docs/validation/FOUNDATION_GATE_REPORT.md, status: candidate}
+      DEL-VAL-014: {name: Foundation Gate Report, file: docs/validation/FOUNDATION_GATE_REPORT.md, status: human_reviewed}
       DEL-VAL-015: {name: F1 Readiness Report, file: docs/validation/F1_READINESS_REPORT.md, status: candidate}
       DEL-VAL-016: {name: Compile Golden Test Definitions, file: tests/compile/, status: candidate}
       DEL-VAL-017: {name: Failure Injection Scenario Suite, file: tests/recovery/, status: candidate}
       DEL-VAL-018: {name: Vertical Slice Receipt, file: docs/validation/VERTICAL_SLICE_RECEIPT.md, status: planned}
-      DEL-VAL-019: {name: CI Validation Receipt, file: docs/validation/CI_RECEIPT-2026-07-28.md, status: tested}
-      DEL-VAL-020: {name: Foundation Completion Audit, file: docs/validation/FOUNDATION_COMPLETION_AUDIT-2026-08-17.md, status: candidate}
+      DEL-VAL-019: {name: Prior CI Validation Receipt, file: docs/validation/CI_RECEIPT-2026-07-28.md, status: tested}
+      DEL-VAL-020: {name: Foundation Completion Audit, file: docs/validation/FOUNDATION_COMPLETION_AUDIT-2026-08-17.md, status: human_reviewed}
+      DEL-VAL-021: {name: Main Merge CI Validation Receipt, file: docs/validation/CI_RECEIPT-2026-08-17-MAIN-MERGE.md, status: machine_checked}
+      DEL-VAL-022: {name: F1 Entry Receipt, file: docs/validation/F1_ENTRY_RECEIPT-2026-08-17.md, status: candidate}
+      DEL-VAL-023: {name: Post-Merge Reconciliation Note, file: docs/validation/POST_MERGE_RECONCILIATION_NOTE.md, status: candidate}
 
   engineering_delivery:
     destination: docs/delivery|.github|issues
@@ -134,22 +139,39 @@ categories:
       DEL-ENG-003: {name: Development Setup, file: docs/delivery/DEVELOPMENT_SETUP.md, status: candidate}
       DEL-ENG-004: {name: Release Policy, file: docs/delivery/RELEASE_POLICY.md, status: candidate}
       DEL-ENG-005: {name: Workstreams, file: docs/delivery/WORKSTREAMS.md, status: candidate}
-      DEL-ENG-006: {name: Milestones, file: docs/delivery/MILESTONES.md, status: candidate}
+      DEL-ENG-006: {name: Milestones, file: docs/delivery/MILESTONES.md, status: human_reviewed}
       DEL-ENG-007: {name: Decision Calendar, file: docs/delivery/DECISION_CALENDAR.md, status: candidate}
-      DEL-ENG-008: {name: Backlog, file: docs/delivery/BACKLOG.md, status: candidate}
-      DEL-ENG-009: {name: Sprint Zero, file: docs/delivery/SPRINT_ZERO.md, status: candidate}
+      DEL-ENG-008: {name: Backlog, file: docs/delivery/BACKLOG.md, status: human_reviewed}
+      DEL-ENG-009: {name: Sprint Zero, file: docs/delivery/SPRINT_ZERO.md, status: superseded}
       DEL-ENG-010: {name: Sprint One, file: docs/delivery/SPRINT_ONE.md, status: candidate}
       DEL-ENG-011: {name: Contribution Templates, file: CONTRIBUTING.md|.github/, status: candidate}
       DEL-ENG-012: {name: Technology Spikes, file: issues/3-5, status: planned}
       DEL-ENG-013: {name: Durable Substrate Vertical Slice, file: issue/6, status: planned}
+      DEL-ENG-014: {name: F1 Evidence Lineage Refresh, file: issue/7, status: planned}
 
 completion_rule:
-  foundation_buildout_complete_when:
-    - all_non_executable_foundation_deliverables_materialized
-    - current_contract_kernel_has_machine_validation_receipt
-    - execution_only_deliverables_have_issues_test_definitions_and_receipt_destinations
-    - no_unexecuted_experiment_is_marked_tested
-  promotion_still_requires:
-    - human_gate_decision
-    - technology_spikes
-    - executable_vertical_slice
+  F0_complete_when:
+    - project_owner_accepts_foundation_package
+    - foundation_is_promoted_to_main
+    - acceptance_receipt_links_decision_and_merge
+    - clean_main_validation_receipt_exists
+  F0_state: accepted
+
+  F1_entry_complete_when:
+    - F0_is_accepted
+    - stale_F0_pending_language_is_reconciled
+    - active_F1_blockers_are_explicitly_owned_and_routed
+    - main_contract_kernel_has_clean_machine_baseline
+  F1_entry_state: candidate_complete_in_transition_PR
+
+  F1_promotion_still_requires:
+    - issue_7_gate_relevant_evidence_lineage
+    - technology_spikes_3_4_5
+    - critical_contradiction_adjudication
+    - clean_contract_validation_at_promotion_head
+    - human_F1_gate_decision
+
+  F2_requires:
+    - F1_accepted
+    - executable_vertical_slice_6
+    - real_failure_injection
