@@ -1,39 +1,71 @@
-version: 0.1.0
-status: initial
+version: 0.2.0
+status: candidate
+updated_at: 2026-08-17
 
 contradictions_and_tensions:
   - id: CON-001
     topic: identifier_format
     positions: [stable_UUIDs, ULIDs_for_readability, UUIDv7_candidate]
-    current_direction: UUIDv7_with_typed_prefix_pending_ADR
+    current_direction: UUIDv7_with_typed_prefix
+    status: candidate_resolution_pending_F1_confirmation
     severity: high
+    decision_record: ADR-0010
+    revisit_trigger: before_persistent_prototype_data
 
   - id: CON-002
     topic: user_state_canonicality
     positions: [cursor_in_sheet_sidecar, cursor_as_local_ephemeral_state]
     current_direction: local_ephemeral_state
+    status: candidate_resolution_pending_F1_confirmation
     severity: high
+    decision_record: ADR-0009
+    revisit_trigger: if_multi_device_or_handoff_requires_portable_context_state
 
   - id: CON-003
     topic: mutation_ownership
     positions: [PatchSession_owns_transaction, Recovery_owns_transaction, shared_Mutation_Envelope]
     current_direction: shared_Mutation_Envelope
+    status: critical_candidate_resolution_pending_F1_confirmation
     severity: critical
+    decision_record: ADR-0007
+    acceptance_condition: >-
+      F1 adversarial review confirms Mutation Envelope is the sole transaction/application
+      authority, PatchSession owns proposal/review/provenance, and Recovery owns preservation,
+      rollback and restore mechanisms without competing canonical transaction paths.
+    revisit_trigger: >-
+      F1 closure and again if F2 implementation creates blocking autosave overhead or a second
+      canonical mutation path.
 
   - id: CON-004
     topic: annotations_storage
     positions: [inline_comments, Sheet_sidecar_comments, dedicated_annotation_log]
     current_direction: dedicated_annotation_log_with_optional_portable_inline_form
+    status: candidate_resolution_pending_F1_F2_validation
     severity: medium
+    decision_record: ADR-0008
+    revisit_trigger: annotation_reanchor_split_merge_and_sync_tests
 
   - id: CON-005
     topic: manuscript_ordering
     positions: [array_order, fractional_order_keys]
     current_direction: array_order_for_solo_v1_with_revisit_trigger
+    status: accepted_for_solo_v1_candidate_contract
     severity: medium
+    revisit_trigger: before_app_managed_sync_or_concurrent_manifest_editing
 
   - id: CON-006
     topic: Compendium_implementation_priority
     positions: [full_early_sidecar, schema_only_boundary_until_foundation]
     current_direction: minimal_boundary_and_deferred_broad_implementation
+    status: accepted_F0_product_sequencing_baseline
     severity: high
+    decision_record: ADR-0011
+    revisit_trigger: after_Writer_Chair_and_Manuscript_Machine_gates_or_user_evidence_of_unserved_continuity_need
+
+open_critical:
+  - CON-003
+
+closure_rule: >-
+  A current_direction is not a resolved contradiction by itself. Critical contradictions remain
+  open until the named gate accepts, revises, or explicitly defers the direction with evidence
+  and a falsifier.
