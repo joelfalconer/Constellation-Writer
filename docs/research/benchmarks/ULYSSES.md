@@ -1,45 +1,69 @@
 # Benchmark Dossier: Ulysses
 
 ```yaml
-status: candidate
-source_basis: [SRC-DR-001, EU-001]
-epistemic_basis: source_assertion
-validation_state: unreviewed
-locator_status: pending_exact_span
+status: refreshed_candidate
+updated_at: 2026-08-17
+historical_source_basis: [SRC-DR-001, EU-001]
+current_source_basis:
+  - SRC-OFFICIAL-ULYSSES-SHEETS-20260817
+  - SRC-OFFICIAL-ULYSSES-EXPORT-20260817
+  - SRC-OFFICIAL-ULYSSES-EXTERNAL-20260817
+  - SRC-OFFICIAL-ULYSSES-GOALS-20260817
+current_evidence_unit: EU-016
+validation_state: machine_checked_current_docs
+historical_locator_status: unresolved_source_unavailable
 ```
 
-## Product thesis
+## Historical report finding
 
-Current corpus characterizes Ulysses as strongest when calm writing, library organization, and export live in one restrained environment.
+The inherited Deep Research ledger characterizes Ulysses as strongest when calm writing, library organization, and export live in one restrained environment. That finding remains `EU-001`, but the final `SRC-DR-001` report attachment is not retrievable in this run, so its exact report span remains explicitly unresolved rather than guessed.
 
-## Core professional workflows
+## Current official product state
 
-- Draft in a low-residue editor.
-- Move between sheets/library items without losing flow.
-- Assemble and export without turning the editor into a publishing dashboard.
+Official Ulysses documentation currently establishes that:
+
+- all writing is done in **Sheets**, stored in **Groups**;
+- Sheets behave like documents without requiring a title or filename as their organizing concept;
+- multiple Sheets, Groups, and filters can be exported through an export preview to HTML, ePub, PDF, DOCX, or plain text;
+- goals can be attached at Sheet, Group, and Project scope;
+- External Folders can expose local/cloud material through Finder and third-party applications, including Markdown files, though external Markdown loses some native Ulysses features and automatic Ulysses backups.
+
+These are documented capabilities, not evidence that Ulysses is objectively calmer, faster, more accessible, or more trustworthy under professional fatigue.
+
+## Benchmark interpretation
+
+The strongest current, source-supported contribution is the coupling of a small writing unit, library-scale navigation, goals, and direct multi-item export without requiring a separate publishing application. External Folder support also creates an important boundary case: portability can be increased, but capability parity with native library storage is reduced.
 
 ## Atomic affordances to benchmark
 
-- editor-to-library switching cost;
-- sheet creation and return;
-- focus/fullsreen behavior;
-- export invocation and preview confidence;
-- visual hierarchy between editor and navigation.
+- Sheet creation, selection, grouping, split/merge, and return cost.
+- Material Sheet exclusion from export and goals/stats where applicable.
+- Group/project goal visibility without dashboard dominance.
+- Export selection, preview, style selection, and multi-Sheet assembly confidence.
+- Native-library versus External-Folder capability differences.
 
 ## Borrow / reject / test
 
-**Borrow:** calm editor dominance, library immediacy, restrained export flow.
+**Borrow candidate:** calm editor dominance, Sheet-scale authoring, library immediacy, lightweight goal attachment, and export that can assemble multiple writing units.
 
-**Reject:** any proprietary-storage assumption that weakens file sovereignty.
+**Reject candidate:** making the writer choose between full product capability and inspectable local files as a permanent architectural tradeoff.
 
-**Test:** whether Constellation Writer can match the perceived calm while exposing stronger local ownership, recovery, and deterministic assembly.
+**Test in Constellation:** whether manifest-first assembly and writer-owned files can retain Ulysses-class immediacy while improving recovery, explicit export semantics, and external inspectability.
 
-## Unknowns
-
-The current evidence ledger does not yet contain exact report spans, current-version UI observations, accessibility measurements, or switching complaints specific to Ulysses. Do not promote those claims until a source-review pass fills the locators.
-
-## Evidence
+## Evidence table
 
 | Claim | Basis | Locator | Validation |
 |---|---|---|---|
-| Calm editor, library, and export are the strongest benchmark contribution | EU-001 / SRC-DR-001 | pending exact span | unreviewed |
+| Historical synthesis: calm editor + library + export is Ulysses' strongest benchmark contribution | EU-001 / SRC-DR-001 | unresolved: final report unavailable | unreviewed historical assertion |
+| Writing unit is the Sheet; Sheets are organized in Groups | EU-016 / SRC-OFFICIAL-ULYSSES-SHEETS-20260817 | `Sheets & Groups` | machine checked |
+| Multi-Sheet/Group export supports preview and common output formats | EU-016 / SRC-OFFICIAL-ULYSSES-EXPORT-20260817 | `Export` | machine checked |
+| Goals exist at Sheet, Group, and Project scope | EU-016 / SRC-OFFICIAL-ULYSSES-GOALS-20260817 | `Goals` | machine checked |
+| External Folders permit interoperable Markdown but with reduced native capabilities | EU-016 / SRC-OFFICIAL-ULYSSES-EXTERNAL-20260817 | `External Folders` | machine checked |
+
+## Remaining gaps
+
+- Long-session editor ergonomics and measured latency.
+- Accessibility behavior across supported Apple platforms.
+- Recovery and sync-conflict behavior under destructive tests.
+- Current professional switching complaints and praise.
+- Exact `SRC-DR-001` report locator.
