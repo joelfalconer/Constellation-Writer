@@ -1,36 +1,23 @@
-# Adjacent Specialist Benchmarks: Final Draft, Vellum, Atticus
+# Adjacent Specialist Benchmarks
 
 ```yaml
-status: evidence_gap_record
-validation_state: unreviewed
+status: refreshed_index
+updated_at: 2026-08-17
+validation_state: machine_checked_current_docs
 ```
 
-These products remain in the intended benchmark corpus because they represent specialist script and publishing workflows. The current atomized evidence ledger does **not** yet contain product-specific evidence units for them.
+The former evidence-gap placeholders for Final Draft, Vellum, and Atticus have now been replaced by product-specific dossiers grounded in current official documentation:
 
-## Final Draft
+- [`FINAL_DRAFT.md`](FINAL_DRAFT.md) — screenplay planning, outline-to-pages, FDX/export boundary.
+- [`VELLUM.md`](VELLUM.md) — manuscript import, book structure, preview, ebook/print generation, content export.
+- [`ATTICUS.md`](ATTICUS.md) — integrated writing/formatting, publication output, cloud/save boundary, DOCX limitations.
 
-Research questions:
+These dossiers establish **documented current capabilities only**. They do not establish professional usability, comparative superiority, accessibility quality, switching motives, or measured trust. Those remain separate evidence gaps.
 
-- Which screenplay-specific editing behaviors are genuinely superior to a Markdown/Fountain workbench?
-- Which revision, scene-navigation, pagination, and interchange expectations are non-negotiable?
-- What can be represented as a `script` Sheet plus compile adapter without contaminating ordinary prose editing?
+## Boundary role in Constellation Writer
 
-## Vellum
-
-Research questions:
-
-- Which preview and formatting affordances create publication confidence?
-- Which transformations are deterministic and explainable versus hidden convenience?
-- Where should Constellation Writer hand off rather than reproduce page-layout capability?
-
-## Atticus
-
-Research questions:
-
-- Which author-to-publication workflows collapse meaningful tool switching?
-- What export/profile concepts transfer cleanly into Constellation Writer?
-- Which cloud/account assumptions conflict with local-first doctrine?
+Final Draft tests which semantics are genuinely screenplay-specific. Vellum tests how far publication formatting should remain a downstream forge rather than the manuscript source of truth. Atticus tests the appeal and architectural cost of collapsing writing and book production into one account-backed environment.
 
 ## Rule
 
-Do not convert these questions into product claims until primary/current sources or direct observations are registered. This dossier exists to preserve coverage without fabricating evidence.
+Do not convert vendor documentation into user sentiment or architecture truth. Product-state observations may inform a prototype hypothesis; Constellation recommendations remain design decisions until their own gates are tested.
