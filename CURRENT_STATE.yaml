@@ -1,7 +1,7 @@
 project_id: constellation_writer
 project_name: Constellation Writer
 repository: joelfalconer/Constellation-Writer
-status: F0_accepted_F1_entry
+status: F0_accepted_F1_evidence_refresh_candidate
 phase: F1_architecture_coherence_evidence_and_spikes
 updated_at: 2026-08-17
 
@@ -11,6 +11,7 @@ core_promise: calm_editor_brutal_recall_governed_transformation
 canonical_branch: main
 canonical_foundation_merge: 1f01da3c76611d9ad9b1b297c2b8f265a91a6daa
 active_transition_branch: f1/post-merge-reconciliation
+active_stacked_research_branch: research/evidence-lineage-refresh
 foundation_pull_request: 1
 foundation_issue: 2
 technology_spikes: [3, 4, 5]
@@ -27,7 +28,6 @@ completed:
   - product_experience_contract_suite_candidate
   - writer_journey_maps_candidate
   - research_evidence_and_friction_package_candidate
-  - benchmark_dossier_package_candidate_with_explicit_gaps
   - common_and_domain_contract_kernel_machine_checked
   - state_machine_and_command_registries_candidate
   - expanded_reference_novel_fixture_machine_checked
@@ -41,10 +41,13 @@ completed:
   - technology_ADR_candidates
   - engineering_and_release_governance
   - foundation_completion_audit
+  - issue_7_current_official_benchmark_refresh_for_eight_products
+  - issue_7_EU_001_through_EU_010_pending_locators_replaced_with_explicit_unresolved_reasons
+  - issue_7_EU_016_through_EU_023_current_product_evidence_units
 
 in_progress:
-  - F1_post_merge_reconciliation
-  - evidence_locator_backfill_issue_7
+  - F1_post_merge_reconciliation_PR_10
+  - issue_7_evidence_refresh_PR_validation_and_review
   - technology_spikes_3_4_5
   - F1_adversarial_architecture_review_after_spikes
 
@@ -90,21 +93,24 @@ F1_blockers:
   - issue: 7
     decision: evidence_lineage_and_benchmark_refresh
     owner: joelfalconer
+    state: closure_ready_when_evidence_refresh_PR_is_reviewed_and_merged
+    unresolved_nonblocking_limitation: SRC_DR_001_final_report_attachment_not_retrievable_for_exact_historical_spans
   - contradiction: CON-003
     topic: mutation_ownership
     state: candidate_resolution_pending_F1_confirmation
 
 known_gaps:
-  - exact_locators_pending_for_deep_research_evidence_units
-  - benchmark_dossiers_are_not_fresh_current_product_audits
+  - exact_historical_SRC_DR_001_spans_unresolved_with_explicit_source_unavailable_reason
+  - benchmark_user_sentiment_switching_fatigue_and_accessibility_not_established_by_vendor_docs
   - current_schemas_cover_foundation_and_reference_fixture_not_every_future_field
   - compile_recovery_and_mutation_are_not_executable_product_services
   - technology_ADRs_0004_0005_0006_are_proposed_not_accepted
   - no_professional_writer_assay_has_run
 
 closure_posture: >-
-  F0 is accepted and promoted. F1 is now an evidence-and-decision gate, not a
-  documentation-completion exercise. Technology spikes, evidence lineage,
-  critical contradiction adjudication, clean contract validation, and an
-  explicit human F1 gate decision remain required. F2 vertical-slice work starts
-  only after F1 closure unless used as an explicitly bounded falsification probe.
+  F0 is accepted and promoted. Issue #7 is closure-ready on review/merge of the
+  evidence-refresh PR: current official benchmark mechanics are registered for all eight
+  requested products, inherited EU-001..EU-010 no longer carry ambiguous pending locators,
+  and unresolved historical report spans are explicitly named rather than fabricated.
+  F1 remains conditional_not_ready until technology spikes #3, #4, #5, CON-003 review,
+  clean gate validation, and a human F1 decision are complete.
