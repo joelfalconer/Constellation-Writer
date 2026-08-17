@@ -1,15 +1,19 @@
-version: 0.1.0
-status: candidate
-updated_at: 2026-07-28
+version: 0.2.0
+status: refreshed_candidate
+updated_at: 2026-08-17
+
 decisions:
   - id: SD-001
     source_id: SRC-DR-001
-    decision: include
-    role: primary_product_and_workflow_synthesis
-    reason: directly addresses benchmark tools, workflows, architecture, and product doctrine
+    decision: retain_with_locator_gap
+    role: historical_product_and_workflow_synthesis
+    reason: directly underlies inherited EU-001 through EU-010
     limitations:
-      - exact evidence spans need re-ingestion and stable locators
-      - vendor behavior may change after report capture
+      - final report attachment is not retrievable in the current repository or File Library search surface
+      - exact page/section/span locators cannot be reconstructed safely
+      - vendor behavior may have changed after report capture
+    handling: preserve historical claims, replace pending placeholders with explicit unresolved reasons, and do not infer missing spans
+
   - id: SD-002
     source_id: SRC-CONV-001
     decision: include_as_design_lineage
@@ -18,21 +22,45 @@ decisions:
     limitations:
       - model-generated design is not market evidence
       - repeated principles do not increase evidentiary weight
+      - EU-011+ remain inference/design unless a separate evidence unit independently supports them
+
   - id: SD-003
-    source_id: SRC-ROS-001
+    source_id: SRC-ROS-041
     decision: include_as_control_authority
     role: research_process_and_governance
     reason: governs Run Contract, epistemic annotation, lineage, validation, and routing
+
   - id: SD-004
-    source_id: official_technology_documentation
-    decision: include_on_demand
-    role: technical_candidate_verification
-    policy: use primary official sources and record version/date
+    source_id: official_product_documentation
+    decision: include_primary_current_state
+    role: current_product_verification
+    policy:
+      - use vendor-owned help, documentation, knowledge-base, and product pages
+      - record access date and publication/update date where available
+      - treat vendor documentation as evidence of documented capability, not proof of usability or user satisfaction
+      - distinguish current observations from historical SRC-DR-001 synthesis
+
   - id: SD-005
     source_id: general_web_reviews
-    decision: conditional
+    decision: defer_for_this_run
     role: complaint_switching_and_real_world_friction_only
-    policy: corroborate critical technical claims with primary sources
+    reason: Prompt 01 prioritizes primary/current product verification; switching and complaint claims need a separately governed user-evidence pass
+    policy: do not fill switching claims from vendor material or model memory
+
+  - id: SD-006
+    source_id: precursor_deep_research_briefs
+    decision: exclude_as_finding_evidence
+    role: scope_and_method_history_only
+    reason: targeted File Library search found research briefs and prompt material, not the final Deep Research findings report
+    limitation: a research request is not evidence that its requested findings occurred
+
+  - id: SD-007
+    source_id: official_product_documentation_set_2026_08_17
+    decision: include
+    role: eight_product_current_benchmark_refresh
+    products: [Ulysses, Scrivener, iA_Writer, Drafts, Obsidian, Final_Draft, Vellum, Atticus]
+    acceptance: each consequential current-state claim cites a registered official source and remains distinct from design recommendation
+
 exclusions:
   - category: generic_AI_writing_tool_roundups
     reason: low workflow precision and commercial ranking bias
@@ -40,3 +68,10 @@ exclusions:
     reason: feature presence does not establish professional usability
   - category: generated_architecture_summaries_as_evidence
     reason: design proposals remain inference or recommendation until tested
+  - category: vendor_docs_as_user_sentiment
+    reason: official documentation can establish documented capability but not switching motives, satisfaction, fatigue, accessibility quality, or professional trust
+
+stop_rules:
+  - do_not_claim_SRC_DR_001_exact_locator_closure_without_retrieving_the_final_report
+  - do_not_promote_EU_011_plus_to_evidence_without_independent_source_units
+  - do_not_convert_vendor_feature_documentation_into_switching_or_usability_claims
