@@ -1,9 +1,9 @@
 project_id: constellation_writer
 project_name: Constellation Writer
 repository: joelfalconer/Constellation-Writer
-status: foundation_architecture_buildout
-phase: F1_machine_validation_and_spikes
-updated_at: 2026-07-28
+status: foundation_deliverable_buildout_complete_candidate
+phase: F0_human_gate_and_F1_executable_spikes
+updated_at: 2026-08-17
 
 product_identity: local_first_professional_writing_workbench
 core_promise: calm_editor_brutal_recall_governed_transformation
@@ -20,34 +20,62 @@ completed:
   - architecture_governance_package
   - integrated_component_specification_suite
   - product_experience_contract_suite
+  - writer_journey_maps_candidate
+  - research_evidence_and_friction_package_candidate
+  - benchmark_dossier_package_candidate_with_explicit_gaps
   - common_and_domain_contract_kernel_candidate
   - state_machine_and_command_registries
   - expanded_reference_novel_fixture
   - foundation_validator_v0_2
   - negative_contract_tests
   - validation_CI_workflow
+  - CI_run_30344185332_success_and_artifact_preserved
   - validation_assays_and_failure_matrices
+  - compile_golden_case_definitions
+  - failure_injection_scenario_definitions
   - technology_ADR_candidates
   - engineering_and_release_governance
+  - foundation_completion_audit
 
 in_progress:
-  - confirm_GitHub_Actions_execution
-  - repair_any_machine_validation_failures
+  - current_head_CI_after_completion_commits
   - human_review_F0_constitution_and_scope
   - execute_technology_spikes
-  - prepare_durable_substrate_vertical_slice
-  - atomize_source_evidence
+  - execute_durable_substrate_vertical_slice
+  - backfill_exact_source_locators
+  - later_professional_writer_assay_after_prototype
 
 next_gate:
+  id: F0
+  name: Project Defined
+  state: candidate_complete_awaiting_human_decision
+
+following_gate:
   id: F1
   name: Architecture Coherent
   state: conditional_not_ready
 
+machine_evidence:
+  last_confirmed_ci:
+    run_id: 30344185332
+    head_sha: 6b48da2d5e90003052111feadea5dfa26d17d268
+    conclusion: success
+    validator_version: 0.2.0
+    schemas: 22
+    sheets: 3
+    manuscripts: 2
+    issues: 0
+
 known_gaps:
-  - source_evidence_units_not_yet_atomized
-  - validator_v0_2_not_yet_confirmed_in_GitHub_CI
-  - contracts_cover_foundation_and_reference_fixture_not_every_future_field
+  - exact_locators_pending_for_deep_research_evidence_units
+  - benchmark_dossiers_are_not_fresh_current_product_audits
+  - current_schemas_cover_foundation_and_reference_fixture_not_every_future_field
   - compile_recovery_and_mutation_are_not_executable_services
   - technology_ADRs_are_proposed_not_accepted
   - no_professional_writer_assay_has_run
   - main_branch_contains_only_bootstrap_readme_until_foundation_merge
+
+closure_posture: >-
+  The repository and mapped foundation deliverables are materially built out.
+  Remaining work is intentionally experimental, executable, or human-governed;
+  it must not be collapsed into documentation-only closure.

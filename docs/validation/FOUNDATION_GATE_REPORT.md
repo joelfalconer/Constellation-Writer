@@ -1,62 +1,67 @@
-# Foundation Gate Report v0.1
+# Foundation Gate Report v0.2
 
 ## Decision summary
 
-**F0 Project Defined:** materially complete as a candidate, pending human acceptance.  
-**F1 Architecture Coherent:** not yet closed. Contract and validator machinery exist, but CI and executable product behavior remain unproven.
+**F0 Project Defined:** candidate package complete, awaiting explicit human acceptance.  
+**F1 Architecture Coherent:** conditional, not closed. Machine contract validation now passes; technology and executable behavior remain open.
 
 ## Evidence available
 
-- Product thesis, vision, users, anti-personas, scope, and success definition.
-- Product Constitution, sovereignty, canonicality, authority, dependency, trust, and anti-feature laws.
-- Integrated component specifications and common contract kernel.
-- Typed identifier, revision, anchor, provenance, lifecycle, consequence, validation, and recovery schemas.
-- Expanded reference novel and deterministic validator.
-- Validation assays, performance budget, recovery drills, and adversarial review.
-- Candidate technology ADRs.
+- Programme definition, user/non-user profiles, scope, success definition, deliverables, and routing.
+- Product Constitution, sovereignty, canonicality, authority, dependency, trust, anti-feature, and reversal-cost laws.
+- Integrated component specifications and shared contract kernel.
+- Research evidence ledger, source decisions, feature atomicity, switching/friction maps, benchmark dossier candidates, and coverage report.
+- Expanded reference novel, deterministic validator, and negative controls.
+- GitHub Actions validation receipt with successful v0.2 report.
+- Product experience contracts and writer journey maps.
+- Prototype stress, performance, recovery, privacy, accessibility, external-editor, compile-golden, and failure-injection test definitions.
+- Candidate technology ADRs with routed spikes.
 
 ## F0 gates
 
 | Criterion | State |
 |---|---|
 | project identity clear | candidate pass |
-| intended users and non-users defined | candidate pass |
+| intended users and deliberate non-fit defined | candidate pass |
 | v1 scope and non-goals explicit | candidate pass |
 | authority hierarchy defined | candidate pass |
-| deliverables mapped | candidate pass |
+| deliverables mapped and materialized | candidate pass |
 | success criteria testable | candidate pass |
-| backlog and next route exist | candidate pass |
-| human acceptance | open |
+| backlog, milestones, owners/routes exist | candidate pass |
+| human acceptance | **open** |
 
 ## F1 gates
 
 | Criterion | State |
 |---|---|
-| every modeled durable field has one owner | candidate, validator partial |
-| shared enums and lifecycles reconciled | candidate |
-| reference fixture validates | prior local v0.1 validator pass; v0.2 CI pending |
-| invalid fixtures fail for expected reasons | tests added, execution pending |
-| cache deletion leaves canonical validation unchanged | specified, not executable product test |
-| compile semantics deterministic | specified, not implemented |
-| mutation and recovery ownership unified | candidate pass |
-| technology spikes completed | open |
+| modeled durable fields have explicit authorities | candidate pass |
+| shared enums and lifecycles reconciled | machine checked where schema/validator covers them |
+| reference fixture validates | pass at CI run 30344185332 |
+| negative fixtures fail for expected reasons | pass in committed CI test suite |
+| cache deletion leaves canonical validation unchanged | contract invariant, executable service test open |
+| compile semantics deterministic | test definitions exist, implementation open |
+| mutation and recovery ownership unified | candidate pass through Mutation Envelope |
+| desktop/editor/compile technology rivals tested | open issues #3-#5 |
+| durable substrate vertical slice | open issue #6 |
+| human architecture approval | open |
 
-## Exceptions
+## Exceptions and unresolved material
 
-- Original research evidence units are not fully atomized.
-- Current schemas cover the foundation fixture, not every future field.
-- No desktop prototype has passed the workflow assay.
-- No recovery implementation has passed fault injection.
+- Deep Research evidence entries still require exact source-locator backfill.
+- Benchmark dossiers preserve current evidence limits and are not fresh product audits.
+- No desktop prototype has passed the long-session assay.
+- No recovery implementation has passed failure injection.
 - No technology ADR is accepted.
+- Main remains intentionally unpromoted until the gate decision.
 
 ## Route
 
-1. Run GitHub CI and repair contract/test failures.
-2. Review and accept or revise F0 constitutional artifacts.
-3. Build technology spikes.
-4. Implement the first vertical slice.
-5. Run F1 machine and human gate review.
+1. Human-review F0 constitutional artifacts and record accept/revise decision.
+2. Execute technology spikes #3-#5 and update ADRs.
+3. Execute vertical slice #6 and populate its reserved receipt.
+4. Run fault injection and compile goldens against real services.
+5. Review F1 with machine evidence and human decision.
 
 ## Promotion rule
 
-Do not merge or label F1 accepted solely because the documentation is comprehensive. F1 requires machine evidence and a recorded human decision.
+Documentation completeness is not architecture validation. Do not merge or close F1 until the relevant machine evidence and human decisions exist.

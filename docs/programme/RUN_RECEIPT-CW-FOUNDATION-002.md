@@ -1,45 +1,67 @@
 # Run Receipt: CW-FOUNDATION-002
 
-## Profile
+## Run contract
 
-- Primary: `system_design_strategy`
-- Sidecar: `computational_analysis`
-- Adversarial probe: targeted architecture rivals
-- Destination: draft PR #1, F1 architecture gate preparation
+```yaml
+profile: update_delta
+supporting_profile: system_design_strategy
+resource_profile: deep
+risk_profile: medium
+primary_outcomes:
+  - recover_exact_pre_interruption_repository_state
+  - finish_mapped_non_executable_foundation_deliverables
+  - preserve_clear_boundary_between_candidate_docs_and_unexecuted_evidence
+acceptance:
+  - current_repository_and_pr_state_verified
+  - prior_machine_validation_evidence_recovered
+  - planned_documentary_foundation_artifacts_materialized_or_explicitly_routed
+  - state_and_gate_reports_reconciled
+  - no_unexecuted_spike_or_vertical_slice_claimed_complete
+destination: foundation/project-establishment PR #1
+```
 
-## Inputs
+## Authority and runtime
 
-- Existing F0 repository package and integrated v0.2 specification candidates.
-- Research OS v0.4.1 pipeline, profiles, controls, context-lineage, and subsystems.
-- Research OS v0.3 methods as degraded reference because the v0.4.1 methods file was unavailable.
-- Official Tauri, CodeMirror, Pandoc, SQLite, and JSON Schema documentation for technology candidates.
+Research OS v0.4.1 runtime projection was used as the governing research posture. The uploaded v0.4.1 `methods`, `records`, and `criteria` files were unavailable; the run used the available v0.4.1 pipeline and profiles, with v0.3 methods only as degraded reference where needed.
 
-## Outputs
+## Recovered pre-interruption state
 
-- Completed common contract kernel candidate.
-- Added state-machine and command registries.
-- Added domain schemas for reference fixture validation.
-- Implemented deterministic validator and CI workflow.
-- Expanded reference fixture across compile, annotation, Compendium, PatchSession, snapshot, conflict, archive, and alternate manuscript cases.
-- Added validation assays and technology ADR candidates.
-- Updated deliverables and current-state records.
+- PR #1 open, mergeable, and draft.
+- 14 commits and 172 changed files at recovered head `6b48da2...`.
+- F0 candidate package materially complete.
+- F1 contract/specification package substantial.
+- Technology spike issues #3-#5 open.
+- Durable substrate issue #6 open.
+- GitHub Actions run `30344185332` had in fact succeeded, contrary to the stale status documents.
+- Validation artifact reported 22 schemas, 3 Sheets, 2 manuscripts, zero issues.
+
+## Delta applied
+
+- materialized benchmark dossiers at the evidence level currently supported;
+- created five writer journey maps;
+- created compile golden-case definitions;
+- created failure-injection scenario definitions;
+- reserved a non-fabricated vertical-slice receipt destination;
+- preserved CI validation evidence in-repo;
+- created a foundation completion audit;
+- reconciled deliverables, current state, F0/F1 reports, PR body, and issue routing.
 
 ## Validation state
 
-- Files generated and locally parsed: passed in an assembled local fixture mirror.
-- Foundation validator: 22 schemas checked and reference fixture passed with zero issues in the local mirror.
-- GitHub CI: pending.
-- Product behavior: untested.
-- Human review: pending.
-- Canonical promotion: none.
+- Previous architecture head: machine checked by GitHub Actions.
+- New completion commits: require the normal CI workflow after push.
+- Technology choices: unreviewed candidate decisions pending spikes.
+- Executable product behavior: not tested.
+- Human gate acceptance: not recorded.
 
-## Unresolved
+## Unresolved gaps
 
-- Typed UUIDv7 approach remains proposed until review and migration implications are confirmed.
-- Validator currently checks a bounded reference package, not every contract or cross-spec statement.
-- Tauri, CodeMirror, and Pandoc decisions require executable spikes.
-- Evidence units from the original research report remain to be atomized.
+- exact evidence locators from the Deep Research report;
+- fresh benchmark/product-version audits if later required;
+- technology spike results;
+- vertical-slice execution;
+- professional-writer assay.
 
-## Route
+## Route and closure
 
-Commit to `foundation/project-establishment`, update draft PR #1, run CI, repair machine failures, then emit F0/F1 gate reports. Do not merge solely because schemas parse.
+The repository build-out task is closed at the **candidate foundation package** level. Remaining work is routed to human decision, technology experiments, executable implementation, and later outcome observation rather than more undifferentiated specification writing.

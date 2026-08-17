@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.0-candidate — 2026-08-17
+
+- Recovered and audited the interrupted foundation build-out against the actual GitHub branch state.
+- Confirmed the committed GitHub Actions validator had passed and preserved the validation receipt in-repo.
+- Materialized benchmark dossiers with explicit evidence limits rather than invented current-product claims.
+- Added writer journey maps for longform drafting, revision/restructure, research-led writing, screenplay development, and transmedia continuity.
+- Added compile golden-case definitions and failure-injection scenarios without mislabeling them as executed tests.
+- Reserved a vertical-slice receipt that cannot be promoted until issue #6 runs.
+- Updated the deliverables register, current state, F0/F1 gate reports, and continuation run receipt.
+
 ## 0.3.0-candidate — 2026-07-28
 
 - Added product information architecture, core workflow catalogue, command palette, typography, modes, navigation-return, Inspector, accessibility, and professional ergonomics contracts.

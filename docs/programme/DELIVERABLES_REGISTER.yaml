@@ -1,7 +1,7 @@
 id: constellation_writer.deliverables
-version: 0.3.0
+version: 0.4.0
 status: candidate
-updated_at: 2026-07-28
+updated_at: 2026-08-17
 status_values: [planned, draft, candidate, machine_checked, human_reviewed, tested, accepted, superseded]
 
 categories:
@@ -17,19 +17,22 @@ categories:
       DEL-PROG-007: {name: Scope and Non-Goals, file: SCOPE_AND_NON_GOALS.md, status: candidate}
       DEL-PROG-008: {name: Success Definition, file: SUCCESS_DEFINITION.md, status: candidate}
       DEL-PROG-009: {name: Concept Glossary, file: ../constitution/CONCEPT_GLOSSARY.md, status: candidate}
+      DEL-PROG-010: {name: Foundation Continuation Run Receipt, file: RUN_RECEIPT-CW-FOUNDATION-002.md, status: candidate}
+
   research_and_evidence:
     destination: docs/research
     items:
       DEL-RES-001: {name: Source Registry, file: SOURCE_REGISTRY.yaml, status: candidate}
-      DEL-RES-002: {name: Inclusion and Exclusion Log, file: SOURCE_DECISIONS.yaml, status: planned}
-      DEL-RES-003: {name: Evidence Unit Ledger, file: EVIDENCE_UNITS.jsonl, status: planned}
-      DEL-RES-004: {name: Benchmark App Dossiers, file: benchmarks/, status: planned}
-      DEL-RES-005: {name: Feature Atomicity Ledger, file: FEATURE_ATOMICITY.yaml, status: planned}
-      DEL-RES-006: {name: Anti-Feature Register, file: ANTI_FEATURES.yaml, status: planned}
-      DEL-RES-007: {name: Complaint and Switching Map, file: SWITCHING_MAP.md, status: planned}
-      DEL-RES-008: {name: Workflow and Friction Map, file: WORKFLOW_FRICTION_MAP.md, status: planned}
+      DEL-RES-002: {name: Inclusion and Exclusion Log, file: SOURCE_DECISIONS.yaml, status: candidate}
+      DEL-RES-003: {name: Evidence Unit Ledger, file: EVIDENCE_UNITS.jsonl, status: candidate}
+      DEL-RES-004: {name: Benchmark App Dossiers, file: benchmarks/, status: candidate}
+      DEL-RES-005: {name: Feature Atomicity Ledger, file: FEATURE_ATOMICITY.yaml, status: candidate}
+      DEL-RES-006: {name: Anti-Feature Register, file: ANTI_FEATURES.yaml, status: candidate}
+      DEL-RES-007: {name: Complaint and Switching Map, file: SWITCHING_MAP.md, status: candidate}
+      DEL-RES-008: {name: Workflow and Friction Map, file: WORKFLOW_FRICTION_MAP.md, status: candidate}
       DEL-RES-009: {name: Contradiction Register, file: CONTRADICTIONS.yaml, status: candidate}
-      DEL-RES-010: {name: Evidence Coverage Report, file: COVERAGE_REPORT.md, status: planned}
+      DEL-RES-010: {name: Evidence Coverage Report, file: COVERAGE_REPORT.md, status: candidate}
+
   architecture_governance:
     destination: docs/constitution|docs/architecture|docs/decisions
     items:
@@ -47,29 +50,31 @@ categories:
       DEL-CON-012: {name: ADR Registry, file: docs/decisions/DECISION_LEDGER.yaml, status: candidate}
       DEL-CON-013: {name: Mutation Envelope, file: docs/architecture/MUTATION_ENVELOPE.md, status: candidate}
       DEL-CON-014: {name: Module Boundary Map, file: docs/architecture/MODULE_BOUNDARIES.md, status: candidate}
+
   shared_contracts:
     destination: contracts|registries
     items:
-      DEL-CTR-001: {name: Common Schema Kernel, file: contracts/common/, status: candidate}
-      DEL-CTR-002: {name: Project Schema, file: contracts/project/project.schema.json, status: candidate}
-      DEL-CTR-003: {name: Sheet Sidecar Schema, file: contracts/sheet/sheet-sidecar.schema.json, status: candidate}
-      DEL-CTR-004: {name: Manuscript Schema, file: contracts/manuscript/manuscript.schema.json, status: candidate}
-      DEL-CTR-005: {name: Compile Profile Schema, file: contracts/compile/compile-profile.schema.json, status: candidate}
-      DEL-CTR-006: {name: Annotation Schema, file: contracts/annotations/annotation.schema.json, status: candidate}
-      DEL-CTR-007: {name: Compendium Schemas, file: contracts/compendium/, status: candidate}
-      DEL-CTR-008: {name: PatchSession Schema, file: contracts/mutation/patch-session.schema.json, status: candidate}
-      DEL-CTR-009: {name: Recovery Schemas, file: contracts/recovery/, status: candidate}
-      DEL-CTR-010: {name: Enum Registry, file: registries/enums.yaml, status: candidate}
-      DEL-CTR-011: {name: Object Type Registry, file: registries/object-types.yaml, status: candidate}
+      DEL-CTR-001: {name: Common Schema Kernel, file: contracts/common/, status: machine_checked}
+      DEL-CTR-002: {name: Project Schema, file: contracts/project/project.schema.json, status: machine_checked}
+      DEL-CTR-003: {name: Sheet Sidecar Schema, file: contracts/sheet/sheet-sidecar.schema.json, status: machine_checked}
+      DEL-CTR-004: {name: Manuscript Schema, file: contracts/manuscript/manuscript.schema.json, status: machine_checked}
+      DEL-CTR-005: {name: Compile Profile Schema, file: contracts/compile/compile-profile.schema.json, status: machine_checked}
+      DEL-CTR-006: {name: Annotation Schema, file: contracts/annotations/annotation.schema.json, status: machine_checked}
+      DEL-CTR-007: {name: Compendium Schemas, file: contracts/compendium/, status: machine_checked}
+      DEL-CTR-008: {name: PatchSession Schema, file: contracts/mutation/patch-session.schema.json, status: machine_checked}
+      DEL-CTR-009: {name: Recovery Schemas, file: contracts/recovery/, status: machine_checked}
+      DEL-CTR-010: {name: Enum Registry, file: registries/enums.yaml, status: machine_checked}
+      DEL-CTR-011: {name: Object Type Registry, file: registries/object-types.yaml, status: machine_checked}
       DEL-CTR-012: {name: State Machine Registry, file: registries/state-machines.yaml, status: candidate}
       DEL-CTR-013: {name: Command Registry, file: registries/commands.yaml, status: candidate}
+
   product_experience:
     destination: docs/product|docs/specifications
     items:
       DEL-UX-001: {name: Editor Doctrine, file: docs/specifications/editor-doctrine-v0.2.md, status: candidate}
       DEL-UX-002: {name: Information Architecture, file: docs/product/INFORMATION_ARCHITECTURE.md, status: candidate}
       DEL-UX-003: {name: Core Workflow Catalogue, file: docs/product/WORKFLOWS.md, status: candidate}
-      DEL-UX-004: {name: Writer Journey Maps, file: docs/product/journeys/, status: planned}
+      DEL-UX-004: {name: Writer Journey Maps, file: docs/product/journeys/, status: candidate}
       DEL-UX-005: {name: Command Palette, file: docs/product/COMMAND_PALETTE.md, status: candidate}
       DEL-UX-006: {name: Typography and Reading System, file: docs/product/TYPOGRAPHY.md, status: candidate}
       DEL-UX-007: {name: Draft Revise Focus Modes, file: docs/product/MODES.md, status: candidate}
@@ -78,6 +83,7 @@ categories:
       DEL-UX-010: {name: Accessibility Spec, file: docs/product/ACCESSIBILITY.md, status: candidate}
       DEL-UX-011: {name: Professional Ergonomics, file: docs/product/ERGONOMICS.md, status: candidate}
       DEL-UX-012: {name: Search and Recall Contract, file: docs/specifications/search-recall-v0.1.md, status: candidate}
+
   component_specifications:
     destination: docs/specifications
     items:
@@ -95,13 +101,14 @@ categories:
       DEL-SPEC-012: {name: Privacy and Security, file: privacy-security-v0.1.md, status: candidate}
       DEL-SPEC-013: {name: Sync-Neutral Files, file: sync-neutral-v0.1.md, status: candidate}
       DEL-SPEC-014: {name: Publication State, file: publication-state-v0.1.md, status: candidate}
+
   reference_and_validation:
     destination: fixtures|tools/validator|tests|docs/validation
     items:
-      DEL-VAL-001: {name: Reference Novel, file: fixtures/reference-novel/, status: candidate}
-      DEL-VAL-002: {name: Foundation Validator v0.2, file: tools/validator/, status: candidate}
-      DEL-VAL-003: {name: Negative Contract Tests, file: tests/contracts/, status: candidate}
-      DEL-VAL-004: {name: CI Workflow, file: .github/workflows/validate.yml, status: candidate}
+      DEL-VAL-001: {name: Reference Novel, file: fixtures/reference-novel/, status: machine_checked}
+      DEL-VAL-002: {name: Foundation Validator v0.2, file: tools/validator/, status: tested}
+      DEL-VAL-003: {name: Negative Contract Tests, file: tests/contracts/, status: tested}
+      DEL-VAL-004: {name: CI Workflow, file: .github/workflows/validate.yml, status: tested}
       DEL-VAL-005: {name: Prototype Stress Assay, file: docs/validation/PROTOTYPE_STRESS_ASSAY.md, status: candidate}
       DEL-VAL-006: {name: 20000 Word Day, file: docs/validation/TWENTY_THOUSAND_WORD_DAY.md, status: candidate}
       DEL-VAL-007: {name: Performance Budget, file: docs/validation/PERFORMANCE_BUDGET.yaml, status: candidate}
@@ -113,9 +120,12 @@ categories:
       DEL-VAL-013: {name: Adversarial Review, file: docs/validation/ADVERSARIAL_REVIEW.md, status: candidate}
       DEL-VAL-014: {name: Foundation Gate Report, file: docs/validation/FOUNDATION_GATE_REPORT.md, status: candidate}
       DEL-VAL-015: {name: F1 Readiness Report, file: docs/validation/F1_READINESS_REPORT.md, status: candidate}
-      DEL-VAL-016: {name: Compile Golden Tests, file: tests/compile/, status: planned}
-      DEL-VAL-017: {name: Failure Injection Suite, file: tests/recovery/, status: planned}
+      DEL-VAL-016: {name: Compile Golden Test Definitions, file: tests/compile/, status: candidate}
+      DEL-VAL-017: {name: Failure Injection Scenario Suite, file: tests/recovery/, status: candidate}
       DEL-VAL-018: {name: Vertical Slice Receipt, file: docs/validation/VERTICAL_SLICE_RECEIPT.md, status: planned}
+      DEL-VAL-019: {name: CI Validation Receipt, file: docs/validation/CI_RECEIPT-2026-07-28.md, status: tested}
+      DEL-VAL-020: {name: Foundation Completion Audit, file: docs/validation/FOUNDATION_COMPLETION_AUDIT-2026-08-17.md, status: candidate}
+
   engineering_delivery:
     destination: docs/delivery|.github|issues
     items:
@@ -132,3 +142,14 @@ categories:
       DEL-ENG-011: {name: Contribution Templates, file: CONTRIBUTING.md|.github/, status: candidate}
       DEL-ENG-012: {name: Technology Spikes, file: issues/3-5, status: planned}
       DEL-ENG-013: {name: Durable Substrate Vertical Slice, file: issue/6, status: planned}
+
+completion_rule:
+  foundation_buildout_complete_when:
+    - all_non_executable_foundation_deliverables_materialized
+    - current_contract_kernel_has_machine_validation_receipt
+    - execution_only_deliverables_have_issues_test_definitions_and_receipt_destinations
+    - no_unexecuted_experiment_is_marked_tested
+  promotion_still_requires:
+    - human_gate_decision
+    - technology_spikes
+    - executable_vertical_slice
