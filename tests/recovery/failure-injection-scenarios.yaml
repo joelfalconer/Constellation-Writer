@@ -1,0 +1,33 @@
+version: 0.1.0
+status: candidate_unexecuted
+scenarios:
+  - id: FI-001
+    inject: process_termination_before_temp_flush
+    expected: old_canonical_file_valid_and_recovery_buffer_available
+  - id: FI-002
+    inject: process_termination_after_temp_flush_before_replace
+    expected: old_or_new_valid_file_and_temp_artifact_detected
+  - id: FI-003
+    inject: disk_full_during_write
+    expected: save_not_acknowledged_and_buffer_preserved
+  - id: FI-004
+    inject: permission_denied
+    expected: buffer_preserved_and_save_copy_available
+  - id: FI-005
+    inject: delete_sqlite_and_indexes
+    expected: canonical_validation_passes_and_catalog_rebuilds
+  - id: FI-006
+    inject: corrupt_sqlite
+    expected: catalog_quarantined_and_rebuilt
+  - id: FI-007
+    inject: external_edit_before_autosave
+    expected: both_versions_preserved_in_conflict_bundle
+  - id: FI-008
+    inject: fail_mid_multi_file_mutation
+    expected: operation_detected_incomplete_and_recovery_bundle_can_restore
+  - id: FI-009
+    inject: failed_schema_migration
+    expected: pre_migration_snapshot_restores_previous_readable_state
+  - id: FI-010
+    inject: bad_ai_patch_then_revert
+    expected: inverse_patch_or_snapshot_restore_creates_new_logged_mutation

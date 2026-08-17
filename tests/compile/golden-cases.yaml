@@ -1,0 +1,30 @@
+version: 0.1.0
+status: candidate_unexecuted
+cases:
+  - id: CG-001
+    name: manifest_order_beats_filesystem_order
+    expected: output_sequence_matches_manifest
+  - id: CG-002
+    name: excluded_sheet_absent
+    expected: excluded_sheet_not_in_output_and_reason_in_qa
+  - id: CG-003
+    name: node_title_suppresses_duplicate_first_heading
+    expected: exactly_one_resolved_title
+  - id: CG-004
+    name: scene_break_semantic
+    expected: renderer_specific_scene_break_from_semantic_role
+  - id: CG-005
+    name: unresolved_comment_final_profile
+    expected: warning_or_error_per_profile
+  - id: CG-006
+    name: missing_asset
+    expected: deterministic_qa_failure_with_source_locator
+  - id: CG-007
+    name: source_map_coverage
+    expected: output_segments_trace_to_placement_sheet_revision_and_span
+  - id: CG-008
+    name: repeated_frozen_compile
+    expected: semantically_equivalent_output
+  - id: CG-009
+    name: pandoc_adapter_failure
+    expected: compile_plan_and_markdown_fallback_remain_valid
