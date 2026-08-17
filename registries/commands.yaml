@@ -1,0 +1,22 @@
+version: 0.1.0
+status: candidate
+commands:
+  - {id: project.new, label: New Project, jurisdiction: command_palette, consequence: canonical_high, keyboard: null}
+  - {id: sheet.new, label: New Sheet, jurisdiction: editor, consequence: canonical_low, keyboard: Mod+N}
+  - {id: sheet.quick_open, label: Quick Open, jurisdiction: command_palette, consequence: safe, keyboard: Mod+P}
+  - {id: search.project, label: Search Project, jurisdiction: command_palette, consequence: safe, keyboard: Mod+Shift+F}
+  - {id: pane.navigator.toggle, label: Toggle Navigator, jurisdiction: editor, consequence: safe, keyboard: Mod+1}
+  - {id: pane.inspector.toggle, label: Toggle Inspector, jurisdiction: editor, consequence: safe, keyboard: Mod+2}
+  - {id: mode.focus.toggle, label: Toggle Focus Mode, jurisdiction: editor, consequence: safe, keyboard: Mod+Shift+Enter}
+  - {id: mode.revision.toggle, label: Toggle Revision Mode, jurisdiction: editor, consequence: safe, keyboard: Mod+Shift+R}
+  - {id: sheet.split, label: Split Sheet at Cursor, jurisdiction: editor, consequence: canonical_high, keyboard: null}
+  - {id: sheet.merge_next, label: Merge with Next Sheet, jurisdiction: navigator, consequence: canonical_high, keyboard: null}
+  - {id: manuscript.move_up, label: Move Node Up, jurisdiction: navigator, consequence: canonical_low, keyboard: Alt+ArrowUp}
+  - {id: manuscript.move_down, label: Move Node Down, jurisdiction: navigator, consequence: canonical_low, keyboard: Alt+ArrowDown}
+  - {id: manuscript.indent, label: Indent Node, jurisdiction: navigator, consequence: canonical_low, keyboard: Alt+ArrowRight}
+  - {id: manuscript.outdent, label: Outdent Node, jurisdiction: navigator, consequence: canonical_low, keyboard: Alt+ArrowLeft}
+  - {id: compile.preview, label: Preview Compile, jurisdiction: compile, consequence: safe, keyboard: null}
+  - {id: compile.run, label: Compile Manuscript, jurisdiction: compile, consequence: canonical_low, keyboard: Mod+Shift+E}
+  - {id: snapshot.named, label: Create Named Snapshot, jurisdiction: recovery, consequence: canonical_low, keyboard: null}
+  - {id: project.validate, label: Validate Project, jurisdiction: command_palette, consequence: safe, keyboard: null}
+  - {id: indexes.rebuild, label: Rebuild Project Indexes, jurisdiction: command_palette, consequence: safe, keyboard: null}

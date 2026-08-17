@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constellation-writer.local/contracts/common/recovery-error.schema.json",
+  "title": "Recovery Error Contract",
+  "type": "object",
+  "required": ["code", "state", "canonical_work_safe", "message", "actions"],
+  "properties": {
+    "code": {"type": "string"},
+    "state": {"enum": ["save_failed", "conflict", "corrupt_cache", "corrupt_canonical_file", "restore_failed", "migration_failed", "disk_full", "permission_denied"]},
+    "canonical_work_safe": {"type": "boolean"},
+    "preserved_at": {"type": ["string", "null"]},
+    "message": {"type": "string"},
+    "technical_detail": {"type": ["string", "null"]},
+    "actions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "label"],
+        "properties": {"id": {"type": "string"}, "label": {"type": "string"}, "destructive": {"type": "boolean", "default": false}},
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

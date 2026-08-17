@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constellation-writer.local/contracts/mutation/patch-session.schema.json",
+  "title": "Patch Session Summary",
+  "type": "object",
+  "required": ["id", "schema_version", "operation_id", "intent", "status", "source", "scope", "patches", "created_at"],
+  "properties": {
+    "id": {"$ref": "../common/identifier.schema.json#/$defs/PatchSessionId"},
+    "schema_version": {"type": "string"},
+    "operation_id": {"$ref": "../common/identifier.schema.json#/$defs/OperationId"},
+    "intent": {"type": "string"},
+    "status": {"$ref": "../common/lifecycle.schema.json#/$defs/PatchState"},
+    "source": {"$ref": "../common/provenance.schema.json"},
+    "scope": {"type": "object"},
+    "patches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "target_id", "base_revision_id", "format", "status"],
+        "properties": {
+          "id": {"$ref": "../common/identifier.schema.json#/$defs/PatchId"},
+          "target_id": {"$ref": "../common/identifier.schema.json#/$defs/SheetId"},
+          "base_revision_id": {"$ref": "../common/identifier.schema.json#/$defs/RevisionId"},
+          "format": {"enum": ["unified_diff", "json_patch", "object_merge_patch", "file_operation", "generated_record"]},
+          "status": {"$ref": "../common/lifecycle.schema.json#/$defs/PatchState"},
+          "body": {}
+        },
+        "additionalProperties": true
+      }
+    },
+    "created_at": {"$ref": "../common/timestamp.schema.json#/$defs/Instant"}
+  },
+  "additionalProperties": true
+}

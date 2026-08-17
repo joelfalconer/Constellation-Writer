@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constellation-writer.local/contracts/project/project.schema.json",
+  "title": "Constellation Writer Project Manifest",
+  "type": "object",
+  "required": ["id", "schema_version", "name", "created_at", "modified_at", "default_manuscript_id", "canonical_policy", "text_dialect"],
+  "properties": {
+    "id": {"$ref": "../common/identifier.schema.json#/$defs/ProjectId"},
+    "schema_version": {"type": "string"},
+    "name": {"type": "string", "minLength": 1},
+    "created_at": {"$ref": "../common/timestamp.schema.json#/$defs/Instant"},
+    "modified_at": {"$ref": "../common/timestamp.schema.json#/$defs/Instant"},
+    "default_manuscript_id": {"$ref": "../common/identifier.schema.json#/$defs/ManuscriptId"},
+    "canonical_policy": {"const": "manifest_first"},
+    "text_dialect": {"type": "string"},
+    "default_compile_profile_id": {"$ref": "../common/identifier.schema.json#/$defs/CompileProfileId"}
+  },
+  "additionalProperties": false
+}

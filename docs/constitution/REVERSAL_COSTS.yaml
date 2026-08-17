@@ -1,0 +1,49 @@
+version: 0.1.0
+status: candidate
+scale:
+  low: local implementation detail with isolated consumers
+  medium: public contract with bounded migration
+  high: cross-cutting contract requiring data and UI migration
+  extreme: foundational authority or ownership reversal
+
+decisions:
+  - id: RC-001
+    decision: plain_text_sheet_bodies
+    cost: extreme
+    lock_gate: F1
+  - id: RC-002
+    decision: stable_typed_uuidv7_identifiers
+    cost: extreme
+    lock_gate: F1
+  - id: RC-003
+    decision: manuscript_order_owned_by_manifest
+    cost: extreme
+    lock_gate: F1
+  - id: RC-004
+    decision: sqlite_is_rebuildable_projection
+    cost: extreme
+    lock_gate: F1
+  - id: RC-005
+    decision: mutation_envelope_is_transaction_owner
+    cost: high
+    lock_gate: F1
+  - id: RC-006
+    decision: annotations_use_dedicated_logs
+    cost: high
+    lock_gate: F2
+  - id: RC-007
+    decision: array_order_for_solo_v1
+    cost: medium
+    revisit_trigger: app_managed_sync_or_concurrent_manifest_editing
+  - id: RC-008
+    decision: tauri_desktop_shell
+    cost: high
+    status: proposed
+  - id: RC-009
+    decision: codemirror_6_editor_engine
+    cost: high
+    status: proposed
+  - id: RC-010
+    decision: pandoc_as_compile_adapter_not_canonical_compiler
+    cost: medium
+    status: proposed

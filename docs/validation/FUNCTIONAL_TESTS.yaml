@@ -1,0 +1,52 @@
+version: 0.1.0
+status: candidate
+suites:
+  canonicality:
+    - id: FT-CAN-001
+      given: valid_reference_vault
+      when: delete_workbench_directory
+      then: canonical_validation_unchanged
+    - id: FT-CAN-002
+      given: renamed_sheet_file
+      when: scan_project
+      then: stable_sheet_identity_preserved
+  manuscript:
+    - id: FT-MAN-001
+      given: files_in_non_manuscript_order
+      when: compile
+      then: manifest_order_wins
+    - id: FT-MAN-002
+      given: excluded_node
+      when: compile
+      then: node_absent_and_reason_reported
+  mutation:
+    - id: FT-MUT-001
+      given: ai_patch_proposed
+      when: no_acceptance
+      then: canonical_source_unchanged
+    - id: FT-MUT-002
+      given: stale_base_revision
+      when: apply_attempted
+      then: blind_application_blocked
+  recovery:
+    - id: FT-REC-001
+      given: unsaved_buffer
+      when: forced_termination_and_restart
+      then: latest_buffer_offered_for_recovery
+    - id: FT-REC-002
+      given: corrupt_sqlite_catalog
+      when: open_project
+      then: catalog_quarantined_and_rebuilt
+    - id: FT-REC-003
+      given: external_and_in_memory_edits
+      when: save_attempted
+      then: both_versions_preserved
+  compile:
+    - id: FT-CMP-001
+      given: identical_frozen_inputs
+      when: compile_twice
+      then: semantic_outputs_equivalent
+    - id: FT-CMP-002
+      given: unresolved_final_export_warning
+      when: final_compile
+      then: policy_blocks_or_reports_explicitly

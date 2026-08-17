@@ -1,0 +1,22 @@
+version: 0.2.0
+status: candidate
+updated_at: 2026-07-28
+decisions:
+  - {id: ADR-0001, title: Contract-first foundation programme, status: proposed, file: ADR-0001-architecture-method.md}
+  - {id: ADR-0002, title: File-owned canonical state and rebuildable projections, status: proposed, file: ADR-0002-canonical-state.md}
+  - {id: ADR-0003, title: Four-part identity model, status: proposed, file: ADR-0003-identity-model.md}
+  - {id: ADR-0004, title: Tauri 2 candidate desktop shell, status: proposed, file: ADR-0004-desktop-shell-tauri.md, evidence_issue: 3}
+  - {id: ADR-0005, title: CodeMirror 6 candidate editor engine, status: proposed, file: ADR-0005-editor-engine-codemirror-6.md, evidence_issue: 4}
+  - {id: ADR-0006, title: Workbench compile plan with Pandoc output adapter, status: proposed, file: ADR-0006-compile-pipeline-pandoc-adapter.md, evidence_issue: 5}
+  - {id: ADR-0007, title: Mutation Envelope owns transaction application, status: proposed, file: ADR-0007-mutation-envelope-transaction-owner.md}
+  - {id: ADR-0008, title: Dedicated annotation logs, status: proposed, file: ADR-0008-dedicated-annotation-logs.md}
+  - {id: ADR-0009, title: Local user state is noncanonical, status: proposed, file: ADR-0009-local-user-state-noncanonical.md}
+  - {id: ADR-0010, title: Typed UUIDv7 identifiers, status: proposed, file: ADR-0010-typed-uuidv7-identifiers.md}
+  - {id: ADR-0011, title: Minimal Compendium implementation boundary, status: proposed, file: ADR-0011-minimal-compendium-boundary.md}
+pending:
+  - yaml_vs_json_for_each_manifest_class
+  - sqlite_fts5_vs_tantivy_upgrade_path
+  - snapshot_storage_inside_vault_vs_app_backup_root
+  - revision_id_generation_and_hash_coupling
+  - Workbench_AST_schema
+  - source_map_granularity

@@ -1,0 +1,36 @@
+version: 0.1.0
+status: candidate
+
+risks:
+  - id: RISK-001
+    name: Editor demoted by adjacent systems
+    severity: critical
+    mitigation: editor_jurisdiction_and_professional_assay
+  - id: RISK-002
+    name: SQLite becomes hidden canonical truth
+    severity: critical
+    mitigation: canonicality_matrix_and_delete_cache_gate
+  - id: RISK-003
+    name: Cross-spec status and enum drift
+    severity: high
+    mitigation: shared_schema_and_registry_kernel
+  - id: RISK-004
+    name: Mutation systems fragment across autosave AI recovery and migration
+    severity: critical
+    mitigation: shared_mutation_envelope
+  - id: RISK-005
+    name: AI provenance creates false confidence
+    severity: high
+    mitigation: review_gates_base_revision_checks_and_reversal
+  - id: RISK-006
+    name: Recovery is specified but not failure-tested
+    severity: critical
+    mitigation: failure_injection_and_archive_restore_gate
+  - id: RISK-007
+    name: Compendium expands before manuscript machine works
+    severity: high
+    mitigation: implementation_deferral_and_minimal_boundary
+  - id: RISK-008
+    name: File sovereignty creates user-visible complexity
+    severity: medium
+    mitigation: app_managed_structure_and_clear_archive_contract

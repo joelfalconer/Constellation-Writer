@@ -1,0 +1,39 @@
+version: 0.1.0
+status: initial
+
+contradictions_and_tensions:
+  - id: CON-001
+    topic: identifier_format
+    positions: [stable_UUIDs, ULIDs_for_readability, UUIDv7_candidate]
+    current_direction: UUIDv7_with_typed_prefix_pending_ADR
+    severity: high
+
+  - id: CON-002
+    topic: user_state_canonicality
+    positions: [cursor_in_sheet_sidecar, cursor_as_local_ephemeral_state]
+    current_direction: local_ephemeral_state
+    severity: high
+
+  - id: CON-003
+    topic: mutation_ownership
+    positions: [PatchSession_owns_transaction, Recovery_owns_transaction, shared_Mutation_Envelope]
+    current_direction: shared_Mutation_Envelope
+    severity: critical
+
+  - id: CON-004
+    topic: annotations_storage
+    positions: [inline_comments, Sheet_sidecar_comments, dedicated_annotation_log]
+    current_direction: dedicated_annotation_log_with_optional_portable_inline_form
+    severity: medium
+
+  - id: CON-005
+    topic: manuscript_ordering
+    positions: [array_order, fractional_order_keys]
+    current_direction: array_order_for_solo_v1_with_revisit_trigger
+    severity: medium
+
+  - id: CON-006
+    topic: Compendium_implementation_priority
+    positions: [full_early_sidecar, schema_only_boundary_until_foundation]
+    current_direction: minimal_boundary_and_deferred_broad_implementation
+    severity: high

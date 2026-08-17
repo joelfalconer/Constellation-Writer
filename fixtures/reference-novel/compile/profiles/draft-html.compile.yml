@@ -1,0 +1,15 @@
+id: cp_018f0000-0000-7000-8000-000000000001
+schema_version: 0.1.0
+name: Draft HTML
+manuscript_id: ms_018f0000-0000-7000-8000-000000000001
+target: html
+output:
+  path: build/draft.html
+  standalone: true
+include_comments: false
+fail_on:
+  - missing_included_sheet
+  - invalid_manifest
+role_transforms:
+  chapter: heading_1
+  scene: concatenate_with_scene_break

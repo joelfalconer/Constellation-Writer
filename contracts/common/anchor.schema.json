@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constellation-writer.local/contracts/common/anchor.schema.json",
+  "title": "Hybrid Text Anchor",
+  "type": "object",
+  "required": ["object_id", "revision_id", "exact"],
+  "properties": {
+    "object_id": {"$ref": "identifier.schema.json#/$defs/SheetId"},
+    "revision_id": {"$ref": "identifier.schema.json#/$defs/RevisionId"},
+    "exact": {"type": "string", "minLength": 1},
+    "prefix": {"type": "string", "default": ""},
+    "suffix": {"type": "string", "default": ""},
+    "structural_path": {"type": "array", "items": {"type": "string"}},
+    "line_start_hint": {"type": ["integer", "null"], "minimum": 1},
+    "line_end_hint": {"type": ["integer", "null"], "minimum": 1},
+    "confidence": {"enum": ["exact", "high", "medium", "low", "failed"]}
+  },
+  "additionalProperties": false
+}

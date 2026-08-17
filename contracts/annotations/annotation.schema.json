@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constellation-writer.local/contracts/annotations/annotation.schema.json",
+  "title": "Annotation Event",
+  "type": "object",
+  "required": ["id", "schema_version", "sheet_id", "kind", "status", "body", "anchor", "created_at"],
+  "properties": {
+    "id": {"$ref": "../common/identifier.schema.json#/$defs/AnnotationId"},
+    "schema_version": {"type": "string"},
+    "sheet_id": {"$ref": "../common/identifier.schema.json#/$defs/SheetId"},
+    "kind": {"enum": ["inline_comment", "margin_annotation", "revision_issue", "editorial_note", "ai_suggestion_note"]},
+    "status": {"enum": ["open", "resolved", "dismissed"]},
+    "body": {"type": "string"},
+    "anchor": {"$ref": "../common/anchor.schema.json"},
+    "created_at": {"$ref": "../common/timestamp.schema.json#/$defs/Instant"},
+    "author_id": {"type": "string"},
+    "export": {"type": "boolean"}
+  },
+  "additionalProperties": false
+}

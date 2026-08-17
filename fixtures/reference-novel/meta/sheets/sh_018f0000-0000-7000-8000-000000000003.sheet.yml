@@ -1,0 +1,16 @@
+id: sh_018f0000-0000-7000-8000-000000000003
+schema_version: 0.1.0
+kind: fragment
+title: Alternate Opening
+status: cut
+created_at: 2026-07-27T00:00:00+10:00
+modified_at: 2026-07-27T00:00:00+10:00
+labels: [alternate, cut]
+summary: An unused alternate opening.
+compile:
+  default_include: false
+  role: scene
+  title_behavior: suppress
+privacy:
+  sensitive: false
+  exclude_from_ai_context: false

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constellation-writer.local/contracts/sheet/sheet-sidecar.schema.json",
+  "title": "Sheet Sidecar",
+  "type": "object",
+  "required": ["id", "schema_version", "kind", "title", "status", "created_at", "modified_at"],
+  "properties": {
+    "id": {"$ref": "../common/identifier.schema.json#/$defs/SheetId"},
+    "schema_version": {"type": "string"},
+    "kind": {"enum": ["manuscript", "material", "note", "research", "source_extract", "script", "poem", "fragment", "outline", "synopsis", "appendix", "frontmatter", "backmatter"]},
+    "title": {"type": "string"},
+    "status": {"enum": ["draft", "revise", "final", "archived", "cut", "stub"]},
+    "created_at": {"$ref": "../common/timestamp.schema.json#/$defs/Instant"},
+    "modified_at": {"$ref": "../common/timestamp.schema.json#/$defs/Instant"},
+    "labels": {"type": "array", "items": {"type": "string"}},
+    "summary": {"type": ["string", "null"]},
+    "compile": {
+      "type": "object",
+      "properties": {
+        "default_include": {"type": "boolean"},
+        "role": {"type": "string"},
+        "title_behavior": {"enum": ["manifest", "sheet_title", "first_heading", "suppress"]}
+      },
+      "additionalProperties": false
+    },
+    "privacy": {
+      "type": "object",
+      "properties": {"sensitive": {"type": "boolean"}, "exclude_from_ai_context": {"type": "boolean"}},
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

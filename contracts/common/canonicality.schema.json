@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constellation-writer.local/contracts/common/canonicality.schema.json",
+  "title": "Canonicality Classification",
+  "$defs": {
+    "CanonicalityClass": {"enum": ["canonical_state", "canonical_event", "derived", "ephemeral", "external_reference"]},
+    "AuthorityRecord": {
+      "type": "object",
+      "required": ["class", "owner"],
+      "properties": {
+        "class": {"$ref": "#/$defs/CanonicalityClass"},
+        "owner": {"type": "string"},
+        "rebuild_from": {"type": ["string", "null"]},
+        "retention_tier": {"enum": ["essential", "recoverable", "diagnostic", "ephemeral"]}
+      },
+      "additionalProperties": false
+    }
+  }
+}

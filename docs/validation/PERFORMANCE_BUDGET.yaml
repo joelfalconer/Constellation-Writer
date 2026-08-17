@@ -1,0 +1,23 @@
+version: 0.1.0
+status: candidate
+budgets:
+  keystroke_to_visible_character_ms: {ideal_p95: 16, maximum_p95: 32, hard_fail_sustained: 50}
+  cursor_movement_ms: {ideal_p95: 16, maximum_p95: 32}
+  selection_feedback_ms: {ideal_p95: 16, maximum_p95: 32}
+  command_palette_open_ms: {ideal_p95: 80, maximum_p95: 150}
+  recent_sheet_switch_ms: {ideal_p95: 80, maximum_p95: 180}
+  arbitrary_sheet_switch_ms: {ideal_p95: 150, maximum_p95: 300}
+  project_search_initial_results_ms: {ideal_p95: 200, maximum_p95: 500}
+  pane_toggle_ms: {ideal_p95: 100, maximum_p95: 180}
+  autosave_writer_block_ms: {maximum_p95: 0}
+  recovery_buffer_flush_ms: {maximum_p95: 250}
+  compile_preview_small_project_s: {maximum_p95: 2}
+  cache_rebuild_100k_words_s: {target_p95: 10}
+scale_targets:
+  sheets: 5000
+  active_manuscript_nodes: 1000
+  project_words: 2000000
+hard_gates:
+  - typing_never_waits_for_index_ai_graph_or_sync
+  - acknowledged_text_loss_equals_zero
+  - cache_deletion_does_not_change_canonical_validation

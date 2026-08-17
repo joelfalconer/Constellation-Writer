@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constellation-writer.local/contracts/common/validation.schema.json",
+  "title": "Validation Results",
+  "$defs": {
+    "ValidationIssue": {
+      "type": "object",
+      "required": ["code", "severity", "message"],
+      "properties": {
+        "code": {"type": "string"},
+        "severity": {"enum": ["info", "warning", "error", "critical"]},
+        "message": {"type": "string"},
+        "path": {"type": ["string", "null"]},
+        "object_id": {"type": ["string", "null"]},
+        "repair_action": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "ValidationReport": {
+      "type": "object",
+      "required": ["validator_version", "status", "issues"],
+      "properties": {
+        "validator_version": {"type": "string"},
+        "status": {"enum": ["passed", "passed_with_warnings", "failed"]},
+        "issues": {"type": "array", "items": {"$ref": "#/$defs/ValidationIssue"}}
+      },
+      "additionalProperties": false
+    }
+  }
+}

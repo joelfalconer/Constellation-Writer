@@ -1,0 +1,46 @@
+version: 0.1.0
+status: candidate
+features:
+  - id: FA-001
+    name: resume_last_sentence
+    atomic_behavior: open project into resolvable Sheet, revision, cursor, scroll, and mode context
+    success_measure: meaningful_continuation_time
+    failure_modes: [dashboard_detour, stale_anchor_wrong_text, missing_context_blocks_open]
+  - id: FA-002
+    name: split_sheet
+    atomic_behavior: divide body at cursor, create new ID and sidecar, update selected manifests, redistribute annotations through review
+    canonical_writes: [source_sheet, new_sheet, sidecars, manifests, annotation_events]
+    consequence: canonical_high
+  - id: FA-003
+    name: manuscript_reorder
+    atomic_behavior: change placement array only
+    canonical_writes: [manuscript_manifest]
+    forbidden_writes: [sheet_body]
+  - id: FA-004
+    name: project_search
+    atomic_behavior: return explained results with scope, matched span, uncertainty, and return token
+    canonical_writes: []
+    degraded_mode: direct_canonical_scan
+  - id: FA-005
+    name: compile
+    atomic_behavior: freeze inputs, resolve plan, validate, transform, render, verify, emit artifact QA and source map
+    canonical_writes: [optional_publication_state]
+  - id: FA-006
+    name: ai_rewrite
+    atomic_behavior: create PatchSession proposal against a base revision; source unchanged until accepted
+    consequence: ai_mutating
+  - id: FA-007
+    name: autosave
+    atomic_behavior: buffer editor state, validate base, write temp, flush, atomic replace, verify revision, acknowledge save
+    consequence: reversible_local
+  - id: FA-008
+    name: external_conflict
+    atomic_behavior: preserve base, current, and external versions before review
+    forbidden_behavior: silent_overwrite
+  - id: FA-009
+    name: cache_rebuild
+    atomic_behavior: delete derived state, scan canonical files, validate, rebuild catalog and indexes
+    canonical_writes: []
+  - id: FA-010
+    name: archive_restore
+    atomic_behavior: validate checksums, preview changes, restore to new path, rebuild derived state, verify compile

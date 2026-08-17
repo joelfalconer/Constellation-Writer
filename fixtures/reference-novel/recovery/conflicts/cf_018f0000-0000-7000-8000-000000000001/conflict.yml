@@ -1,0 +1,17 @@
+id: cf_018f0000-0000-7000-8000-000000000001
+schema_version: 0.1.0
+object_type: sheet
+object_id: sh_018f0000-0000-7000-8000-000000000002
+path: sheets/sh_018f0000-0000-7000-8000-000000000002-letter-in-wall.md
+created_at: 2026-07-27T00:30:00+10:00
+base:
+  revision_id: rev_018f0000-0000-7000-8000-000000000002
+  hash: sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+current_app_version:
+  path: current.md
+  hash: sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+external_version:
+  path: external.md
+  hash: sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+status: unresolved
+resolution: null

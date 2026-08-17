@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constellation-writer.local/contracts/recovery/snapshot.schema.json",
+  "title": "Snapshot Manifest",
+  "type": "object",
+  "required": ["id", "schema_version", "project_id", "type", "scope", "created_at", "included_files"],
+  "properties": {
+    "id": {"$ref": "../common/identifier.schema.json#/$defs/SnapshotId"},
+    "schema_version": {"type": "string"},
+    "project_id": {"$ref": "../common/identifier.schema.json#/$defs/ProjectId"},
+    "type": {"enum": ["automatic_interval", "manual_named", "pre_destructive_operation", "pre_migration", "pre_ai_apply", "pre_import", "pre_conflict_resolution", "pre_compile_final"]},
+    "scope": {"enum": ["object", "manuscript", "project_delta", "full_project"]},
+    "created_at": {"$ref": "../common/timestamp.schema.json#/$defs/Instant"},
+    "included_files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string"},
+          "object_id": {"type": ["string", "null"]},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": true
+}

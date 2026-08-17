@@ -1,0 +1,54 @@
+id: constellation_writer.project_manifest
+version: 0.1.0
+status: candidate
+repository: joelfalconer/Constellation-Writer
+
+purpose: >-
+  Define and build a local-first professional writing workbench whose daily
+  centre is a calm editor, whose durable truth remains file-owned, whose
+  manuscript assembly and compilation are deterministic, and whose advanced
+  transformations are inspectable and reversible.
+
+authority:
+  canonical_repository: joelfalconer/Constellation-Writer
+  canonical_branch: main
+  candidate_branch_pattern: foundation/*
+  promotion_requires:
+    - stable_identifier
+    - provenance
+    - validation_state
+    - human_review_or_gate_receipt
+
+workstreams:
+  - writer_experience
+  - durable_substrate
+  - manuscript_machine
+  - trust_and_transformation
+  - continuity_sidecar
+  - validation
+
+foundational_invariants:
+  - INV-AUTH-001
+  - INV-DATA-001
+  - INV-ID-001
+  - INV-ASM-001
+  - INV-MUT-001
+  - INV-REC-001
+  - INV-CMP-001
+
+initial_product:
+  - editor
+  - project_vault
+  - sheets
+  - manuscript_assembly
+  - literal_and_structural_search
+  - deterministic_compile
+  - recovery_and_backup
+
+later_layers:
+  - compendium
+  - continuity
+  - semantic_recall
+  - governed_ai_tools
+  - optional_sync
+  - transmedia_operations

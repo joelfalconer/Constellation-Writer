@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constellation-writer.local/contracts/compendium/evidence.schema.json",
+  "title": "Claim Evidence",
+  "type": "object",
+  "required": ["id", "schema_version", "type", "role", "claim_id", "anchor", "confidence", "review_status", "created_at"],
+  "properties": {
+    "id": {"$ref": "../common/identifier.schema.json#/$defs/EvidenceId"},
+    "schema_version": {"type": "string"},
+    "type": {"enum": ["manuscript_span", "sheet_level", "source_record", "manual_note", "ai_inference", "compile_output", "imported_record"]},
+    "role": {"enum": ["supports", "contradicts", "contextualizes", "implies", "source_for", "derived_from"]},
+    "claim_id": {"$ref": "../common/identifier.schema.json#/$defs/ClaimId"},
+    "anchor": {"$ref": "../common/anchor.schema.json"},
+    "confidence": {"enum": ["manual", "observed", "inferred", "imported", "uncertain"]},
+    "review_status": {"enum": ["candidate", "accepted", "rejected", "stale"]},
+    "created_at": {"$ref": "../common/timestamp.schema.json#/$defs/Instant"}
+  },
+  "additionalProperties": true
+}
