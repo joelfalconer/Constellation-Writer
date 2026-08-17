@@ -1,46 +1,126 @@
-version: 0.1.0
-status: candidate
+version: 0.2.0
+status: candidate_with_evidence_links
+updated_at: 2026-08-17
+
 features:
   - id: FA-001
     name: resume_last_sentence
     atomic_behavior: open project into resolvable Sheet, revision, cursor, scroll, and mode context
     success_measure: meaningful_continuation_time
     failure_modes: [dashboard_detour, stale_anchor_wrong_text, missing_context_blocks_open]
+    evidence_posture: design_hypothesis_requires_measurement
+
   - id: FA-002
     name: split_sheet
     atomic_behavior: divide body at cursor, create new ID and sidecar, update selected manifests, redistribute annotations through review
     canonical_writes: [source_sheet, new_sheet, sidecars, manifests, annotation_events]
     consequence: canonical_high
+    benchmark_evidence: [EU-016, EU-017]
+    evidence_note: Ulysses and Scrivener document split/merge or discrete-chunk mechanics; Constellation transaction semantics remain design-specific.
+
   - id: FA-003
     name: manuscript_reorder
     atomic_behavior: change placement array only
     canonical_writes: [manuscript_manifest]
     forbidden_writes: [sheet_body]
+    benchmark_evidence: [EU-017, EU-021]
+    evidence_note: Scrivener Binder and Final Draft outline mechanics support structural reordering as a professional workflow; placement-only writes are a Constellation design decision.
+
   - id: FA-004
     name: project_search
     atomic_behavior: return explained results with scope, matched span, uncertainty, and return token
     canonical_writes: []
     degraded_mode: direct_canonical_scan
+    benchmark_evidence: [EU-019, EU-020]
+    evidence_note: Drafts workspaces/search and Obsidian backlinks/cache show retrieval layers; explained-result semantics remain untested Constellation design.
+
   - id: FA-005
     name: compile
     atomic_behavior: freeze inputs, resolve plan, validate, transform, render, verify, emit artifact QA and source map
     canonical_writes: [optional_publication_state]
+    benchmark_evidence: [EU-016, EU-017, EU-022, EU-023]
+    evidence_note: Ulysses, Scrivener, Vellum, and Atticus verify assembly/export/publishing workflows. Determinism, QA, and source-map requirements are Constellation design hypotheses for issue #5.
+
   - id: FA-006
     name: ai_rewrite
     atomic_behavior: create PatchSession proposal against a base revision; source unchanged until accepted
     consequence: ai_mutating
+    evidence_posture: normative_design_not_vendor_benchmark_claim
+
   - id: FA-007
     name: autosave
     atomic_behavior: buffer editor state, validate base, write temp, flush, atomic replace, verify revision, acknowledge save
     consequence: reversible_local
+    evidence_posture: implementation_design_requires_failure_injection
+
   - id: FA-008
     name: external_conflict
     atomic_behavior: preserve base, current, and external versions before review
     forbidden_behavior: silent_overwrite
+    evidence_posture: trust_design_requires_failure_injection
+
   - id: FA-009
     name: cache_rebuild
     atomic_behavior: delete derived state, scan canonical files, validate, rebuild catalog and indexes
     canonical_writes: []
+    benchmark_evidence: [EU-020]
+    evidence_note: Obsidian documents a rebuildable metadata cache over local Markdown files; Constellation full catalog/search/graph rebuild remains an executable F2 requirement.
+
   - id: FA-010
     name: archive_restore
     atomic_behavior: validate checksums, preview changes, restore to new path, rebuild derived state, verify compile
+    evidence_posture: trust_design_requires_failure_injection
+
+benchmark_atoms:
+  - id: BA-001
+    name: sheet_group_authoring
+    products: [Ulysses]
+    evidence: [EU-016]
+    observed_mechanic: writing occurs in Sheets organized by Groups; goals/export can operate over multiple scopes
+    transfer_status: prototype_reference
+
+  - id: BA-002
+    name: binder_compile_separation
+    products: [Scrivener]
+    evidence: [EU-017]
+    observed_mechanic: Binder structure organizes discrete chunks while Compile assembles/transforms output separately from writing appearance
+    transfer_status: architecture_reference
+
+  - id: BA-003
+    name: editor_analysis_toggles
+    products: [iA_Writer]
+    evidence: [EU-018]
+    observed_mechanic: Focus, Syntax, Style, and Authorship controls operate at the editor surface and can be toggled
+    transfer_status: editor_spike_reference
+
+  - id: BA-004
+    name: explicit_text_action_routing
+    products: [Drafts]
+    evidence: [EU-019]
+    observed_mechanic: Draft List organizes text; Action List explicitly transforms/routes it; Workspaces save retrieval/action context
+    transfer_status: command_palette_reference
+
+  - id: BA-005
+    name: file_truth_derived_relationships
+    products: [Obsidian]
+    evidence: [EU-020]
+    observed_mechanic: local Markdown files remain primary while metadata cache, backlinks, graph, and properties add derived/structured behavior
+    transfer_status: substrate_reference
+
+  - id: BA-006
+    name: script_outline_to_pages
+    products: [Final_Draft]
+    evidence: [EU-021]
+    observed_mechanic: Beat Board material can move through a page-aware Outline Editor into script pages
+    transfer_status: specialist_adapter_reference
+
+  - id: BA-007
+    name: publication_preview_pipeline
+    products: [Vellum, Atticus]
+    evidence: [EU-022, EU-023]
+    observed_mechanic: manuscript/book content is previewed and styled before generation of ebook/print artifacts
+    transfer_status: compile_preview_reference
+
+rule: >-
+  Benchmark evidence can establish that a mechanic exists in a current product. It does not
+  validate Constellation's proposed implementation, usability, performance, or architecture.
