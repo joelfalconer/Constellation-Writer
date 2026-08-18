@@ -9,7 +9,7 @@ use std::{
     sync::Mutex,
     time::{Duration, Instant},
 };
-use tauri::{menu::{MenuBuilder, MenuItemBuilder}, AppHandle, Emitter, Manager, State};
+use tauri::{menu::{MenuBuilder, MenuItemBuilder}, AppHandle, Emitter, State};
 use tauri_plugin_clipboard_manager::ClipboardExt;
 use tauri_plugin_dialog::DialogExt;
 
