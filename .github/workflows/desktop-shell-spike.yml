@@ -1,0 +1,92 @@
+name: Desktop shell spike
+
+on:
+  pull_request:
+    paths:
+      - 'spikes/desktop-shell/**'
+      - 'docs/decisions/ADR-0004-desktop-shell-tauri.md'
+      - 'docs/delivery/RUN_PROMPT-03-DESKTOP_SHELL_SPIKE.md'
+      - '.github/workflows/desktop-shell-spike.yml'
+  workflow_dispatch:
+
+jobs:
+  shell-spike:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+        shell: [electron, tauri]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Build shared 50k renderer
+        run: |
+          npm install --prefix spikes/desktop-shell/shared
+          npm run build --prefix spikes/desktop-shell/shared
+      - name: Install Rust
+        if: matrix.shell == 'tauri'
+        uses: dtolnay/rust-toolchain@stable
+      - name: Electron tests and package
+        if: matrix.shell == 'electron'
+        run: |
+          npm install --prefix spikes/desktop-shell/electron
+          npm test --prefix spikes/desktop-shell/electron
+          npm run package --prefix spikes/desktop-shell/electron
+      - name: Tauri tests
+        if: matrix.shell == 'tauri'
+        run: |
+          npm install --prefix spikes/desktop-shell/tauri
+          cargo test --manifest-path spikes/desktop-shell/tauri/src-tauri/Cargo.toml
+      - name: Build Tauri macOS app
+        if: matrix.shell == 'tauri' && runner.os == 'macOS'
+        working-directory: spikes/desktop-shell/tauri
+        run: npx tauri build --bundles app
+      - name: Build Tauri Windows NSIS
+        if: matrix.shell == 'tauri' && runner.os == 'Windows'
+        working-directory: spikes/desktop-shell/tauri
+        run: npx tauri build --bundles nsis
+      - name: Resolve Electron macOS binary and package root
+        if: matrix.shell == 'electron' && runner.os == 'macOS'
+        run: |
+          echo "SPIKE_BINARY=$(find spikes/desktop-shell/electron/dist -path '*/CWElectronShellSpike.app/Contents/MacOS/CWElectronShellSpike' -print -quit)" >> "$GITHUB_ENV"
+          echo "PACKAGE_ROOT=spikes/desktop-shell/electron/dist" >> "$GITHUB_ENV"
+      - name: Resolve Tauri macOS binary and package root
+        if: matrix.shell == 'tauri' && runner.os == 'macOS'
+        run: |
+          echo "SPIKE_BINARY=$GITHUB_WORKSPACE/spikes/desktop-shell/tauri/src-tauri/target/release/bundle/macos/CWTauriShellSpike.app/Contents/MacOS/cw-tauri-shell-spike" >> "$GITHUB_ENV"
+          echo "PACKAGE_ROOT=spikes/desktop-shell/tauri/src-tauri/target/release/bundle" >> "$GITHUB_ENV"
+      - name: Resolve Electron Windows binary and package root
+        if: matrix.shell == 'electron' && runner.os == 'Windows'
+        run: |
+          bin=$(find spikes/desktop-shell/electron/dist -name 'CWElectronShellSpike.exe' -print -quit)
+          echo "SPIKE_BINARY=$GITHUB_WORKSPACE/$bin" >> "$GITHUB_ENV"
+          echo "PACKAGE_ROOT=spikes/desktop-shell/electron/dist" >> "$GITHUB_ENV"
+      - name: Resolve Tauri Windows binary and package root
+        if: matrix.shell == 'tauri' && runner.os == 'Windows'
+        run: |
+          echo "SPIKE_BINARY=$GITHUB_WORKSPACE/spikes/desktop-shell/tauri/src-tauri/target/release/cw-tauri-shell-spike.exe" >> "$GITHUB_ENV"
+          echo "PACKAGE_ROOT=spikes/desktop-shell/tauri/src-tauri/target/release/bundle" >> "$GITHUB_ENV"
+      - name: Collect package metrics
+        run: python spikes/desktop-shell/scripts/collect-package-metrics.py --shell ${{ matrix.shell }} --platform ${{ runner.os }} --root "$PACKAGE_ROOT" --output "spikes/desktop-shell/results/raw/${{ runner.os }}-${{ matrix.shell }}-package.json"
+      - name: Runtime probe
+        id: runtime_probe
+        continue-on-error: true
+        run: node spikes/desktop-shell/scripts/run-runtime-probe.mjs --binary="$SPIKE_BINARY" --report="spikes/desktop-shell/results/raw/${{ runner.os }}-${{ matrix.shell }}-runtime.json" --shell=${{ matrix.shell }} --platform=${{ runner.os }}
+      - name: Record runtime probe limitation if unavailable
+        if: steps.runtime_probe.outcome != 'success'
+        run: |
+          mkdir -p spikes/desktop-shell/results/raw
+          printf '{"shell":"%s","platform":"%s","runtime_probe":"unavailable_on_hosted_runner","binary":"%s"}\n' '${{ matrix.shell }}' '${{ runner.os }}' "$SPIKE_BINARY" > "spikes/desktop-shell/results/raw/${{ runner.os }}-${{ matrix.shell }}-runtime-limitation.json"
+      - name: Upload shell-spike evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: shell-spike-${{ runner.os }}-${{ matrix.shell }}
+          path: spikes/desktop-shell/results/raw/*.json
+          if-no-files-found: error

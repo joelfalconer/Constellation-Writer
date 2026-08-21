@@ -1,9 +1,9 @@
 project_id: constellation_writer
 project_name: Constellation Writer
 repository: joelfalconer/Constellation-Writer
-status: F0_accepted_F1_evidence_refresh_candidate
+status: F0_accepted_F1_shell_decision_candidate
 phase: F1_architecture_coherence_evidence_and_spikes
-updated_at: 2026-08-17
+updated_at: 2026-08-18
 
 product_identity: local_first_professional_writing_workbench
 core_promise: calm_editor_brutal_recall_governed_transformation
@@ -12,6 +12,7 @@ canonical_branch: main
 canonical_foundation_merge: 1f01da3c76611d9ad9b1b297c2b8f265a91a6daa
 active_transition_branch: f1/post-merge-reconciliation
 active_stacked_research_branch: research/evidence-lineage-refresh
+active_shell_spike_branch: spike/desktop-shell-decision
 foundation_pull_request: 1
 foundation_issue: 2
 technology_spikes: [3, 4, 5]
@@ -44,15 +45,21 @@ completed:
   - issue_7_current_official_benchmark_refresh_for_eight_products
   - issue_7_EU_001_through_EU_010_pending_locators_replaced_with_explicit_unresolved_reasons
   - issue_7_EU_016_through_EU_023_current_product_evidence_units
+  - issue_3_equivalent_Electron_and_Tauri_shell_controls
+  - issue_3_windows_macos_matrix_build_package_and_runtime_probe
+  - issue_3_path_and_symlink_escape_negative_controls
+  - issue_3_ADR_0004_Electron_selected_for_F2_scaffold
 
 in_progress:
   - F1_post_merge_reconciliation_PR_10
-  - issue_7_evidence_refresh_PR_validation_and_review
-  - technology_spikes_3_4_5
+  - issue_7_evidence_refresh_PR_review_and_merge
+  - issue_3_shell_spike_PR_review_and_merge
+  - technology_spikes_4_5
   - F1_adversarial_architecture_review_after_spikes
 
 queued_after_F1:
   - durable_substrate_vertical_slice_issue_6
+  - F2_physical_shell_IME_accessibility_and_real_hardware_budget_controls
   - F2_failure_injection_against_executable_substrate
   - later_professional_writer_assay_issue_8
 
@@ -67,23 +74,29 @@ following_gate:
   state: blocked_on_F1_and_vertical_slice_6
 
 machine_evidence:
-  last_confirmed_ci:
-    run_id: 32010291279
-    head_sha: 1f01da3c76611d9ad9b1b297c2b8f265a91a6daa
-    branch: main
+  last_confirmed_foundation_ci:
+    run_id: 32085957973
+    head_sha: d9991c9245caf689de7ebfa4eb0a735f41a8a7a4
+    branch: spike/desktop-shell-decision
     conclusion: success
-    validator_version: 0.2.0
-    schemas: 22
-    sheets: 3
-    manuscripts: 2
-    issues: 0
-    artifact_id: 9281496266
-    artifact_digest: sha256:5f45cd432d3f147d55cb73c71c3044e68b0dfc6ba4c0c8be46e9a0744e1936a5
+  shell_spike:
+    run_id: 32085957984
+    head_sha: d9991c9245caf689de7ebfa4eb0a735f41a8a7a4
+    conclusion: success
+    matrix_jobs: 4
+    electron_macos: pass
+    electron_windows: pass
+    tauri_macos: pass
+    tauri_windows: pass
+    decision: Electron_for_F2_scaffold
+    residual_hard_veto_tests: [physical_IME, VoiceOver_Narrator_NVDA, high_contrast_200_percent_zoom]
 
 F1_blockers:
   - issue: 3
     decision: desktop_shell_Tauri2_vs_Electron
     owner: joelfalconer
+    state: closure_ready_when_shell_spike_PR_is_reviewed_and_merged
+    outcome: Electron_selected_for_F2_scaffold_with_explicit_revisit_triggers
   - issue: 4
     decision: professional_prose_editor_engine
     owner: joelfalconer
@@ -102,15 +115,15 @@ F1_blockers:
 known_gaps:
   - exact_historical_SRC_DR_001_spans_unresolved_with_explicit_source_unavailable_reason
   - benchmark_user_sentiment_switching_fatigue_and_accessibility_not_established_by_vendor_docs
-  - current_schemas_cover_foundation_and_reference_fixture_not_every_future_field
+  - shell_physical_IME_and_assistive_technology_controls_not_yet_run
+  - shell_startup_memory_metrics_are_single_hosted_runner_observations_not_product_budgets
   - compile_recovery_and_mutation_are_not_executable_product_services
-  - technology_ADRs_0004_0005_0006_are_proposed_not_accepted
+  - technology_ADRs_0005_0006_are_proposed_not_accepted
   - no_professional_writer_assay_has_run
 
 closure_posture: >-
-  F0 is accepted and promoted. Issue #7 is closure-ready on review/merge of the
-  evidence-refresh PR: current official benchmark mechanics are registered for all eight
-  requested products, inherited EU-001..EU-010 no longer carry ambiguous pending locators,
-  and unresolved historical report spans are explicitly named rather than fabricated.
-  F1 remains conditional_not_ready until technology spikes #3, #4, #5, CON-003 review,
-  clean gate validation, and a human F1 decision are complete.
+  F0 is accepted and promoted. Issue #7 remains closure-ready on its stacked PR merge. Issue #3
+  now has equivalent executable shell controls, a clean Windows/macOS matrix, explicit limitations,
+  and ADR-0004 selects Electron for the F2 scaffold while carrying physical IME/accessibility vetoes
+  forward. F1 remains conditional_not_ready until issue #4, issue #5, CON-003 review, clean gate
+  validation, stacked PR promotion, adversarial closure, and a human F1 decision are complete.
