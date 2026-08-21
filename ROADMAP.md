@@ -10,32 +10,51 @@ Evidence: `docs/programme/F0_ACCEPTANCE_RECEIPT-2026-08-17.md`.
 
 ## F1: Architecture Coherent
 
-**State: entered, `conditional_not_ready`.**
+**State: accepted 2026-08-22.**
 
-Required before closure:
+The accepted architecture package includes:
 
-- complete gate-relevant evidence lineage refresh #7;
-- decide desktop shell through spike #3 and ADR-0004;
-- decide professional prose editor through spike #4 and ADR-0005;
-- decide compile architecture through spike #5 and ADR-0006;
-- confirm canonical ownership, identity boundaries, enums/lifecycles, and dependency rules remain coherent;
-- adjudicate critical mutation-ownership contradiction `CON-003`;
-- run adversarial F1 architecture review and record human gate decision.
+- Electron as the F2 desktop shell scaffold;
+- CodeMirror 6 as the F2 professional prose editor scaffold;
+- typed UUIDv7 durable identity;
+- Manuscript Manifest ownership of order, membership, placement role/title, and semantic break intent;
+- Constellation-owned compile plan and Workbench AST with a pinned replaceable Pandoc edge;
+- Mutation Envelope as the sole canonical application authority;
+- PatchSession as the review/provenance container when review-bearing;
+- Recovery as preservation/restore machinery, with restore applied through the Mutation Envelope;
+- noncanonical local cursor/scroll/pane/recent-context state;
+- Claim-owned Compendium `canon_state`;
+- annotation storage deliberately deferred pending F2 executable evidence.
+
+Evidence: `docs/validation/F1_ARCHITECTURE_COHERENT_RECEIPT-2026-08-22.md` and `docs/validation/F1_ADVERSARIAL_ARCHITECTURE_CLOSURE-2026-08-22.md`.
 
 ## F2: Substrate Executable
 
-**State: queued after F1.**
+**State: active 2026-08-22.**
+
+First executable gate:
+
+```bash
+python tools/local_validate.py --suite all
+```
+
+A passing local receipt from a real repository checkout is required before the repaired compile implementation is treated as executable substrate. Hosted GitHub Actions is optional/manual replication only and is not a project gate.
 
 Execute durable substrate vertical slice #6:
 
 - scan and validate canonical files;
-- atomically write Sheets;
+- atomically replace individual Sheet files where the filesystem supports the required primitive;
+- use recovery-backed, crash-detectable operation plans for multi-file mutations;
 - persist/recover recovery buffers;
 - render/reorder manifest placements without changing prose;
 - build/delete/rebuild SQLite working catalog;
 - preserve competing external versions;
 - snapshot and restore;
-- run mandatory failure injection.
+- run mandatory failure injection;
+- emit receipts for recovery/conflict operations;
+- prove no SQLite-only durable field exists.
+
+Current execution note: the initiating ChatGPT runtime could not obtain a repository checkout because outbound DNS could not resolve `github.com`. That observation is infrastructure-unavailable, not a validation pass or failure. The local receipt remains mandatory.
 
 ## Manuscript Machine
 
