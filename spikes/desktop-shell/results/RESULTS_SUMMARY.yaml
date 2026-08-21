@@ -1,0 +1,109 @@
+version: 0.1.0
+status: measured_candidate
+measured_at: 2026-08-18
+head_sha: d9991c9245caf689de7ebfa4eb0a735f41a8a7a4
+workflow:
+  run_id: 32085957984
+  conclusion: success
+  matrix:
+    - macOS_electron
+    - Windows_electron
+    - macOS_tauri
+    - Windows_tauri
+foundation_validation:
+  run_id: 32085957973
+  conclusion: success
+
+controls:
+  shared_renderer: Vite_CodeMirror_6
+  fixture_words: 50000
+  equivalent_renderer_source: true
+  path_boundary_negative_controls:
+    electron: pass_windows_and_macos
+    tauri: pass_windows_and_macos
+
+measurements:
+  macOS:
+    electron:
+      startup_to_renderer_ready_ms: 1889.843
+      editor_init_ms: 391.2
+      first_paint_ms: 700.2
+      process_tree_rss_kb: 403984
+      package_measurement_mib: 479.049
+      package_measurement_kind: unpacked_packager_output_tree
+      runtime_probe: passed
+    tauri:
+      startup_to_renderer_ready_ms: 4884.458833
+      editor_init_ms: 119.0
+      first_paint_ms: 344.0
+      process_tree_rss_kb: 96544
+      package_measurement_mib: 11.123
+      package_measurement_kind: Tauri_bundle_directory
+      runtime_probe: passed
+  Windows:
+    electron:
+      startup_to_renderer_ready_ms: 971.012
+      editor_init_ms: 159.4
+      first_paint_ms: 431.5
+      process_tree_rss_kb: 295316
+      package_measurement_mib: 347.958
+      package_measurement_kind: unpacked_packager_output_tree
+      runtime_probe: passed
+    tauri:
+      startup_to_renderer_ready_ms: 12525.5678
+      editor_init_ms: 265.1
+      first_paint_ms: 629.2
+      process_tree_rss_kb: 361668
+      package_measurement_mib: 2.194
+      package_measurement_kind: NSIS_distribution_output
+      runtime_probe: passed
+
+artifacts:
+  macOS_electron:
+    id: 9306716059
+    digest: sha256:b107c04a0aa52e0972a9994d56bb8c11997ea9a117340a355637ed325eeadc4b
+  Windows_electron:
+    id: 9306721515
+    digest: sha256:11a38af23e55feb52b839561d69b4c1a90dc1ebabf840edae9014696812f9bb3
+  macOS_tauri:
+    id: 9306806703
+    digest: sha256:dea93f0b267528091085b4ab12a570625c0e087fb71aa4a1e0861df9c92ca97f
+  Windows_tauri:
+    id: 9306895797
+    digest: sha256:81b93a8bf9e6222de29d90f68858da4260d884216021a76a21a6966413dd48cf
+
+measurement_limits:
+  - single_hosted_runner_sample_per_shell_and_platform
+  - process_tree_RSS_is_not_cross_shell_equivalent_because_OS_WebView_process_ownership_differs
+  - package_measurement_is_not_apples_to_apples_on_Windows
+  - hosted_CI_does_not_validate_real_IME_candidate_windows
+  - hosted_CI_does_not_validate_VoiceOver_Narrator_NVDA_traversal
+  - hosted_CI_does_not_validate_real_high_contrast_or_Finder_Explorer_drag_drop
+  - unsigned_spike_does_not_validate_distribution_signing_or_notarization
+
+hard_veto_assessment:
+  unsafe_file_boundary: no_veto_observed
+  shell_build_or_runtime_failure: no_veto_observed_after_fixture_setup_repairs
+  editor_behavior: no_veto_observed_in_50k_render_smoke
+  accessibility: unmeasured_manual_veto_remains
+  IME: unmeasured_manual_veto_remains
+  crash_recovery: mechanism_present_but_destructive_manual_drill_remains
+
+decision:
+  selected_shell: Electron
+  selected_version_for_scaffold: 43.2.0
+  adr: ADR-0004
+  status: accepted_for_F2_scaffold
+  reason_summary: >-
+    Both controls can satisfy the bounded security and native-integration contract. Electron is
+    selected because the same bundled Chromium engine is used across Windows and macOS and the
+    measured hosted-runner shell-ready time was materially lower on both platforms. This better
+    protects the writer-surface consistency and time-to-first-word priorities at the current gate.
+    Tauri's much smaller distribution footprint is acknowledged but is not decisive, and the
+    package/RSS measurements are not sufficiently comparable to treat them as winner metrics.
+  revisit_triggers:
+    - physical_IME_or_accessibility_veto
+    - F2_memory_or_startup_regression_against_real_hardware_budget
+    - Electron_security_boundary_requires_broad_renderer_privilege
+    - native_integration_or_distribution_burden_becomes_material
+    - editor_spike_4_discovers_shell_specific_engine_requirement

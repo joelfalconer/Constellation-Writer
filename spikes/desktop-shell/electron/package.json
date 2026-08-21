@@ -1,0 +1,15 @@
+{
+  "name": "cw-electron-shell-spike",
+  "version": "0.0.1",
+  "private": true,
+  "main": "main.cjs",
+  "scripts": {
+    "test": "node --test test/*.test.cjs",
+    "prepare:renderer": "node ../scripts/copy-renderer.mjs electron",
+    "package": "npm run prepare:renderer && electron-packager . CWElectronShellSpike --out=dist --overwrite --prune=true"
+  },
+  "devDependencies": {
+    "@electron/packager": "^18.3.0",
+    "electron": "43.2.0"
+  }
+}

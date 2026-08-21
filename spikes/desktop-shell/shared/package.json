@@ -1,0 +1,15 @@
+{
+  "name": "@constellation-writer/shell-spike-renderer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@codemirror/lang-markdown": "^6.3.0",
+    "codemirror": "^6.0.1"
+  },
+  "devDependencies": {
+    "vite": "^7.1.0"
+  }
+}

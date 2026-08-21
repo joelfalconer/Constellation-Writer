@@ -1,56 +1,28 @@
-version: 0.1.0
-status: initial
+version: 0.2.0
+status: refreshed_candidate
+updated_at: 2026-08-17
 
 sources:
   - id: SRC-DR-001
     title: Deep Research report on professional writing workbenches
     type: deep_research_report
-    role: primary_product_and_benchmark_evidence
-    availability: conversation_attachment
+    role: historical_product_and_benchmark_synthesis
+    availability: referenced_conversation_attachment_not_retrievable_in_current_run
     validation_state: human_reviewed_in_conversation
-    notes: Strategic basis for editor sovereignty, assembly, local-first architecture, derived intelligence, and governed AI.
+    locator_state: unresolved_source_unavailable
+    notes: >-
+      The repository inherited EU-001 through EU-010 from this report, but the final report
+      attachment is not present in the repository and targeted File Library searches on
+      2026-08-17 returned precursor research briefs rather than the final report. Historical
+      claims are preserved; exact page/span locators must not be invented.
 
-  - id: SRC-CAND-EDITOR-001
-    title: Editor Doctrine v0.1 candidate
-    type: design_proposal
-    role: candidate_specification_input
+  - id: SRC-CONV-001
+    title: Constellation Writer design conversation synthesis
+    type: design_lineage
+    role: candidate_architecture_reasoning
+    availability: conversation_history
     validation_state: unreviewed
-
-  - id: SRC-CAND-VAULT-001
-    title: Project Vault Schema v0.1 candidate
-    type: design_proposal
-    role: candidate_specification_input
-    validation_state: unreviewed
-
-  - id: SRC-CAND-SHEET-001
-    title: Sheet Schema v0.1 candidate
-    type: design_proposal
-    role: candidate_specification_input
-    validation_state: unreviewed
-
-  - id: SRC-CAND-MANIFEST-001
-    title: Manuscript Manifest v0.1 candidate
-    type: design_proposal
-    role: candidate_specification_input
-    validation_state: unreviewed
-
-  - id: SRC-CAND-COMPENDIUM-001
-    title: Compendium Claim Ledger v0.1 candidate
-    type: design_proposal
-    role: candidate_specification_input
-    validation_state: unreviewed
-
-  - id: SRC-CAND-PATCH-001
-    title: PatchSession Spec v0.1 candidate
-    type: design_proposal
-    role: candidate_specification_input
-    validation_state: unreviewed
-
-  - id: SRC-CAND-RECOVERY-001
-    title: Recovery and Backup Spec v0.1 candidate
-    type: design_proposal
-    role: candidate_specification_input
-    validation_state: unreviewed
+    notes: Model/user design lineage is inference or recommendation unless independently evidenced.
 
   - id: SRC-ROS-041
     title: Research OS v0.4.1 runtime projection
@@ -58,4 +30,302 @@ sources:
     role: process_and_lineage_governance
     validation_state: provisional_operational_candidate
 
-source_rule: Candidate specifications are design proposals, not evidence of implementation fitness.
+  - id: SRC-OFFICIAL-ULYSSES-SHEETS-20260817
+    title: Ulysses Help — Sheets & Groups
+    type: official_product_documentation
+    product: Ulysses
+    accessed_at: 2026-08-17
+    url: https://help.ulysses.app/en_US/the-library/567894-sheets-groups
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-ULYSSES-EXPORT-20260817
+    title: Ulysses Help — Export
+    type: official_product_documentation
+    product: Ulysses
+    accessed_at: 2026-08-17
+    url: https://help.ulysses.app/export
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-ULYSSES-EXTERNAL-20260817
+    title: Ulysses Help — External Folders
+    type: official_product_documentation
+    product: Ulysses
+    accessed_at: 2026-08-17
+    url: https://help.ulysses.app/the-library/external-folders
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-ULYSSES-GOALS-20260817
+    title: Ulysses Help — Goals
+    type: official_product_documentation
+    product: Ulysses
+    accessed_at: 2026-08-17
+    url: https://help.ulysses.app/the-dashboard/goals
+    role: current_product_state
+    validation_state: machine_checked
+
+  - id: SRC-OFFICIAL-SCRIVENER-BINDER-20260817
+    title: Literature & Latte — 3 Power-User Tips for Working More Efficiently with the Scrivener Binder
+    type: official_product_documentation
+    product: Scrivener
+    published_at: 2025-03-26
+    accessed_at: 2026-08-17
+    url: https://www.literatureandlatte.com/blog/3-power-user-tips-for-working-more-efficiently-with-the-scrivener-binder
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-SCRIVENER-COMPILE-20260817
+    title: Literature & Latte — How to Compile Your Scrivener Project for Print, PDF, or Microsoft Word
+    type: official_product_documentation
+    product: Scrivener
+    published_at: 2025-12-10
+    accessed_at: 2026-08-17
+    url: https://www.literatureandlatte.com/blog/how-to-compile-your-scrivener-project-for-print-pdf-or-microsoft-word
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-SCRIVENER-COMPILE-FORMATS-20260817
+    title: Literature & Latte — Create Custom Scrivener Compile Formats
+    type: official_product_documentation
+    product: Scrivener
+    published_at: 2026-07-15
+    accessed_at: 2026-08-17
+    url: https://www.literatureandlatte.com/blog/create-custom-scrivener-compile-formats
+    role: current_product_state
+    validation_state: machine_checked
+
+  - id: SRC-OFFICIAL-IA-FOCUS-20260817
+    title: iA Writer Support — Focus Mode
+    type: official_product_documentation
+    product: iA Writer
+    accessed_at: 2026-08-17
+    url: https://ia.net/writer/support/editor/focus-mode
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-IA-SYNTAX-20260817
+    title: iA Writer Support — Syntax Highlight
+    type: official_product_documentation
+    product: iA Writer
+    accessed_at: 2026-08-17
+    url: https://ia.net/writer/support/editor/syntax-highlight
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-IA-STYLE-20260817
+    title: iA Writer Support — Style Check
+    type: official_product_documentation
+    product: iA Writer
+    accessed_at: 2026-08-17
+    url: https://ia.net/writer/support/editor/style-check
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-IA-SETTINGS-20260817
+    title: iA Writer Support — Settings
+    type: official_product_documentation
+    product: iA Writer
+    published_at: 2026-08
+    accessed_at: 2026-08-17
+    url: https://ia.net/writer/support/basics/settings
+    role: current_product_state
+    validation_state: machine_checked
+
+  - id: SRC-OFFICIAL-DRAFTS-START-20260817
+    title: Drafts User Guide — Getting Started
+    type: official_product_documentation
+    product: Drafts
+    accessed_at: 2026-08-17
+    url: https://docs.getdrafts.com/gettingstarted/
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-DRAFTS-ACTIONS-20260817
+    title: Drafts User Guide — Actions
+    type: official_product_documentation
+    product: Drafts
+    accessed_at: 2026-08-17
+    url: https://docs.getdrafts.com/actions/
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-DRAFTS-WORKSPACES-20260817
+    title: Drafts User Guide — Workspaces
+    type: official_product_documentation
+    product: Drafts
+    accessed_at: 2026-08-17
+    url: https://docs.getdrafts.com/docs/drafts/workspaces
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-DRAFTS-TAGS-20260817
+    title: Drafts User Guide — Flags & Tagging
+    type: official_product_documentation
+    product: Drafts
+    accessed_at: 2026-08-17
+    url: https://docs.getdrafts.com/docs/drafts/tagging.html
+    role: current_product_state
+    validation_state: machine_checked
+
+  - id: SRC-OFFICIAL-OBSIDIAN-DATA-20260817
+    title: Obsidian Help — How Obsidian stores data
+    type: official_product_documentation
+    product: Obsidian
+    accessed_at: 2026-08-17
+    url: https://obsidian.md/help/data-storage
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-OBSIDIAN-BACKLINKS-20260817
+    title: Obsidian Help — Backlinks
+    type: official_product_documentation
+    product: Obsidian
+    accessed_at: 2026-08-17
+    url: https://obsidian.md/help/backlinks
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-OBSIDIAN-GRAPH-20260817
+    title: Obsidian Help — Graph view
+    type: official_product_documentation
+    product: Obsidian
+    accessed_at: 2026-08-17
+    url: https://obsidian.md/help/Plugins/Graph%2Bview
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-OBSIDIAN-PROPERTIES-20260817
+    title: Obsidian Help — Properties
+    type: official_product_documentation
+    product: Obsidian
+    accessed_at: 2026-08-17
+    url: https://obsidian.md/help/properties
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-OBSIDIAN-PLUGINS-20260817
+    title: Obsidian Help — Community plugins
+    type: official_product_documentation
+    product: Obsidian
+    accessed_at: 2026-08-17
+    url: https://obsidian.md/help/community-plugins
+    role: current_product_state
+    validation_state: machine_checked
+
+  - id: SRC-OFFICIAL-FINALDRAFT-OUTLINE-20260817
+    title: Final Draft Knowledge Base — How can I outline a script in Final Draft?
+    type: official_product_documentation
+    product: Final Draft
+    published_at: 2024-01-05
+    accessed_at: 2026-08-17
+    url: https://kb.finaldraft.com/hc/en-us/articles/15573792158996-How-can-I-outline-a-script-in-Final-Draft
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-FINALDRAFT-BEATBOARD-20260817
+    title: Final Draft Knowledge Base — What is the Beat Board?
+    type: official_product_documentation
+    product: Final Draft
+    published_at: 2025-02-19
+    accessed_at: 2026-08-17
+    url: https://kb.finaldraft.com/hc/en-us/articles/27608580196244-What-is-the-Beat-Board
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-FINALDRAFT-EXPORT-20260817
+    title: Final Draft Knowledge Base — Export a Final Draft file to another format
+    type: official_product_documentation
+    product: Final Draft
+    published_at: 2024-07-11
+    accessed_at: 2026-08-17
+    url: https://kb.finaldraft.com/hc/en-us/articles/27525594609684-How-do-I-export-a-Final-Draft-file-to-a-different-format-like-RTF-or-TXT
+    role: current_product_state
+    validation_state: machine_checked
+
+  - id: SRC-OFFICIAL-VELLUM-SPECS-20260817
+    title: Vellum — Technical Specifications
+    type: official_product_documentation
+    product: Vellum
+    accessed_at: 2026-08-17
+    url: https://vellum.pub/specs/
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-VELLUM-IMPORT-20260817
+    title: Vellum Help — Importing Your Manuscript
+    type: official_product_documentation
+    product: Vellum
+    accessed_at: 2026-08-17
+    url: https://help.vellum.pub/importing/
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-VELLUM-PRINT-20260817
+    title: Vellum Help — Your Print Edition
+    type: official_product_documentation
+    product: Vellum
+    accessed_at: 2026-08-17
+    url: https://help.vellum.pub/print/
+    role: current_product_state
+    validation_state: machine_checked
+
+  - id: SRC-OFFICIAL-ATTICUS-QUICKSTART-20260817
+    title: Atticus — Quick Start Guide
+    type: official_product_documentation
+    product: Atticus
+    accessed_at: 2026-08-17
+    url: https://www.atticus.io/quick-start-guide/
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-ATTICUS-FORMATTING-20260817
+    title: Atticus Help Center — How to Format Your Book with Atticus
+    type: official_product_documentation
+    product: Atticus
+    published_at: 2026-03-19
+    accessed_at: 2026-08-17
+    url: https://intercom.help/atticus-5877e36564df/en/articles/12581876-how-to-format-your-book-with-atticus
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-ATTICUS-DOCX-20260817
+    title: Atticus Help Center — Can I Export My Book into Word (.docx)?
+    type: official_product_documentation
+    product: Atticus
+    published_at: 2026-02-20
+    accessed_at: 2026-08-17
+    url: https://intercom.help/atticus-5877e36564df/en/articles/12631348-can-i-export-my-book-into-word-docx
+    role: current_product_state
+    validation_state: machine_checked
+  - id: SRC-OFFICIAL-ATTICUS-CHAPTER-EXPORT-20260817
+    title: Atticus Help Center — Can I export specific chapters from my project?
+    type: official_product_documentation
+    product: Atticus
+    published_at: 2026-02-20
+    accessed_at: 2026-08-17
+    url: https://intercom.help/atticus-5877e36564df/en/articles/12683240-can-i-export-specific-chapters-from-my-project
+    role: current_product_state
+    validation_state: machine_checked
+
+  - id: SRC-CAND-EDITOR-001
+    title: Editor Doctrine v0.1 candidate
+    type: design_proposal
+    role: candidate_specification_input
+    validation_state: unreviewed
+  - id: SRC-CAND-VAULT-001
+    title: Project Vault Schema v0.1 candidate
+    type: design_proposal
+    role: candidate_specification_input
+    validation_state: unreviewed
+  - id: SRC-CAND-SHEET-001
+    title: Sheet Schema v0.1 candidate
+    type: design_proposal
+    role: candidate_specification_input
+    validation_state: unreviewed
+  - id: SRC-CAND-MANIFEST-001
+    title: Manuscript Manifest v0.1 candidate
+    type: design_proposal
+    role: candidate_specification_input
+    validation_state: unreviewed
+  - id: SRC-CAND-COMPENDIUM-001
+    title: Compendium Claim Ledger v0.1 candidate
+    type: design_proposal
+    role: candidate_specification_input
+    validation_state: unreviewed
+  - id: SRC-CAND-PATCH-001
+    title: PatchSession Spec v0.1 candidate
+    type: design_proposal
+    role: candidate_specification_input
+    validation_state: unreviewed
+  - id: SRC-CAND-RECOVERY-001
+    title: Recovery and Backup Spec v0.1 candidate
+    type: design_proposal
+    role: candidate_specification_input
+    validation_state: unreviewed
+
+source_rule: >-
+  Candidate specifications and conversation synthesis are design lineage, not evidence of
+  implementation or market fitness. Current product-state claims must resolve to registered
+  primary/official sources with access dates. Historical SRC-DR-001 claims remain historical
+  until the final report becomes retrievable for exact-locator backfill.

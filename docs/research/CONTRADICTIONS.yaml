@@ -1,4 +1,4 @@
-version: 0.2.0
+version: 0.3.0
 status: candidate
 updated_at: 2026-08-17
 
@@ -62,10 +62,42 @@ contradictions_and_tensions:
     decision_record: ADR-0011
     revisit_trigger: after_Writer_Chair_and_Manuscript_Machine_gates_or_user_evidence_of_unserved_continuity_need
 
+research_uncertainties:
+  - id: UNC-EVID-001
+    topic: historical_deep_research_locator_recovery
+    observation: >-
+      The final SRC-DR-001 report is referenced as a conversation attachment but was not
+      retrievable from the repository or targeted File Library searches on 2026-08-17.
+      Search results surfaced precursor research briefs, not the final findings report.
+    consequence: EU-001_through_EU-010_exact_spans_remain_unresolved_with_explicit_reason
+    severity: medium
+    revisit_trigger: final_report_attachment_or_archive_copy_becomes_available
+
+  - id: UNC-EVID-002
+    topic: vendor_documentation_vs_professional_usability
+    observation: >-
+      Official current documentation now covers all eight requested benchmark products at the
+      documented-capability level, but does not establish comparative usability, fatigue,
+      accessibility quality, switching motives, or professional trust.
+    consequence: do_not_upgrade_current_product_mechanics_to_user_outcome_claims
+    severity: high
+    revisit_trigger: professional_writer_assays_or_switcher_critical_incident_research
+
+  - id: UNC-EVID-003
+    topic: integrated_publishing_vs_local_first_authority
+    observation: >-
+      Vellum and Atticus demonstrate short manuscript-to-publication paths, while Atticus also
+      documents cloud autosave/account recovery and Vellum imports into a native book format.
+      The convenience/sovereignty tradeoff is a design tension rather than a benchmark verdict.
+    consequence: keep_compile_and_storage_architecture_decisions_testable_in_issues_5_and_6
+    severity: medium
+    revisit_trigger: compile_spike_and_durable_substrate_tests
+
 open_critical:
   - CON-003
 
 closure_rule: >-
   A current_direction is not a resolved contradiction by itself. Critical contradictions remain
   open until the named gate accepts, revises, or explicitly defers the direction with evidence
-  and a falsifier.
+  and a falsifier. Research uncertainties remain visible until their named revisit trigger fires;
+  they are not silently converted into architecture truth.

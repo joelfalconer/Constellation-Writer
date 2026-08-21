@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' ipc: http://ipc.localhost" />
+    <title>Constellation Writer Shell Spike</title>
+  </head>
+  <body>
+    <main class="shell">
+      <header>
+        <div>
+          <strong>Constellation Writer shell spike</strong>
+          <span id="shell-name">detecting shell</span>
+        </div>
+        <div class="actions" aria-label="Shell capability controls">
+          <button id="open-project">Open project</button>
+          <button id="save-as">Save as</button>
+          <button id="start-watch">Watch</button>
+          <button id="atomic-write">Atomic write probe</button>
+          <button id="copy">Copy</button>
+          <button id="paste">Paste</button>
+          <button id="crash">Crash fixture</button>
+        </div>
+      </header>
+      <section class="status" aria-live="polite">
+        <span id="project-root">No project root selected</span>
+        <span id="status-text">Initializing 50k fixture</span>
+      </section>
+      <section id="drop-zone" class="drop-zone" tabindex="0" aria-label="Native file drop target">Drop a file here</section>
+      <section id="editor" aria-label="Editor placeholder"></section>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
