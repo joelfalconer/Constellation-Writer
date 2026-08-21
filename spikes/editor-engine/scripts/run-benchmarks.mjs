@@ -8,7 +8,8 @@ const platformArg = process.argv.find((arg) => arg.startsWith("--platform="));
 const platform = platformArg ? platformArg.split("=")[1] : process.platform;
 const port = 4174;
 const spikeRoot = fileURLToPath(new URL("..", import.meta.url));
-const server = spawn(process.platform === "win32" ? "npx.cmd" : "npx", ["vite", "preview", "--host", "127.0.0.1", "--port", String(port)], {
+const viteBin = fileURLToPath(new URL("../node_modules/vite/bin/vite.js", import.meta.url));
+const server = spawn(process.execPath, [viteBin, "preview", "--host", "127.0.0.1", "--port", String(port)], {
   cwd: spikeRoot,
   stdio: ["ignore", "pipe", "pipe"]
 });
