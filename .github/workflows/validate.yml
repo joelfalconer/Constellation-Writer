@@ -1,9 +1,9 @@
 name: Validate foundation contracts
 
+# Hosted GitHub Actions is an optional replication surface. The canonical
+# non-gating path is `python tools/local_validate.py --suite foundation`.
 on:
-  pull_request:
-  push:
-    branches: [main, foundation/project-establishment]
+  workflow_dispatch:
 
 jobs:
   contracts:
