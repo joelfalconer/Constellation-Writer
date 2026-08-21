@@ -1,27 +1,32 @@
 # Constellation Writer
 
-Constellation Writer is a local-first professional writing workbench for serious writers, longform authors, essayists, researchers, screenwriters, content strategists, and transmedia creators.
-
-## Product doctrine
+Constellation Writer is a local-first professional writing workbench for serious longform authorship.
 
 > Calm editor. Brutal recall. Governed transformation.
 
-The editor is the sovereign authorship surface. Plain-text files and manifests hold durable project truth. SQLite, search, graph, embeddings, previews, and QA are rebuildable projections. AI and automation propose inspectable changes rather than silently mutating the manuscript.
+The product is manuscript-first rather than dashboard-first, graph-first, or AI-first. Writer-owned files and manifests hold durable truth; search, graph, semantic indexes, previews, QA, and AI outputs are derived or governed projections.
 
-## Foundation posture
+## Foundation doctrine
 
-This repository is being established through a contract-first, fixture-first, vertical-slice-first programme:
+- the editor is the sovereign authorship surface;
+- manuscript prose remains writer-owned plain text;
+- identity is stable and independent of title, path, or placement;
+- the Manuscript Manifest owns assembly;
+- SQLite and other indexes remain rebuildable;
+- transformations are inspectable, provenance-bearing, and recoverable;
+- Compendium and AI capabilities remain subordinate to the manuscript.
 
-1. Constitution and invariants.
-2. Shared schema kernel.
-3. Mutation and recovery contracts.
-4. Reference project fixtures.
-5. Executable vertical slice.
-6. Failure injection and professional-workflow assays.
-7. Reconciled component specifications.
+## Validation without hosted CI
 
-See [CURRENT_STATE.yaml](CURRENT_STATE.yaml), [PROJECT_MANIFEST.yaml](PROJECT_MANIFEST.yaml), and [docs/README.md](docs/README.md).
+Project validity does not depend on paid GitHub Actions capacity. The default deterministic validation route is local:
 
-## Canonicality
+```bash
+python -m pip install -r tools/validator/requirements.txt
+python tools/local_validate.py --suite all
+```
 
-GitHub is the canonical project repository. Generated drafts remain candidates until reviewed and promoted through an ADR, validation receipt, or foundation gate.
+GitHub Actions workflows are retained as optional manual replication recipes, not automatic merge gates. See `docs/validation/LOCAL_VALIDATION_POLICY.md`.
+
+## Current phase
+
+The repository is in governed foundation and F1 architecture-coherence work. Read `CURRENT_STATE.yaml`, `ROADMAP.md`, and `docs/constitution/` before making architectural changes.
