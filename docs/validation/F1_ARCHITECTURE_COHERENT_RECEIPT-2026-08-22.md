@@ -1,17 +1,21 @@
 # F1 Architecture Coherent Gate Receipt — 2026-08-22
 
 **Gate:** F1 — Architecture Coherent  
-**Machine closure state:** `ready_for_human_decision`  
-**Human decision:** `pending`  
+**Machine closure state:** `complete`  
+**Human decision:** `approved`  
+**Decided by:** `joelfalconer`  
+**Decided at:** `2026-08-22T01:50:00+10:00`  
 **Run:** `CW-F1-ARCH-CLOSURE-006`
 
 ## Gate result
 
-The machine/adversarial closure work is complete enough to present F1 to the owner for an explicit decision.
+**F1 Architecture Coherent is accepted.**
 
-No critical architecture contradiction remains open. The architecture now names one canonical owner for manuscript assembly, one canonical application authority for mutation, one owner for Compendium canon state, and noncanonical boundaries for local user state and derived projections.
+The machine/adversarial closure established a coherent authority package with no open critical architecture contradiction. The human owner explicitly approved that package on 2026-08-22 and routed the project into F2 `Substrate Executable`.
 
-This receipt does **not** mark F1 passed. The owner must explicitly approve, approve with conditions, or reject/reopen the gate.
+The architecture names one canonical owner for manuscript assembly, one canonical application authority for mutation, one owner for Compendium canon state, and noncanonical boundaries for local user state and derived projections.
+
+Approval is an architecture gate decision, not a claim that the executable substrate has already passed F2. Local deterministic validation remains the first F2 executable gate.
 
 ## Gate checklist
 
@@ -22,23 +26,23 @@ This receipt does **not** mark F1 passed. The owner must explicitly approve, app
 | editor-engine architecture selected | pass | ADR-0005 CodeMirror 6, with IME/accessibility/latency revisit triggers |
 | compile authority selected | pass | ADR-0006, Manifest-owned assembly + Constellation plan/AST + replaceable Pandoc edge |
 | critical mutation ownership resolved | pass | ADR-0007 accepts Mutation Envelope as sole canonical application authority |
-| atomicity semantics coherent | pass | Product Constitution now guarantees file-boundary atomic replacement where supported; multi-file operations are explicitly recovery-backed unless stronger transactional semantics are proven |
+| atomicity semantics coherent | pass | Product Constitution guarantees file-boundary atomic replacement where supported; multi-file operations are recovery-backed unless stronger transactional semantics are proven |
 | durable identity direction locked before prototype data | pass | ADR-0010 typed UUIDv7 |
 | volatile user state excluded from canonical project truth | pass | ADR-0009 |
-| stale compile inclusion authority removed | pass | STATE_AUTHORITY_MATRIX now gives Manifest sole assembly membership authority |
+| stale compile inclusion authority removed | pass | STATE_AUTHORITY_MATRIX gives Manifest sole assembly membership authority |
 | Compendium canon-state owner unique | pass | `claim_record.canon_state`; no separate Canon State record in F1 model |
 | competing PatchSession/Recovery transaction ownership removed | pass | PatchSession review, Mutation Envelope apply, Recovery preserve/restore mechanisms |
-| deferred annotation storage not falsely canonical | pass | ADR-0008 deferred; Canonicality Matrix carries annotations under deferred authority only |
+| deferred annotation storage not falsely canonical | pass | ADR-0008 deferred; Canonicality Matrix carries no premature annotation storage authority |
 | open critical contradictions | pass | zero |
 | serious rivals/revisit triggers preserved | pass | adversarial closure report + ADR falsifiers |
 | hosted GitHub Actions required | pass | no; Actions is optional manual replication only |
-| fresh local validation on closure revision | not_run | current ChatGPT runtime lacks repository execution checkout |
+| fresh local validation on closure revision | not_run | prior chat runtime lacked repository execution checkout |
 | post-review compile v0.2 executable receipt | not_run | mandatory first F2 substrate gate |
 | physical shell/editor assays | deferred | F2/F4 controls, not falsely marked passed |
 | professional writer/output assays | deferred | later gate, not architecture evidence |
-| human F1 decision | pending | explicitly required below |
+| human F1 decision | pass | explicitly approved 2026-08-22 |
 
-## Accepted architecture package presented to the human gate
+## Accepted architecture package
 
 ```yaml
 shell: Electron
@@ -75,7 +79,7 @@ compendium:
 
 PR #15 review surfaced two additional P1 coherence defects before promotion:
 
-1. Compendium `canon_state` still had two possible owners (`canon_state_record_or_claim_field_per_final_schema`). The authority is now locked to `claim_record.canon_state`, the Claim schema imports the shared `CanonState` enum, the reference fixture is migrated, and the Claim Ledger explicitly rejects a separate F1 Canon State record.
+1. Compendium `canon_state` still had two possible owners. The authority is now locked to `claim_record.canon_state`, the Claim schema imports the shared `CanonState` enum, the reference fixture is migrated, and the Claim Ledger explicitly rejects a separate F1 Canon State record.
 2. ADR-0007's recovery-backed multi-file semantics conflicted with the Product Constitution's unqualified statement that canonical writes are atomic. The constitution now defines atomicity at the single-file replacement boundary where supported and explicitly requires recovery-backed, crash-detectable semantics for multi-file operations unless genuine cross-file transactions are proven.
 
 These findings reinforce the closure method: zero-contradiction status is earned only after review, not inferred from the first coherent-looking model.
@@ -86,48 +90,38 @@ ADR-0008 annotation storage remains deliberately deferred to F2 because file-cou
 
 These are permitted to remain open because they do not create a competing canonical authority at F1 and each has a named later decision or falsifier.
 
-## Validation exception
+## Validation boundary
 
-The repository no longer depends on paid hosted CI. The canonical deterministic validation command is:
+The repository does not depend on paid hosted CI. The canonical deterministic validation command is:
 
 ```bash
 python tools/local_validate.py --suite all
 ```
 
-The current runtime cannot execute that command against a checked-out repository. Therefore no fresh local pass is claimed for this closure revision.
+No prior unexecuted local validation is retroactively described as passing. F2 begins by obtaining a local deterministic receipt from a real repository checkout before relying on the repaired compile v0.2 code as executable substrate.
 
-The repaired compile spike v0.2 remains under the explicitly recorded non-production execution exception. Architecture decisions may proceed, but the repaired spike must not be relied on as executable F2 substrate until a passing local receipt exists.
-
-## Human decision block
-
-Choose exactly one:
+## Human decision record
 
 ```yaml
 human_F1_decision:
-  state: pending  # approve | approve_with_conditions | reject_reopen
-  decided_by: null
-  decided_at: null
-  conditions: []
+  state: approve
+  decided_by: joelfalconer
+  decided_at: 2026-08-22T01:50:00+10:00
+  conditions:
+    - F2 begins with local deterministic validation
+    - execute durable substrate vertical slice issue_6
   reopened_ADRs_or_topics: []
-  rationale: null
+  rationale: approve F1 and route directly into F2 Substrate Executable
 ```
 
-### If approved
+## Active route
 
-Route to F2 `Substrate Executable`, beginning with:
+F2 `Substrate Executable` begins with:
 
-1. obtain a passing local `python tools/local_validate.py --suite all` receipt from a real checkout;
+1. obtain a local `python tools/local_validate.py --suite all` receipt from a real checkout;
 2. execute vertical slice issue #6 using the accepted architecture package;
 3. exercise Mutation Envelope save/recovery/failure semantics;
 4. run physical shell/editor IME/accessibility/native-interaction controls as the executable substrate becomes available.
-
-### If approved with conditions
-
-Record conditions as F2 entry gates. Conditions must not be silently treated as already satisfied.
-
-### If rejected/reopened
-
-Name the ADR or authority boundary being reopened and preserve the accepted alternatives/fallbacks for a delta run.
 
 ## Review triggers
 
