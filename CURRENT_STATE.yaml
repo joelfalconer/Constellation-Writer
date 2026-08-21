@@ -1,7 +1,7 @@
 project_id: constellation_writer
 project_name: Constellation Writer
 repository: joelfalconer/Constellation-Writer
-status: F0_accepted_F1_compile_decision_candidate
+status: F0_accepted_F1_compile_review_repaired
 phase: F1_architecture_coherence_closure_preparation
 updated_at: 2026-08-21
 
@@ -21,6 +21,15 @@ evidence_lineage_issue: 7
 vertical_slice_issue: 6
 professional_assay_issue: 8
 
+validation_runtime_policy:
+  primary: local_deterministic_runner
+  command: python tools/local_validate.py --suite all
+  receipt: build/local-validation-receipt.json
+  github_actions: optional_manual_replication_only
+  github_actions_quota_unavailable_is_failure: false
+  automatic_actions_triggers: disabled_candidate_PR_14
+  policy: docs/validation/LOCAL_VALIDATION_POLICY.md
+
 completed:
   - F0_Project_Defined_accepted
   - foundation_PR_1_merged_to_main
@@ -35,7 +44,6 @@ completed:
   - expanded_reference_novel_fixture_machine_checked
   - foundation_validator_v0_2
   - negative_contract_tests
-  - validation_CI_workflow
   - validation_assays_and_failure_matrices
   - engineering_and_release_governance
   - foundation_completion_audit
@@ -45,16 +53,22 @@ completed:
   - ADR_0004_Electron_selected_for_F2_scaffold
   - issue_4_editor_spike_PR_13_merged_and_issue_closed
   - ADR_0005_CodeMirror_6_selected_for_F2_scaffold
-  - issue_5_compile_golden_and_negative_controls_13_of_13_pass
-  - issue_5_repeated_frozen_compile_equivalence
+  - issue_5_compile_golden_and_negative_controls_13_of_13_pass_at_evidence_head
+  - issue_5_repeated_frozen_compile_equivalence_at_evidence_head
   - issue_5_Pandoc_3_10_1_and_3_9_0_2_verified_adapter_controls
   - issue_5_DOCX_EPUB_semantic_version_comparison
   - issue_5_adapter_failure_preserves_constellation_fallbacks
   - issue_5_ADR_0006_Workbench_plan_AST_plus_Pandoc_adapter_candidate
   - issue_5_compile_authority_contract_reconciliation_candidate
+  - issue_5_six_P1_review_findings_repaired_in_compile_spike_v0_2
+  - issue_5_six_targeted_regression_tests_added
+  - issue_5_all_review_threads_resolved
+  - local_first_validation_runner_added
+  - hosted_Actions_changed_to_manual_optional_replication_candidate
+  - Actions_quota_unavailability_removed_as_project_gate_candidate
 
 in_progress:
-  - issue_5_compile_spike_PR_14_review_and_merge
+  - issue_5_compile_spike_PR_14_promotion
   - F1_CON_003_mutation_ownership_confirmation
   - F1_adversarial_architecture_review_after_spikes
   - F1_clean_promotion_validation
@@ -62,6 +76,7 @@ in_progress:
 
 queued_after_F1:
   - durable_substrate_vertical_slice_issue_6
+  - F2_first_local_validation_receipt_for_promoted_substrate
   - F2_physical_shell_IME_accessibility_and_real_hardware_budget_controls
   - F2_physical_editor_IME_bidi_accessibility_native_interaction_controls
   - F2_representative_hardware_editor_latency_replication
@@ -107,6 +122,14 @@ machine_evidence:
   compile_spike_foundation_validation:
     run_id: 32468472562
     conclusion: success
+  compile_post_review_delta:
+    implementation_version: 0.2.0
+    review_findings_repaired: 6
+    targeted_regressions_added: 6
+    review_threads_resolved: 6
+    post_repair_hosted_actions: hosted_ci_unavailable_nonblocking
+    post_repair_local_suite: not_run_in_current_chat_runtime
+    exception_receipt: docs/programme/RUN_RECEIPT-CW-F1-COMPILE-SPIKE-005-REVIEW-DELTA.md
   compile_decision: Workbench_owned_plan_AST_with_Pandoc_3_10_1_output_adapter_for_F2
 
 F1_blockers:
@@ -121,7 +144,7 @@ F1_blockers:
   - issue: 5
     decision: Workbench_AST_and_Pandoc_adapter_boundary
     owner: joelfalconer
-    state: closure_ready_when_PR_14_is_reviewed_and_merged
+    state: promotion_ready_under_recorded_post_review_validation_exception
     outcome: Workbench_owned_plan_AST_with_Pandoc_3_10_1_as_pinned_DOCX_EPUB_adapter
   - issue: 7
     decision: evidence_lineage_and_benchmark_refresh
@@ -147,13 +170,17 @@ known_gaps:
   - professional_DOCX_EPUB_accessibility_and_style_fidelity_not_yet_assayed
   - Pandoc_distribution_licensing_signing_security_update_policy_not_yet_completed
   - compile_recovery_and_mutation_are_not_executable_product_services
+  - post_review_compile_v0_2_local_suite_not_yet_executed_in_a_repository_checkout
   - no_professional_writer_assay_has_run
 
 closure_posture: >-
   F0 is accepted. Issues #3, #4, and #7 are closed and their promoted decisions select Electron and
-  CodeMirror 6 for the F2 shell/editor scaffold. Issue #5 has now passed 13 golden/negative controls,
-  repeated frozen-input determinism, verified current/prior Pandoc DOCX/EPUB adapter comparison, and
-  explicit adapter-failure fallback. ADR-0006 therefore selects a Constellation-owned compile plan and
-  Workbench AST with Pandoc 3.10.1 quarantined to the DOCX/EPUB output edge. F1 remains conditional_not_ready
-  until PR #14 is reviewed/merged, CON-003 is adjudicated, adversarial closure and clean promotion validation
-  pass, and the human F1 gate decision is recorded.
+  CodeMirror 6 for the F2 shell/editor scaffold. Issue #5 has prior executed architecture evidence for
+  deterministic compile planning, current/prior Pandoc adapter comparison and adapter-failure fallback.
+  Independent review then found six implementation-fidelity defects; all six are repaired in spike v0.2,
+  each has a targeted regression test, and all six review threads are resolved. Hosted Actions quota is now
+  explicitly non-gating: workflows are retained as manual recipes while deterministic repository validation
+  moves to tools/local_validate.py. The v0.2 post-review suite is not claimed as executed in the current chat
+  runtime and is carried to F2 as the first executable-substrate receipt. F1 remains conditional_not_ready
+  until PR #14 is promoted, CON-003 is adjudicated, adversarial closure completes, and the human F1 gate
+  decision is recorded.
