@@ -83,6 +83,20 @@ A change may be promoted without GitHub Actions when all of the following are tr
 
 If the current execution environment cannot run the local suite, that limitation must be recorded. Review may continue, but an unexecuted local suite must not be described as passing.
 
+### Explicit execution exception
+
+A non-production, reversible architecture-decision or falsification spike may be promoted without a post-change execution receipt only when **all** of these additional conditions are recorded:
+
+- the reason execution is unavailable is infrastructure/tooling access rather than a known failing test;
+- relevant prior machine evidence exists for the architectural claim being promoted;
+- the unexecuted delta is independently source-reviewed and all blocking review findings are resolved;
+- targeted regression tests or equivalent falsifiers are added for material defects discovered in review;
+- the promotion record labels the delta `not_run` or equivalent and never claims it passed;
+- production or executable-substrate reliance is prohibited until the next available local validation gate passes;
+- the next gate, owner, command, and failure response are explicit.
+
+This exception is intentionally narrow. It may move a governed architecture decision forward without buying hosted CI, but it may not turn unexecuted code into accepted production substrate.
+
 ## GitHub Actions posture
 
 Repository workflows are retained as reproducible recipes and optional manual replication surfaces. Automatic pull-request and push triggers are disabled while hosted Actions capacity is not part of the operating model.
@@ -96,9 +110,10 @@ A maintainer may manually invoke a workflow later if hosted capacity becomes ava
 | `passed` | command executed and acceptance checks passed | satisfies its validation class |
 | `failed` | command executed and acceptance checks failed | blocks affected promotion |
 | `hosted_ci_unavailable` | hosted executor did not run because capacity/service was unavailable | non-blocking; use local route |
-| `not_run` | validation has not yet been executed | cannot be claimed as passed |
+| `not_run` | validation has not yet been executed | cannot be claimed as passed; may use the narrow explicit exception above |
 | `not_applicable` | validation class does not apply to the change | non-blocking with rationale |
 | `carried_forward` | prior evidence remains relevant to unchanged behavior | usable only within its original scope |
+| `exception_promoted` | narrow governed exception used for a non-production/reversible decision | must carry a mandatory next executable gate |
 
 ## Review and revisit triggers
 
@@ -108,6 +123,7 @@ Revisit this policy if:
 - a local and hosted run disagree materially;
 - local validation is found to omit a gate previously enforced by CI;
 - a security or release requirement genuinely needs an isolated external executor;
-- the project adopts another no-cost or self-hosted validation runtime.
+- the project adopts another no-cost or self-hosted validation runtime;
+- execution exceptions become routine rather than rare, bounded, and explicitly justified.
 
 The preferred response to those events is to restore the missing validation capability without making paid hosted CI a product-development dependency.
