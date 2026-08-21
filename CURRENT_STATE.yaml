@@ -1,18 +1,18 @@
 project_id: constellation_writer
 project_name: Constellation Writer
 repository: joelfalconer/Constellation-Writer
-status: F0_accepted_F1_shell_decision_candidate
+status: F0_accepted_F1_editor_decision_candidate
 phase: F1_architecture_coherence_evidence_and_spikes
-updated_at: 2026-08-18
+updated_at: 2026-08-21
 
 product_identity: local_first_professional_writing_workbench
 core_promise: calm_editor_brutal_recall_governed_transformation
 
 canonical_branch: main
 canonical_foundation_merge: 1f01da3c76611d9ad9b1b297c2b8f265a91a6daa
-active_transition_branch: f1/post-merge-reconciliation
-active_stacked_research_branch: research/evidence-lineage-refresh
-active_shell_spike_branch: spike/desktop-shell-decision
+canonical_F1_stack_merge: bc422e5bf0b6e5e668c3cead1f82e9b8c269a99c
+active_editor_spike_branch: spike/editor-engine-decision
+active_editor_spike_PR: 13
 foundation_pull_request: 1
 foundation_issue: 2
 technology_spikes: [3, 4, 5]
@@ -35,31 +35,32 @@ completed:
   - foundation_validator_v0_2
   - negative_contract_tests
   - validation_CI_workflow
-  - main_merge_CI_run_32010291279_success
   - validation_assays_and_failure_matrices
   - compile_golden_case_definitions
   - failure_injection_scenario_definitions
   - technology_ADR_candidates
   - engineering_and_release_governance
   - foundation_completion_audit
-  - issue_7_current_official_benchmark_refresh_for_eight_products
-  - issue_7_EU_001_through_EU_010_pending_locators_replaced_with_explicit_unresolved_reasons
-  - issue_7_EU_016_through_EU_023_current_product_evidence_units
-  - issue_3_equivalent_Electron_and_Tauri_shell_controls
-  - issue_3_windows_macos_matrix_build_package_and_runtime_probe
-  - issue_3_path_and_symlink_escape_negative_controls
-  - issue_3_ADR_0004_Electron_selected_for_F2_scaffold
+  - F1_post_merge_reconciliation_PR_10_merged
+  - issue_7_evidence_refresh_PR_11_merged_and_issue_closed
+  - issue_3_shell_spike_PR_12_promoted_and_issue_closed
+  - ADR_0004_Electron_selected_for_F2_scaffold
+  - issue_4_CodeMirror_ProseMirror_equivalent_bounded_controls
+  - issue_4_windows_macos_50k_editor_measurement_run
+  - issue_4_source_fidelity_rival_control
+  - issue_4_ADR_0005_CodeMirror_selected_for_F2_scaffold_candidate
 
 in_progress:
-  - F1_post_merge_reconciliation_PR_10
-  - issue_7_evidence_refresh_PR_review_and_merge
-  - issue_3_shell_spike_PR_review_and_merge
-  - technology_spikes_4_5
+  - issue_4_editor_spike_PR_13_review_and_merge
+  - technology_spike_5_compile_architecture
+  - F1_CON_003_mutation_ownership_confirmation
   - F1_adversarial_architecture_review_after_spikes
 
 queued_after_F1:
   - durable_substrate_vertical_slice_issue_6
   - F2_physical_shell_IME_accessibility_and_real_hardware_budget_controls
+  - F2_physical_editor_IME_bidi_accessibility_native_interaction_controls
+  - F2_representative_hardware_editor_latency_replication
   - F2_failure_injection_against_executable_substrate
   - later_professional_writer_assay_issue_8
 
@@ -74,39 +75,47 @@ following_gate:
   state: blocked_on_F1_and_vertical_slice_6
 
 machine_evidence:
-  last_confirmed_foundation_ci:
-    run_id: 32085957973
-    head_sha: d9991c9245caf689de7ebfa4eb0a735f41a8a7a4
-    branch: spike/desktop-shell-decision
+  editor_spike_decision_run:
+    run_id: 32460827533
+    head_sha: fbe91cf91ae5122887768d8469a99d744277fb6d
     conclusion: success
-  shell_spike:
-    run_id: 32085957984
-    head_sha: d9991c9245caf689de7ebfa4eb0a735f41a8a7a4
+    windows: pass
+    macos: pass
+    windows_artifact: 9438891488
+    windows_digest: sha256:68daf976fe6e08d264f071173a3e064d1fe0e1a52afdca666c36345eec5363e8
+    macos_artifact: 9438883335
+    macos_digest: sha256:a7fe1cddc5357ea9c0286d270b5ce917cb75ec441d1883e8dcb2fcc95a8fef0c
+  editor_spike_foundation_validation:
+    run_id: 32460827551
+    head_sha: fbe91cf91ae5122887768d8469a99d744277fb6d
     conclusion: success
-    matrix_jobs: 4
-    electron_macos: pass
-    electron_windows: pass
-    tauri_macos: pass
-    tauri_windows: pass
-    decision: Electron_for_F2_scaffold
-    residual_hard_veto_tests: [physical_IME, VoiceOver_Narrator_NVDA, high_contrast_200_percent_zoom]
+  editor_decision: CodeMirror_6_for_F2_scaffold
+  editor_residual_veto_tests:
+    - physical_IME
+    - VoiceOver_Narrator_NVDA
+    - physical_bidi_caret_selection
+    - high_contrast_200_percent_zoom
+    - native_clipboard_drag_platform_text_services
+    - six_hour_writer_assay
+    - representative_hardware_latency
 
 F1_blockers:
   - issue: 3
     decision: desktop_shell_Tauri2_vs_Electron
-    owner: joelfalconer
-    state: closure_ready_when_shell_spike_PR_is_reviewed_and_merged
+    state: closed
     outcome: Electron_selected_for_F2_scaffold_with_explicit_revisit_triggers
   - issue: 4
     decision: professional_prose_editor_engine
     owner: joelfalconer
+    state: closure_ready_when_PR_13_is_reviewed_and_merged
+    outcome: CodeMirror_6_selected_for_F2_scaffold_with_explicit_physical_vetoes
   - issue: 5
     decision: Workbench_AST_and_Pandoc_adapter_boundary
     owner: joelfalconer
+    state: open
   - issue: 7
     decision: evidence_lineage_and_benchmark_refresh
-    owner: joelfalconer
-    state: closure_ready_when_evidence_refresh_PR_is_reviewed_and_merged
+    state: closed
     unresolved_nonblocking_limitation: SRC_DR_001_final_report_attachment_not_retrievable_for_exact_historical_spans
   - contradiction: CON-003
     topic: mutation_ownership
@@ -116,14 +125,17 @@ known_gaps:
   - exact_historical_SRC_DR_001_spans_unresolved_with_explicit_source_unavailable_reason
   - benchmark_user_sentiment_switching_fatigue_and_accessibility_not_established_by_vendor_docs
   - shell_physical_IME_and_assistive_technology_controls_not_yet_run
-  - shell_startup_memory_metrics_are_single_hosted_runner_observations_not_product_budgets
+  - editor_physical_IME_bidi_accessibility_and_six_hour_controls_not_yet_run
+  - editor_macos_cursor_selection_hosted_p95_slightly_above_32ms_target_for_both_controls
   - compile_recovery_and_mutation_are_not_executable_product_services
-  - technology_ADRs_0005_0006_are_proposed_not_accepted
+  - ADR_0006_is_proposed_not_accepted
   - no_professional_writer_assay_has_run
 
 closure_posture: >-
-  F0 is accepted and promoted. Issue #7 remains closure-ready on its stacked PR merge. Issue #3
-  now has equivalent executable shell controls, a clean Windows/macOS matrix, explicit limitations,
-  and ADR-0004 selects Electron for the F2 scaffold while carrying physical IME/accessibility vetoes
-  forward. F1 remains conditional_not_ready until issue #4, issue #5, CON-003 review, clean gate
-  validation, stacked PR promotion, adversarial closure, and a human F1 decision are complete.
+  F0 and the PR10/PR11/PR12 F1 stack are promoted to main. Issue #3 and issue #7 are closed.
+  Issue #4 now has equivalent CodeMirror 6 and ProseMirror controls, a clean Windows/macOS decision
+  run, explicit source-fidelity evidence, and ADR-0005 selects CodeMirror 6 for the F2 editor scaffold
+  while carrying physical IME/bidi/accessibility, six-hour writer, native-interaction, and representative
+  hardware latency controls forward. F1 remains conditional_not_ready until PR #13 is reviewed/merged,
+  issue #5 is resolved, CON-003 is adjudicated, adversarial closure passes, promotion validation is clean,
+  and human F1 approval is recorded.
