@@ -48,6 +48,14 @@ human / AI / import / migration / recovery intent
 
 No subsystem may bypass this path for canonical mutation merely because its operation appears simple.
 
+## Atomicity semantics
+
+The Product Constitution's atomic-write law applies to **single-file canonical replacement** at the file boundary where the supported filesystem provides the required replacement primitive. The architecture does not pretend that a collection of ordinary filesystem writes automatically has database-style cross-file atomicity.
+
+A multi-file Mutation Envelope therefore uses an explicit operation plan plus recovery artifacts. If interruption occurs after some file replacements have committed, the system must detect and disclose partial application, preserve enough information to complete or roll back safely, and enter recovery review where needed. It may not report the operation as atomically committed when that guarantee was not actually available.
+
+If a future substrate provides genuine transactional multi-file semantics, the envelope may exploit them as an implementation optimization without changing the authority model.
+
 ## Autosave and latency
 
 This decision does **not** require every keystroke to become a heavyweight transaction object. The editor buffer remains the immediate interaction surface. Autosave may use a lightweight `canonical_low` envelope with implicit human authority, coalescing, and minimal recovery bookkeeping.
@@ -60,7 +68,7 @@ The architecture is falsified if the shared envelope forces blocking work into t
 - PatchSession remains an editorial review/provenance object rather than an event-sourced filesystem engine.
 - Recovery remains trustworthy without becoming a competing transaction protocol.
 - Restore, migration, import, conflict resolution, bulk edits, AI acceptance, and ordinary save can share one consequence-sensitive substrate.
-- Multi-file atomicity remains recovery-backed rather than pretending the filesystem offers universal database transactions.
+- Single-file canonical replacement is atomic where supported; multi-file consistency is recovery-backed unless the implementation can prove a stronger transactional guarantee.
 - Outcome history becomes inspectable without making event replay necessary to reconstruct current canonical truth.
 
 ## Serious rivals considered
@@ -83,7 +91,7 @@ The accepted direction is consistent with:
 
 - `docs/architecture/MUTATION_ENVELOPE.md`, which already defines the envelope beneath autosave, human commands, PatchSessions, imports, migrations, conflict resolution, and restore;
 - `docs/specifications/patch-session-v0.2.md`, which explicitly makes PatchSession the writer-facing review/provenance container rather than the complete transaction model;
-- `docs/specifications/recovery-backup-v0.2.md`, which routes high-consequence operations and restore preparation through the Mutation Envelope;
+- `docs/specifications/recovery-backup-v0.2.md`, which defines single-file atomic replacement and recovery-backed multi-file operations;
 - `docs/constitution/DEPENDENCY_RULES.md`, which forbids PatchSession and Recovery as competing transaction owners;
 - `docs/constitution/SOVEREIGNTY_MODEL.md`, which requires every canonical write route to pass through a declared mutation policy;
 - `INV-MUT-001`, which requires governed review for non-human canonical mutation.
@@ -98,13 +106,15 @@ Reopen this ADR if any of the following is observed in F2:
 2. autosave requires a materially different canonical write model to remain reliable;
 3. restore or multi-file recovery cannot be represented without a second canonical application authority;
 4. stale-base, lock, or revision checks become inconsistent across operation classes;
-5. implementation introduces a canonical write path that bypasses the envelope and cannot be removed without unacceptable cost.
+5. implementation introduces a canonical write path that bypasses the envelope and cannot be removed without unacceptable cost;
+6. the supported filesystem/runtime cannot provide the single-file replacement guarantees assumed by the recovery design and no safe fallback can be defined.
 
 ## F2 acceptance tests
 
 - direct human save uses the mutation substrate without blocking the editor interaction loop;
 - AI cannot bypass PatchSession review and the Mutation Envelope to write canonical files;
 - stale base revision blocks blind application;
+- single-file replacement satisfies the documented atomic file-boundary behavior on supported filesystems;
 - destructive operations obtain the required pre-operation recovery artifact;
 - interrupted multi-file mutation exposes partial state and can recover or resume safely;
 - restore is represented as a new governed mutation rather than silent filesystem replacement;
