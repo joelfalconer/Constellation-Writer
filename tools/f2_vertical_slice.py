@@ -5,6 +5,7 @@ import argparse
 from dataclasses import asdict, dataclass
 from hashlib import sha256
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -33,6 +34,7 @@ from packages.mutation.core import (
     apply_operation_plan,
     apply_text_mutation,
     move_canonical_file,
+    reconcile_incomplete_operations,
 )
 from packages.recovery.core import (
     clear_recovery_buffer,
@@ -109,6 +111,10 @@ def main() -> int:
     checks.append(Check("validator_before", validation_before["passed"], validation_before))
 
     project_data = project_manifest(project)
+    child_env = os.environ.copy()
+    child_env["PYTHONPATH"] = (
+        str(repo) + os.pathsep + child_env.get("PYTHONPATH", "")
+    )
     sheet_id = "sh_018f0000-0000-7000-8000-000000000001"
     second_sheet_id = "sh_018f0000-0000-7000-8000-000000000002"
     sheet, sidecar_path, sidecar = load_sheet_with_sidecar(project, sheet_id)
@@ -302,6 +308,45 @@ def main() -> int:
         )
     )
 
+    single_hard_rel = Path("materials/f2-single-hard-exit.txt")
+    single_hard_path = project / single_hard_rel
+    single_hard_path.write_text("before-hard\n", encoding="utf-8")
+    single_hard_before = sha256_file(single_hard_path)
+    hard_single_script = "\n".join(
+        [
+            "import sys",
+            "from pathlib import Path",
+            "from packages.mutation.core import apply_text_mutation",
+            "from packages.vault.core import sha256_file",
+            "root = Path(sys.argv[1])",
+            "rel = Path('materials/f2-single-hard-exit.txt')",
+            f"pid = {project_data['id']!r}",
+            "apply_text_mutation(root, rel, 'after-hard\\n', object_id=pid, object_type='project_material', intent='hard process exit after replacement', expected_sha256=sha256_file(root / rel), hard_exit_after_replace=True)",
+        ]
+    )
+    hard_single = subprocess.run(
+        [sys.executable, "-c", hard_single_script, str(project)],
+        cwd=repo,
+        env=child_env,
+        check=False,
+    )
+    hard_single_reconcile = reconcile_incomplete_operations(project)
+    hard_single_result = next(
+        (item for item in hard_single_reconcile if item.get("kind") == "single_file"),
+        None,
+    )
+    checks.append(
+        Check(
+            "single_file_hard_exit_reconciles_committed_bytes",
+            hard_single.returncode == 86
+            and sha256_file(single_hard_path) != single_hard_before
+            and bool(hard_single_result)
+            and hard_single_result.get("application_state")
+            == "applied_recovered_after_crash",
+            {"returncode": hard_single.returncode, "reconciliation": hard_single_result},
+        )
+    )
+
     a_rel = Path("materials/f2-multi-a.txt")
     b_rel = Path("materials/f2-multi-b.txt")
     for rel, text in ((a_rel, "a-before\n"), (b_rel, "b-before\n")):
@@ -343,6 +388,57 @@ def main() -> int:
         )
     )
 
+    crash_a_rel = Path("materials/f2-crash-a.txt")
+    crash_b_rel = Path("materials/f2-crash-b.txt")
+    for rel, text in (
+        (crash_a_rel, "ca-before\n"),
+        (crash_b_rel, "cb-before\n"),
+    ):
+        (project / rel).write_text(text, encoding="utf-8")
+    crash_a_before = sha256_file(project / crash_a_rel)
+    crash_b_before = sha256_file(project / crash_b_rel)
+    hard_multi_script = "\n".join(
+        [
+            "import sys",
+            "from pathlib import Path",
+            "from packages.mutation.core import PlannedWrite, apply_operation_plan",
+            "from packages.vault.core import sha256_file",
+            "root = Path(sys.argv[1])",
+            "a = Path('materials/f2-crash-a.txt')",
+            "b = Path('materials/f2-crash-b.txt')",
+            f"pid = {project_data['id']!r}",
+            "apply_operation_plan(root, [PlannedWrite(a.as_posix(), pid, 'project_material', b'ca-after\\n', sha256_file(root / a)), PlannedWrite(b.as_posix(), pid, 'project_material', b'cb-after\\n', sha256_file(root / b))], intent='hard process exit mid plan', hard_exit_after_applies=1)",
+        ]
+    )
+    hard_multi = subprocess.run(
+        [sys.executable, "-c", hard_multi_script, str(project)],
+        cwd=repo,
+        env=child_env,
+        check=False,
+    )
+    mixed_observed = (
+        sha256_file(project / crash_a_rel) != crash_a_before
+        and sha256_file(project / crash_b_rel) == crash_b_before
+    )
+    hard_multi_reconcile = reconcile_incomplete_operations(project)
+    hard_multi_result = next(
+        (item for item in hard_multi_reconcile if item.get("kind") == "multi_file"),
+        None,
+    )
+    checks.append(
+        Check(
+            "multi_file_hard_exit_reconciles_by_rollback",
+            hard_multi.returncode == 87
+            and mixed_observed
+            and bool(hard_multi_result)
+            and hard_multi_result.get("application_state")
+            == "failed_recovered_after_crash"
+            and sha256_file(project / crash_a_rel) == crash_a_before
+            and sha256_file(project / crash_b_rel) == crash_b_before,
+            {"returncode": hard_multi.returncode, "reconciliation": hard_multi_result},
+        )
+    )
+
     validation_after = run_validator(
         repo, project, workdir / "validation-after.json"
     )
@@ -376,12 +472,19 @@ def main() -> int:
             "controlled_failure_injection": (
                 sha256_file(single_failure_path) == before_failure_hash
                 and sha256_file(project / a_rel) == a_before
+                and bool(hard_single_result)
+                and hard_single_result.get("application_state")
+                == "applied_recovered_after_crash"
+                and bool(hard_multi_result)
+                and hard_multi_result.get("application_state")
+                == "failed_recovered_after_crash"
             ),
         },
     }
     receipt_path = workdir / "F2_VERTICAL_SLICE_RECEIPT.json"
     receipt_path.write_text(
-        json.dumps(receipt, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+        json.dumps(receipt, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
     )
     print(json.dumps(receipt, indent=2, ensure_ascii=False))
     print(f"\nReceipt: {receipt_path}")
