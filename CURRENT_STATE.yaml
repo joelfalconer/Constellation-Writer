@@ -1,8 +1,8 @@
 project_id: constellation_writer
 project_name: Constellation Writer
 repository: joelfalconer/Constellation-Writer
-status: F1_machine_closure_promoted_waiting_human_decision
-phase: F1_architecture_coherent_human_gate
+status: F1_accepted_F2_entry_active
+phase: F2_substrate_executable
 updated_at: 2026-08-22
 
 product_identity: local_first_professional_writing_workbench
@@ -31,7 +31,8 @@ validation_runtime_policy:
   github_actions_quota_unavailable_is_failure: false
   automatic_actions_triggers: disabled
   policy: docs/validation/LOCAL_VALIDATION_POLICY.md
-  F1_closure_revision_local_execution: not_run_in_current_chat_runtime
+  F1_closure_revision_local_execution: not_run_in_prior_chat_runtime
+  F2_entry_local_checkout_attempt: blocked_current_runtime_dns_no_github_checkout
   production_substrate_reliance_before_local_pass: prohibited
 
 completed:
@@ -84,14 +85,30 @@ completed:
   - F1_adversarial_architecture_closure_complete
   - F1_PR_15_two_P1_review_findings_repaired_and_threads_resolved
   - F1_machine_closure_PR_15_merged
-  - F1_gate_receipt_prepared_with_human_decision_pending
+  - F1_human_gate_approved_2026_08_22
+  - F1_Architecture_Coherent_accepted
 
 in_progress:
-  - F1_human_gate_decision
+  - F2_local_validation_receipt
+  - issue_6_durable_substrate_vertical_slice
 
-queued_after_F1:
-  - durable_substrate_vertical_slice_issue_6
-  - F2_first_local_validation_receipt_for_promoted_substrate
+F2_entry:
+  state: active
+  entered_at: 2026-08-22T01:50:00+10:00
+  entered_by: joelfalconer
+  F1_receipt: docs/validation/F1_ARCHITECTURE_COHERENT_RECEIPT-2026-08-22.md
+  local_validation:
+    required_command: python tools/local_validate.py --suite all
+    current_state: blocked_in_current_chat_runtime
+    blocker: outbound_DNS_prevents_repository_checkout
+    interpretation: infrastructure_unavailable_not_pass_or_fail
+    substrate_reliance_allowed: false
+  vertical_slice:
+    issue: 6
+    state: starting
+    objective: durable_Sheet_persistence_manifest_assembly_catalog_rebuild_conflict_preservation_snapshot_restore
+
+queued_in_F2:
   - F2_mutation_envelope_save_recovery_and_failure_injection
   - F2_single_file_atomic_replacement_and_multi_file_crash_recovery_assays
   - F2_physical_shell_IME_accessibility_and_real_hardware_budget_controls
@@ -101,21 +118,29 @@ queued_after_F1:
   - F2_annotation_log_storage_reanchor_sync_and_compaction_assay
   - later_professional_writer_assay_issue_8
 
-next_gate:
+previous_gate:
   id: F1
   name: Architecture Coherent
-  state: waiting_explicit_human_decision
+  state: accepted
   receipt: docs/validation/F1_ARCHITECTURE_COHERENT_RECEIPT-2026-08-22.md
   adversarial_review: docs/validation/F1_ADVERSARIAL_ARCHITECTURE_CLOSURE-2026-08-22.md
   run_receipt: docs/programme/RUN_RECEIPT-CW-F1-ARCH-CLOSURE-006.md
   review_delta_receipt: docs/programme/RUN_RECEIPT-CW-F1-ARCH-CLOSURE-006-PR-REVIEW-DELTA.md
-  human_decision: pending
+  human_decision: approved
 
-following_gate:
+next_gate:
   id: F2
   name: Substrate Executable
-  state: blocked_only_on_human_F1_approval_and_vertical_slice_execution
+  state: entered_local_validation_pending
   first_gate_action: python tools/local_validate.py --suite all
+  implementation_issue: 6
+  hard_gates:
+    - zero_silent_loss
+    - no_SQLite_only_durable_field
+    - rename_move_preserves_Sheet_identity
+    - recovery_and_conflict_receipts
+    - validator_pass_before_and_after_cache_deletion
+    - controlled_failure_injection
 
 accepted_architecture:
   shell: Electron
@@ -169,7 +194,7 @@ machine_evidence:
     targeted_regressions_added: 6
     review_threads_resolved: 6
     post_repair_hosted_actions: hosted_ci_unavailable_nonblocking
-    post_repair_local_suite: not_run_in_current_chat_runtime
+    post_repair_local_suite: not_run_in_prior_chat_runtime
     exception_receipt: docs/programme/RUN_RECEIPT-CW-F1-COMPILE-SPIKE-005-REVIEW-DELTA.md
   F1_adversarial_closure:
     run_id: CW-F1-ARCH-CLOSURE-006
@@ -178,30 +203,7 @@ machine_evidence:
     critical_contradictions_open: 0
     PR_15_blocking_findings_repaired: 2
     PR_15_review_threads_resolved: 2
-    result: ready_for_human_F1_gate
-    fresh_repo_validation: not_run
-
-F1_blockers:
-  - issue: 3
-    state: closed
-    outcome: Electron_selected_for_F2_scaffold_with_explicit_revisit_triggers
-  - issue: 4
-    state: closed
-    outcome: CodeMirror_6_selected_for_F2_scaffold_with_explicit_physical_vetoes
-  - issue: 5
-    state: closed
-    outcome: Workbench_owned_plan_AST_with_Pandoc_3_10_1_as_pinned_DOCX_EPUB_adapter
-  - issue: 7
-    state: closed
-    unresolved_nonblocking_limitation: SRC_DR_001_final_report_attachment_not_retrievable_for_exact_historical_spans
-  - contradiction: CON-003
-    state: resolved_F1
-    outcome: Mutation_Envelope_sole_canonical_application_authority
-  - gate_review: F1_adversarial_architecture_closure
-    state: complete_and_promoted
-    outcome: ready_for_human_decision
-  - human_decision: F1_Architecture_Coherent
-    state: pending
+    result: accepted_by_human_owner
 
 open_critical_contradictions: []
 
@@ -215,6 +217,7 @@ deferred_nonblocking_decisions:
   - Pandoc_distribution_licensing_signing_security_update_policy
 
 known_gaps:
+  - local_validation_receipt_not_yet_obtained_for_promoted_substrate
   - exact_historical_SRC_DR_001_spans_unresolved_with_explicit_source_unavailable_reason
   - benchmark_user_sentiment_switching_fatigue_and_accessibility_not_established_by_vendor_docs
   - shell_physical_IME_and_assistive_technology_controls_not_yet_run
@@ -227,17 +230,15 @@ known_gaps:
   - Pandoc_distribution_licensing_signing_security_update_policy_not_yet_completed
   - mutation_envelope_execution_and_autosave_latency_not_yet_tested
   - single_file_atomic_replacement_and_multi_file_crash_recovery_not_yet_tested_on_supported_platforms
-  - post_review_compile_v0_2_local_suite_not_yet_executed_in_a_repository_checkout
   - annotation_log_storage_model_not_yet_executably_validated
   - no_professional_writer_assay_has_run
 
 closure_posture: >-
-  F1 machine/adversarial closure is promoted on main through PR #15. The compile decision is canonical,
-  the Mutation Envelope is the sole canonical application authority, Compendium canon state is owned only by
-  claim_record.canon_state, volatile user state is noncanonical, typed UUIDv7 is the accepted identity model,
-  and annotation storage authority remains explicitly deferred. The higher-order atomicity law now matches the
-  filesystem guarantees actually claimed: atomic single-file replacement where supported and recovery-backed
-  multi-file consistency otherwise. Hosted GitHub Actions is non-gating and manual-only. No fresh local closure
-  execution is claimed because the current runtime lacks a repository checkout. The project is now waiting only
-  for the explicit human F1 gate decision. If approved, the first F2 action is a passing local
-  tools/local_validate.py --suite all receipt before executable-substrate reliance.
+  F1 Architecture Coherent is accepted by the human owner. The project has entered F2 Substrate Executable.
+  The accepted architecture remains Electron plus CodeMirror 6, Manifest-owned assembly, Constellation-owned
+  compile plan and Workbench AST, typed UUIDv7 identity, Mutation Envelope canonical application, recovery-backed
+  multi-file consistency, noncanonical local user state, and Claim-owned Compendium canon state. Hosted GitHub
+  Actions remains non-gating. F2 begins with a local deterministic validation receipt and issue #6. The current
+  chat runtime attempted to obtain a repository checkout but outbound DNS could not resolve github.com, so that
+  local gate is recorded as infrastructure-blocked rather than passed or failed. Executable-substrate reliance
+  remains prohibited until a real checkout produces a passing local receipt.
