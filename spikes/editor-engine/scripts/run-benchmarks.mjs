@@ -1,13 +1,15 @@
 import { chromium } from "playwright";
 import { spawn } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 import process from "node:process";
 
 const platformArg = process.argv.find((arg) => arg.startsWith("--platform="));
 const platform = platformArg ? platformArg.split("=")[1] : process.platform;
 const port = 4174;
+const spikeRoot = fileURLToPath(new URL("..", import.meta.url));
 const server = spawn(process.platform === "win32" ? "npx.cmd" : "npx", ["vite", "preview", "--host", "127.0.0.1", "--port", String(port)], {
-  cwd: new URL("..", import.meta.url),
+  cwd: spikeRoot,
   stdio: ["ignore", "pipe", "pipe"]
 });
 
