@@ -1,0 +1,25 @@
+{
+  "name": "cw-editor-engine-spike",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "benchmark": "node scripts/run-benchmarks.mjs",
+    "test": "node --test scripts/unit.test.mjs"
+  },
+  "dependencies": {
+    "@codemirror/commands": "^6.8.1",
+    "@codemirror/lang-markdown": "^6.3.2",
+    "@codemirror/state": "^6.5.2",
+    "@codemirror/view": "^6.38.1",
+    "playwright": "^1.54.2",
+    "prosemirror-commands": "^1.7.1",
+    "prosemirror-history": "^1.4.1",
+    "prosemirror-keymap": "^1.2.3",
+    "prosemirror-markdown": "^1.13.2",
+    "prosemirror-model": "^1.25.3",
+    "prosemirror-state": "^1.4.3",
+    "prosemirror-view": "^1.40.1",
+    "vite": "^7.1.3"
+  }
+}

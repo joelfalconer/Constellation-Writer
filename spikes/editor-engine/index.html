@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Constellation Writer Editor Engine Spike</title>
+</head>
+<body>
+  <div id="app-shell">
+    <aside id="navigator" aria-label="Navigator">Navigator control</aside>
+    <main id="main-surface">
+      <header id="toolbar" aria-label="Editor controls">
+        <button id="draft-mode" type="button">Draft</button>
+        <button id="revise-mode" type="button">Revise</button>
+        <button id="toggle-pane" type="button">Toggle pane</button>
+        <button id="toggle-typewriter" type="button">Typewriter</button>
+        <span id="status" aria-live="polite"></span>
+      </header>
+      <section id="editor-frame" aria-label="Writing surface">
+        <div id="editor-host"></div>
+      </section>
+    </main>
+    <aside id="inspector" aria-label="Inspector">Revision controls</aside>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

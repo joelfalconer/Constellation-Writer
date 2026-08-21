@@ -1,0 +1,123 @@
+schema: cw_editor_engine_results_summary_v1
+run_id: CW-F1-EDITOR-SPIKE-004
+status: measured_decision_candidate
+measured_head: fbe91cf91ae5122887768d8469a99d744277fb6d
+measured_at: 2026-08-21
+workflow:
+  editor_engine:
+    run_id: 32460827533
+    conclusion: success
+    matrix_jobs: 2
+  foundation_validation:
+    run_id: 32460827551
+    conclusion: success
+artifacts:
+  Windows:
+    artifact_id: 9438891488
+    digest: sha256:68daf976fe6e08d264f071173a3e064d1fe0e1a52afdca666c36345eec5363e8
+  macOS:
+    artifact_id: 9438883335
+    digest: sha256:a7fe1cddc5357ea9c0286d270b5ce917cb75ec441d1883e8dcb2fcc95a8fef0c
+resolved_versions:
+  codemirror:
+    commands: 6.11.0
+    lang_markdown: 6.5.2
+    state: 6.7.1
+    view: 6.43.9
+  prosemirror:
+    commands: 1.7.2
+    history: 1.5.0
+    keymap: 1.2.3
+    markdown: 1.13.6
+    model: 1.25.11
+    state: 1.4.4
+    view: 1.42.2
+  playwright: 1.62.1
+  vite: 7.3.6
+  chromium: 151.0.7922.34
+fixture:
+  words: 50446
+  mixed_script: [Japanese, Arabic, Hebrew, English]
+measurements:
+  Windows:
+    codemirror6:
+      canonical_source_exact_at_mount: true
+      overlay_removal_preserves_source: true
+      undo_round_trip_exact: true
+      return_token_scroll_drift_px: 0
+      keystroke_p95_ms: 17.6
+      cursor_p95_ms: 18.2
+      selection_p95_ms: 18.2
+      pane_toggle_p95_ms: 17.5
+    prosemirror:
+      canonical_longform_round_trip_exact: true
+      source_fidelity_fixture_exact_round_trip: false
+      overlay_removal_preserves_source: true
+      undo_round_trip_exact: true
+      return_token_scroll_drift_px: 0
+      keystroke_p95_ms: 17.5
+      cursor_p95_ms: 18.0
+      selection_p95_ms: 18.0
+      pane_toggle_p95_ms: 17.6
+  macOS:
+    codemirror6:
+      canonical_source_exact_at_mount: true
+      overlay_removal_preserves_source: true
+      undo_round_trip_exact: true
+      return_token_scroll_drift_px: 0
+      keystroke_p95_ms: 19.9
+      cursor_p95_ms: 33.5
+      selection_p95_ms: 33.1
+      pane_toggle_p95_ms: 20.5
+    prosemirror:
+      canonical_longform_round_trip_exact: true
+      source_fidelity_fixture_exact_round_trip: false
+      overlay_removal_preserves_source: true
+      undo_round_trip_exact: true
+      return_token_scroll_drift_px: 0
+      keystroke_p95_ms: 20.6
+      cursor_p95_ms: 34.8
+      selection_p95_ms: 33.3
+      pane_toggle_p95_ms: 18.4
+hard_gate_state:
+  codemirror_exact_source: pass
+  codemirror_overlay_nonmutation: pass
+  codemirror_undo_round_trip: pass
+  codemirror_return_token_scroll_stability: pass
+  bounded_50k_renderer: pass
+  rival_executed: pass
+  physical_IME: unmeasured_veto
+  assistive_technology: unmeasured_veto
+  physical_bidi_caret_selection: unmeasured_veto
+  six_hour_writer_assay: unmeasured_veto
+  representative_hardware_budget: unmeasured_revisit
+warnings:
+  - macOS hosted-runner cursor and selection p95 observations slightly exceed the current 32 ms maximum target for both engines
+  - hosted-runner frame observations are not product SLO proof
+  - synthetic composition events are not real IME evidence
+  - DOM accessibility semantics are not screen-reader traversal evidence
+  - ProseMirror Markdown parse/serialize normalizes the dedicated source-fidelity fixture
+preserved_failures:
+  - run: 32460543378
+    platform: Windows
+    failure: Node_24_spawn_EINVAL_starting_preview_process
+  - run: 32460687987
+    platform: Windows
+    failure: Node_24_spawn_EINVAL_persisted_after_URL_to_path_cwd_fix
+  - repair: launch Vite through process.execPath and absolute vite.js path
+selection:
+  primary: CodeMirror_6
+  scope: F2_editor_scaffold
+  rival_retained: ProseMirror
+  rationale:
+    - exact plain-text source sovereignty
+    - revision decorations do not mutate source
+    - correct undo and return-token behavior in bounded controls
+    - no material hosted-runner latency advantage for the structured rival
+    - ProseMirror introduces observable Markdown source-normalization pressure
+  mandatory_revisit:
+    - physical_IME_or_composition_failure
+    - VoiceOver_Narrator_NVDA_failure
+    - bidi_caret_or_selection_failure
+    - representative_hardware_latency_budget_failure
+    - six_hour_writer_assay_reveals_editor_fatigue_or_native_feel_failure
