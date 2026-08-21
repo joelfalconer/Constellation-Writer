@@ -1,4 +1,4 @@
-version: 0.2.0
+version: 0.3.0
 status: candidate_F1_machine_closure
 updated_at: 2026-08-22
 
@@ -44,7 +44,7 @@ authorities:
     relation: relation_record
     claim: claim_record
     evidence: evidence_record
-    canon_state: canon_state_record_or_claim_field_per_final_schema
+    canon_state: claim_record.canon_state
 
   mutation:
     proposal_and_review: patch_session_when_review_bearing
@@ -65,5 +65,6 @@ authorities:
 acceptance_notes:
   - manifest inclusion is canonical assembly membership; a compile profile may only select an explicit output projection
   - semantic role is a manifest placement property; compile profiles map roles to target treatment rather than redefining them
+  - Compendium canon state is an intrinsic property of the atomic Claim and is stored only on the Claim record; no separate canon-state record exists in the F1 model
   - PatchSession may carry proposals and review decisions but cannot become a second transaction engine
   - Recovery preserves rollback and restore material; restoration itself is a governed mutation
