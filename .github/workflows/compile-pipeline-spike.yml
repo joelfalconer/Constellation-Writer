@@ -1,0 +1,109 @@
+name: Compile pipeline spike
+
+on:
+  pull_request:
+    paths:
+      - 'spikes/compile-pipeline/**'
+      - 'docs/decisions/ADR-0006-compile-pipeline-pandoc-adapter.md'
+      - 'docs/specifications/compile-contract-v0.2.md'
+      - 'docs/specifications/manuscript-manifest-v0.2.md'
+      - 'contracts/compile/compile-profile.schema.json'
+      - 'docs/delivery/RUN_PROMPT-05-COMPILE_PIPELINE_SPIKE.md'
+      - '.github/workflows/compile-pipeline-spike.yml'
+  workflow_dispatch:
+
+jobs:
+  compile-spike:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install repository validation dependencies
+        run: python -m pip install -r tools/validator/requirements.txt
+
+      - name: Run compile golden and negative controls
+        run: python -m unittest discover -s spikes/compile-pipeline -p 'test_*.py' -v
+
+      - name: Compile reference manuscript twice without adapters
+        run: |
+          python spikes/compile-pipeline/compile_spike.py compile \
+            --project fixtures/reference-novel \
+            --manifest manuscripts/main.manuscript.yml \
+            --profile compile/profiles/draft-html.compile.yml \
+            --out build/compile-spike/repeat-a
+          python spikes/compile-pipeline/compile_spike.py compile \
+            --project fixtures/reference-novel \
+            --manifest manuscripts/main.manuscript.yml \
+            --profile compile/profiles/draft-html.compile.yml \
+            --out build/compile-spike/repeat-b
+          python spikes/compile-pipeline/compile_spike.py compare \
+            --left build/compile-spike/repeat-a \
+            --right build/compile-spike/repeat-b \
+            --out build/compile-spike/direct-repeat-comparison.json
+
+      - name: Install verified Pandoc 3.10.1 and 3.9.0.2 controls
+        run: |
+          set -euo pipefail
+          mkdir -p build/pandoc-downloads build/pandoc/3.10.1 build/pandoc/3.9.0.2
+
+          curl --fail --location --retry 3 \
+            -o build/pandoc-downloads/pandoc-3.10.1-linux-amd64.tar.gz \
+            https://github.com/jgm/pandoc/releases/download/3.10.1/pandoc-3.10.1-linux-amd64.tar.gz
+          echo '72948bf5784f560d5ad1876709daca27e0667f262da727bb33f77b58e52df2f5  build/pandoc-downloads/pandoc-3.10.1-linux-amd64.tar.gz' | sha256sum --check --strict
+          tar -xzf build/pandoc-downloads/pandoc-3.10.1-linux-amd64.tar.gz \
+            -C build/pandoc/3.10.1 --strip-components=1
+
+          curl --fail --location --retry 3 \
+            -o build/pandoc-downloads/pandoc-3.9.0.2-linux-amd64.tar.gz \
+            https://github.com/jgm/pandoc/releases/download/3.9.0.2/pandoc-3.9.0.2-linux-amd64.tar.gz
+          echo 'a69abfababda8a56969a254b09f9553a7be89ddec00d4e0fe9fd585d71a67508  build/pandoc-downloads/pandoc-3.9.0.2-linux-amd64.tar.gz' | sha256sum --check --strict
+          tar -xzf build/pandoc-downloads/pandoc-3.9.0.2-linux-amd64.tar.gz \
+            -C build/pandoc/3.9.0.2 --strip-components=1
+
+          build/pandoc/3.10.1/bin/pandoc --version | head -n 1
+          build/pandoc/3.9.0.2/bin/pandoc --version | head -n 1
+
+      - name: Run pinned current and prior Pandoc adapter controls
+        run: |
+          python spikes/compile-pipeline/compile_spike.py compile \
+            --project fixtures/reference-novel \
+            --manifest manuscripts/main.manuscript.yml \
+            --profile compile/profiles/draft-html.compile.yml \
+            --out build/compile-spike/pandoc-3.10.1 \
+            --pandoc "$GITHUB_WORKSPACE/build/pandoc/3.10.1/bin/pandoc"
+          python spikes/compile-pipeline/compile_spike.py compile \
+            --project fixtures/reference-novel \
+            --manifest manuscripts/main.manuscript.yml \
+            --profile compile/profiles/draft-html.compile.yml \
+            --out build/compile-spike/pandoc-3.9.0.2 \
+            --pandoc "$GITHUB_WORKSPACE/build/pandoc/3.9.0.2/bin/pandoc"
+          python spikes/compile-pipeline/compile_spike.py compare \
+            --left build/compile-spike/pandoc-3.10.1 \
+            --right build/compile-spike/pandoc-3.9.0.2 \
+            --out build/compile-spike/pandoc-version-comparison.json \
+            --require-adapter-semantics
+
+      - name: Exercise explicit adapter failure fallback
+        run: |
+          python spikes/compile-pipeline/compile_spike.py compile \
+            --project fixtures/reference-novel \
+            --manifest manuscripts/main.manuscript.yml \
+            --profile compile/profiles/draft-html.compile.yml \
+            --out build/compile-spike/adapter-unavailable \
+            --pandoc "$GITHUB_WORKSPACE/build/not-a-pandoc-binary"
+          test -s build/compile-spike/adapter-unavailable/compile-plan.json
+          test -s build/compile-spike/adapter-unavailable/output.md
+          test -s build/compile-spike/adapter-unavailable/output.html
+          test -s build/compile-spike/adapter-unavailable/source-map.json
+
+      - name: Preserve compile decision evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: compile-pipeline-spike-evidence
+          path: build/compile-spike/**
+          if-no-files-found: error
