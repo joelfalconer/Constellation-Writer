@@ -1,8 +1,8 @@
 project_id: constellation_writer
 project_name: Constellation Writer
 repository: joelfalconer/Constellation-Writer
-status: F0_accepted_F1_editor_decision_candidate
-phase: F1_architecture_coherence_evidence_and_spikes
+status: F0_accepted_F1_compile_review_repaired
+phase: F1_architecture_coherence_closure_preparation
 updated_at: 2026-08-21
 
 product_identity: local_first_professional_writing_workbench
@@ -11,14 +11,24 @@ core_promise: calm_editor_brutal_recall_governed_transformation
 canonical_branch: main
 canonical_foundation_merge: 1f01da3c76611d9ad9b1b297c2b8f265a91a6daa
 canonical_F1_stack_merge: bc422e5bf0b6e5e668c3cead1f82e9b8c269a99c
-active_editor_spike_branch: spike/editor-engine-decision
-active_editor_spike_PR: 13
+canonical_editor_decision_merge: d24a6dff4a97d1a1ad3437c3f33abbae43978409
+active_compile_spike_branch: spike/compile-pipeline-decision
+active_compile_spike_PR: 14
 foundation_pull_request: 1
 foundation_issue: 2
 technology_spikes: [3, 4, 5]
 evidence_lineage_issue: 7
 vertical_slice_issue: 6
 professional_assay_issue: 8
+
+validation_runtime_policy:
+  primary: local_deterministic_runner
+  command: python tools/local_validate.py --suite all
+  receipt: build/local-validation-receipt.json
+  github_actions: optional_manual_replication_only
+  github_actions_quota_unavailable_is_failure: false
+  automatic_actions_triggers: disabled_candidate_PR_14
+  policy: docs/validation/LOCAL_VALIDATION_POLICY.md
 
 completed:
   - F0_Project_Defined_accepted
@@ -34,33 +44,43 @@ completed:
   - expanded_reference_novel_fixture_machine_checked
   - foundation_validator_v0_2
   - negative_contract_tests
-  - validation_CI_workflow
   - validation_assays_and_failure_matrices
-  - compile_golden_case_definitions
-  - failure_injection_scenario_definitions
-  - technology_ADR_candidates
   - engineering_and_release_governance
   - foundation_completion_audit
   - F1_post_merge_reconciliation_PR_10_merged
   - issue_7_evidence_refresh_PR_11_merged_and_issue_closed
   - issue_3_shell_spike_PR_12_promoted_and_issue_closed
   - ADR_0004_Electron_selected_for_F2_scaffold
-  - issue_4_CodeMirror_ProseMirror_equivalent_bounded_controls
-  - issue_4_windows_macos_50k_editor_measurement_run
-  - issue_4_source_fidelity_rival_control
-  - issue_4_ADR_0005_CodeMirror_selected_for_F2_scaffold_candidate
+  - issue_4_editor_spike_PR_13_merged_and_issue_closed
+  - ADR_0005_CodeMirror_6_selected_for_F2_scaffold
+  - issue_5_compile_golden_and_negative_controls_13_of_13_pass_at_evidence_head
+  - issue_5_repeated_frozen_compile_equivalence_at_evidence_head
+  - issue_5_Pandoc_3_10_1_and_3_9_0_2_verified_adapter_controls
+  - issue_5_DOCX_EPUB_semantic_version_comparison
+  - issue_5_adapter_failure_preserves_constellation_fallbacks
+  - issue_5_ADR_0006_Workbench_plan_AST_plus_Pandoc_adapter_candidate
+  - issue_5_compile_authority_contract_reconciliation_candidate
+  - issue_5_six_P1_review_findings_repaired_in_compile_spike_v0_2
+  - issue_5_six_targeted_regression_tests_added
+  - issue_5_all_review_threads_resolved
+  - local_first_validation_runner_added
+  - hosted_Actions_changed_to_manual_optional_replication_candidate
+  - Actions_quota_unavailability_removed_as_project_gate_candidate
 
 in_progress:
-  - issue_4_editor_spike_PR_13_review_and_merge
-  - technology_spike_5_compile_architecture
+  - issue_5_compile_spike_PR_14_promotion
   - F1_CON_003_mutation_ownership_confirmation
   - F1_adversarial_architecture_review_after_spikes
+  - F1_clean_promotion_validation
+  - F1_human_gate_decision
 
 queued_after_F1:
   - durable_substrate_vertical_slice_issue_6
+  - F2_first_local_validation_receipt_for_promoted_substrate
   - F2_physical_shell_IME_accessibility_and_real_hardware_budget_controls
   - F2_physical_editor_IME_bidi_accessibility_native_interaction_controls
   - F2_representative_hardware_editor_latency_replication
+  - F2_compile_plan_AST_production_parser_and_adapter_packaging
   - F2_failure_injection_against_executable_substrate
   - later_professional_writer_assay_issue_8
 
@@ -77,27 +97,40 @@ following_gate:
 machine_evidence:
   editor_spike_decision_run:
     run_id: 32460827533
-    head_sha: fbe91cf91ae5122887768d8469a99d744277fb6d
     conclusion: success
-    windows: pass
-    macos: pass
-    windows_artifact: 9438891488
-    windows_digest: sha256:68daf976fe6e08d264f071173a3e064d1fe0e1a52afdca666c36345eec5363e8
-    macos_artifact: 9438883335
-    macos_digest: sha256:a7fe1cddc5357ea9c0286d270b5ce917cb75ec441d1883e8dcb2fcc95a8fef0c
-  editor_spike_foundation_validation:
-    run_id: 32460827551
-    head_sha: fbe91cf91ae5122887768d8469a99d744277fb6d
+    decision: CodeMirror_6_for_F2_scaffold
+  editor_final_head_validation:
+    foundation_run: 32461402976
+    editor_run: 32461403096
     conclusion: success
-  editor_decision: CodeMirror_6_for_F2_scaffold
-  editor_residual_veto_tests:
-    - physical_IME
-    - VoiceOver_Narrator_NVDA
-    - physical_bidi_caret_selection
-    - high_contrast_200_percent_zoom
-    - native_clipboard_drag_platform_text_services
-    - six_hour_writer_assay
-    - representative_hardware_latency
+  compile_spike_decision_run:
+    run_id: 32468472581
+    evidence_head: 68c4fc6564d8294c683211e3319025942da7666d
+    conclusion: success
+    golden_and_negative_tests: 13
+    golden_and_negative_passed: 13
+    artifact_id: 9441576333
+    artifact_digest: sha256:75c5018dcb748f0e2a843445955068cf359f9c6f9872a0a047e69b22eee68b34
+    direct_repeat_equivalence: true
+    pandoc_current: 3.10.1
+    pandoc_prior: 3.9.0.2
+    docx_semantic_equal: true
+    docx_byte_equal: true
+    epub_semantic_equal: true
+    epub_byte_equal: false
+    adapter_failure_fallback: pass
+  compile_spike_foundation_validation:
+    run_id: 32468472562
+    conclusion: success
+  compile_post_review_delta:
+    implementation_version: 0.2.0
+    review_findings_repaired: 6
+    targeted_regressions_added: 6
+    review_threads_resolved: 6
+    post_repair_hosted_actions: hosted_ci_unavailable_nonblocking
+    post_repair_local_suite: not_run_in_current_chat_runtime
+    exception_receipt: docs/programme/RUN_RECEIPT-CW-F1-COMPILE-SPIKE-005-REVIEW-DELTA.md
+  compile_decision: Workbench_owned_plan_AST_with_Pandoc_3_10_1_output_adapter_for_F2
 
 F1_blockers:
   - issue: 3
@@ -106,13 +139,13 @@ F1_blockers:
     outcome: Electron_selected_for_F2_scaffold_with_explicit_revisit_triggers
   - issue: 4
     decision: professional_prose_editor_engine
-    owner: joelfalconer
-    state: closure_ready_when_PR_13_is_reviewed_and_merged
+    state: closed
     outcome: CodeMirror_6_selected_for_F2_scaffold_with_explicit_physical_vetoes
   - issue: 5
     decision: Workbench_AST_and_Pandoc_adapter_boundary
     owner: joelfalconer
-    state: open
+    state: promotion_ready_under_recorded_post_review_validation_exception
+    outcome: Workbench_owned_plan_AST_with_Pandoc_3_10_1_as_pinned_DOCX_EPUB_adapter
   - issue: 7
     decision: evidence_lineage_and_benchmark_refresh
     state: closed
@@ -120,6 +153,10 @@ F1_blockers:
   - contradiction: CON-003
     topic: mutation_ownership
     state: candidate_resolution_pending_F1_confirmation
+  - gate_review: F1_adversarial_architecture_closure
+    state: pending_after_PR_14_promotion
+  - human_decision: F1_Architecture_Coherent
+    state: pending
 
 known_gaps:
   - exact_historical_SRC_DR_001_spans_unresolved_with_explicit_source_unavailable_reason
@@ -127,15 +164,23 @@ known_gaps:
   - shell_physical_IME_and_assistive_technology_controls_not_yet_run
   - editor_physical_IME_bidi_accessibility_and_six_hour_controls_not_yet_run
   - editor_macos_cursor_selection_hosted_p95_slightly_above_32ms_target_for_both_controls
+  - compile_spike_parser_is_not_production_markdown_parser
+  - final_Workbench_AST_schema_and_citation_bibliography_boundary_not_locked
+  - binary_DOCX_EPUB_source_map_is_semantic_segment_level_not_byte_addressed
+  - professional_DOCX_EPUB_accessibility_and_style_fidelity_not_yet_assayed
+  - Pandoc_distribution_licensing_signing_security_update_policy_not_yet_completed
   - compile_recovery_and_mutation_are_not_executable_product_services
-  - ADR_0006_is_proposed_not_accepted
+  - post_review_compile_v0_2_local_suite_not_yet_executed_in_a_repository_checkout
   - no_professional_writer_assay_has_run
 
 closure_posture: >-
-  F0 and the PR10/PR11/PR12 F1 stack are promoted to main. Issue #3 and issue #7 are closed.
-  Issue #4 now has equivalent CodeMirror 6 and ProseMirror controls, a clean Windows/macOS decision
-  run, explicit source-fidelity evidence, and ADR-0005 selects CodeMirror 6 for the F2 editor scaffold
-  while carrying physical IME/bidi/accessibility, six-hour writer, native-interaction, and representative
-  hardware latency controls forward. F1 remains conditional_not_ready until PR #13 is reviewed/merged,
-  issue #5 is resolved, CON-003 is adjudicated, adversarial closure passes, promotion validation is clean,
-  and human F1 approval is recorded.
+  F0 is accepted. Issues #3, #4, and #7 are closed and their promoted decisions select Electron and
+  CodeMirror 6 for the F2 shell/editor scaffold. Issue #5 has prior executed architecture evidence for
+  deterministic compile planning, current/prior Pandoc adapter comparison and adapter-failure fallback.
+  Independent review then found six implementation-fidelity defects; all six are repaired in spike v0.2,
+  each has a targeted regression test, and all six review threads are resolved. Hosted Actions quota is now
+  explicitly non-gating: workflows are retained as manual recipes while deterministic repository validation
+  moves to tools/local_validate.py. The v0.2 post-review suite is not claimed as executed in the current chat
+  runtime and is carried to F2 as the first executable-substrate receipt. F1 remains conditional_not_ready
+  until PR #14 is promoted, CON-003 is adjudicated, adversarial closure completes, and the human F1 gate
+  decision is recorded.

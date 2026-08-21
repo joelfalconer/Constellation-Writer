@@ -2,18 +2,63 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://constellation-writer.local/contracts/compile/compile-profile.schema.json",
   "title": "Compile Profile",
+  "description": "Target-format projection and rendering policy. Manuscript assembly order, membership and semantic role remain owned by the Manuscript Manifest.",
   "type": "object",
   "required": ["id", "schema_version", "name", "target", "manuscript_id", "output"],
   "properties": {
     "id": {"$ref": "../common/identifier.schema.json#/$defs/CompileProfileId"},
     "schema_version": {"type": "string"},
     "name": {"type": "string"},
+    "description": {"type": "string"},
     "target": {"enum": ["markdown", "html", "docx", "epub", "pdf", "fountain"]},
     "manuscript_id": {"$ref": "../common/identifier.schema.json#/$defs/ManuscriptId"},
-    "output": {"type": "object", "required": ["path"], "properties": {"path": {"type": "string"}, "standalone": {"type": "boolean"}}, "additionalProperties": true},
+    "scope": {
+      "type": "object",
+      "description": "Explicit export projection over already-included Manifest placements. Scope does not mutate assembly membership or semantic role.",
+      "properties": {
+        "include_roles": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "exclude_roles": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "include_placement_ids": {
+          "type": "array",
+          "items": {"$ref": "../common/identifier.schema.json#/$defs/PlacementId"},
+          "uniqueItems": true
+        },
+        "exclude_placement_ids": {
+          "type": "array",
+          "items": {"$ref": "../common/identifier.schema.json#/$defs/PlacementId"},
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "output": {
+      "type": "object",
+      "required": ["path"],
+      "properties": {
+        "path": {"type": "string"},
+        "standalone": {"type": "boolean"}
+      },
+      "additionalProperties": true
+    },
     "include_comments": {"type": "boolean"},
-    "fail_on": {"type": "array", "items": {"type": "string"}},
-    "role_transforms": {"type": "object"}
+    "fail_on": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "role_transforms": {
+      "type": "object",
+      "description": "Maps Manifest-owned semantic roles to target-format treatment. Keys do not redefine the role itself.",
+      "additionalProperties": true
+    }
   },
+  "allOf": [
+    {
+      "not": {
+        "anyOf": [
+          {"required": ["assembly_overrides"]},
+          {"required": ["order_overrides"]},
+          {"required": ["membership_overrides"]},
+          {"required": ["role_overrides"]}
+        ]
+      }
+    }
+  ],
   "additionalProperties": true
 }
