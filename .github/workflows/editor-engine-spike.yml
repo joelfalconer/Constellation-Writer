@@ -1,12 +1,8 @@
 name: Editor engine spike
 
+# Hosted GitHub Actions is optional replication only and must not gate progress.
+# Reuse this workflow manually if hosted Windows/macOS capacity is available.
 on:
-  pull_request:
-    paths:
-      - 'spikes/editor-engine/**'
-      - 'docs/decisions/ADR-0005-editor-engine-codemirror-6.md'
-      - 'docs/delivery/RUN_PROMPT-04-EDITOR_ENGINE_SPIKE.md'
-      - '.github/workflows/editor-engine-spike.yml'
   workflow_dispatch:
 
 jobs:
