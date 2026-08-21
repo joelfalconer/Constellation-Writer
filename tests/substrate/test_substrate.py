@@ -1,7 +1,10 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
+import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -24,6 +27,7 @@ from packages.mutation.core import (
     apply_operation_plan,
     apply_text_mutation,
     move_canonical_file,
+    reconcile_incomplete_operations,
     typed_uuid7,
 )
 from packages.recovery.core import (
@@ -136,6 +140,12 @@ class SubstrateTests(unittest.TestCase):
     def tearDown(self):
         self.temp.cleanup()
 
+    def child_env(self):
+        env = os.environ.copy()
+        repo = Path(__file__).resolve().parents[2]
+        env["PYTHONPATH"] = str(repo) + os.pathsep + env.get("PYTHONPATH", "")
+        return env
+
     def test_uuid7_typed(self):
         value = typed_uuid7("op")
         self.assertRegex(
@@ -176,6 +186,33 @@ class SubstrateTests(unittest.TestCase):
                 failpoint="after_temp_fsync",
             )
         self.assertEqual(find_sheet_by_id(self.root, S1).sha256, before)
+
+    def test_single_file_hard_exit_is_reconciled_as_applied(self):
+        script = "\n".join(
+            [
+                "import sys",
+                "from pathlib import Path",
+                "from packages.vault.core import find_sheet_by_id",
+                "from packages.mutation.core import apply_text_mutation",
+                "root = Path(sys.argv[1])",
+                f"sid = {S1!r}",
+                "sheet = find_sheet_by_id(root, sid)",
+                "apply_text_mutation(root, sheet.path.relative_to(root), sheet.raw_text + 'after-crash\\n', object_id=sid, object_type='sheet', intent='crash-after-replace', expected_sha256=sheet.sha256, hard_exit_after_replace=True)",
+            ]
+        )
+        child = subprocess.run(
+            [sys.executable, "-c", script, str(self.root)],
+            env=self.child_env(),
+            check=False,
+        )
+        self.assertEqual(child.returncode, 86)
+        self.assertIn("after-crash", find_sheet_by_id(self.root, S1).raw_text)
+        reconciled = reconcile_incomplete_operations(self.root)
+        self.assertEqual(len(reconciled), 1)
+        self.assertEqual(
+            reconciled[0]["application_state"], "applied_recovered_after_crash"
+        )
+        self.assertTrue((self.root / reconciled[0]["receipt_path"]).exists())
 
     def test_manifest_reorder_does_not_touch_prose(self):
         before_hashes = {
@@ -278,12 +315,49 @@ class SubstrateTests(unittest.TestCase):
         self.assertEqual(sha256_file(self.root / a), ah)
         self.assertEqual(sha256_file(self.root / b), bh)
         receipts = list((self.root / "mutations/receipts").glob("*.json"))
-        self.assertTrue(receipts)
         values = [json.loads(path.read_text()) for path in receipts]
-        failed = [value for value in values if "application_state" in value]
         self.assertTrue(
-            any(value["application_state"] == "failed_recovered" for value in failed)
+            any(
+                value.get("application_state") == "failed_recovered"
+                for value in values
+            )
         )
+
+    def test_multi_file_hard_exit_rolls_back_from_persisted_bundle(self):
+        a = Path("materials/crash-a.txt")
+        b = Path("materials/crash-b.txt")
+        (self.root / a).write_text("a0", encoding="utf-8")
+        (self.root / b).write_text("b0", encoding="utf-8")
+        ah = sha256_file(self.root / a)
+        bh = sha256_file(self.root / b)
+        script = "\n".join(
+            [
+                "import sys",
+                "from pathlib import Path",
+                "from packages.mutation.core import PlannedWrite, apply_operation_plan",
+                "from packages.vault.core import sha256_file",
+                "root = Path(sys.argv[1])",
+                "a = Path('materials/crash-a.txt')",
+                "b = Path('materials/crash-b.txt')",
+                f"pid = {P1!r}",
+                "apply_operation_plan(root, [PlannedWrite(a.as_posix(), pid, 'material', b'a1', sha256_file(root / a)), PlannedWrite(b.as_posix(), pid, 'material', b'b1', sha256_file(root / b))], intent='hard-crash', hard_exit_after_applies=1)",
+            ]
+        )
+        child = subprocess.run(
+            [sys.executable, "-c", script, str(self.root)],
+            env=self.child_env(),
+            check=False,
+        )
+        self.assertEqual(child.returncode, 87)
+        self.assertNotEqual(sha256_file(self.root / a), ah)
+        self.assertEqual(sha256_file(self.root / b), bh)
+        reconciled = reconcile_incomplete_operations(self.root)
+        self.assertEqual(len(reconciled), 1)
+        self.assertEqual(
+            reconciled[0]["application_state"], "failed_recovered_after_crash"
+        )
+        self.assertEqual(sha256_file(self.root / a), ah)
+        self.assertEqual(sha256_file(self.root / b), bh)
 
 
 if __name__ == "__main__":
