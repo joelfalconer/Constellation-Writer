@@ -61,7 +61,7 @@ acceptance_tests:
 
 Canonical Research OS v0.4.1 was loaded from `joelfalconer/research-os`.
 
-Tier 0 loaded: pipeline, profiles, methods. Tier 1 governance used: records and controls. The adversarial review profile requires source-selection audit, rival-hypothesis testing, negative controls, and governed closure. The run also behaves as an update delta over prior F1 work rather than recomputing unaffected evidence.
+Tier 0 loaded: pipeline, profiles, methods. Tier 1 loaded: records, controls, context lineage, criteria, and telemetry. The adversarial review profile requires source-selection audit, rival-hypothesis testing, negative controls, and governed closure. The run also behaves as an update delta over prior F1 work rather than recomputing unaffected evidence. Full context, control, telemetry, omission, and method lineage is preserved in `docs/programme/RUN_RECEIPT-CW-F1-ARCH-CLOSURE-006.md`.
 
 ## Evidence and coverage summary
 
@@ -79,7 +79,7 @@ The current architecture corpus is internally coherent on the F1 decisions that 
 | recovery preservation/restore mechanism | Recovery | specification + ADR-0007 boundary | accepted jurisdiction; restore applies through envelope |
 | user interaction state | local user state | canonicality rationale + ADR-0009 | accepted noncanonical |
 | durable object identity | typed UUIDv7 | invariant + ADR-0010 | accepted before persistent prototype data |
-| annotations | dedicated annotation log direction | ADR-0008 | deferred to F2 validation |
+| annotations | dedicated annotation log direction | ADR-0008 | deferred to F2 validation; not yet canonical authority |
 
 ## Named maps
 
@@ -95,9 +95,12 @@ Canonical application -> Mutation Envelope
 Recovery material -> Recovery service
 Mutation outcome history -> mutation event log
 Cursor/scroll/panes/recent context -> local user state
+Annotations -> authority deferred pending F2 executable assay
 ```
 
 The prior stale authority entry `manuscript_manifest_with_compile_profile_override` has been removed. Manifest membership is now canonical; a profile may select an explicit export projection but cannot mutate assembly semantics.
+
+The closure delta also caught a second authority-overreach during self-review: the Canonicality Matrix had temporarily named `annotation_log` as canonical despite ADR-0008 being deferred. That row was removed and annotations are now explicitly represented under deferred authority until F2 storage/reanchor/sync/compaction assays pass.
 
 ### Dependency map
 
@@ -183,7 +186,7 @@ The material uncertainties are execution and product-quality uncertainties, not 
 
 **Counterexample:** file-count, sync conflicts, split/merge re-anchoring and compaction are precisely the behavior that has not been exercised.
 
-**Disposition:** do not overclaim. Preserve ADR-0008 direction but defer acceptance to F2 evidence.
+**Disposition:** do not overclaim. Preserve ADR-0008 direction but defer acceptance to F2 evidence. The Canonicality Matrix must not name an annotation canonical owner until that decision is accepted.
 
 ## Hard-gate results
 
@@ -195,6 +198,7 @@ derived_store_required_for_project_truth: false
 AI_direct_canonical_write_authority: false
 user_state_canonical_churn: false
 identity_depends_on_title_path_or_placement: false
+deferred_annotation_storage_presented_as_canonical: false
 hosted_CI_required_for_project_validity: false
 unexecuted_validation_claimed_passed: false
 human_F1_decision_fabricated: false
