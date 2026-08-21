@@ -1,5 +1,6 @@
-version: 0.2.0
-status: candidate
+version: 0.3.0
+status: candidate_F1_machine_closure
+updated_at: 2026-08-22
 classes:
   canonical_state: current_durable_project_truth
   canonical_event: durable_history_or_governance_truth
@@ -10,24 +11,33 @@ entries:
   - {state: sheet_identity, owner: sheet_frontmatter, class: canonical_state, mirrors: [sqlite_catalog]}
   - {state: sheet_prose, owner: sheet_markdown_body, class: canonical_state, mirrors: [editor_buffer, full_text_index]}
   - {state: sheet_local_metadata, owner: sheet_sidecar, class: canonical_state, mirrors: [sqlite_catalog]}
-  - {state: annotations, owner: annotation_log, class: canonical_state, mirrors: [sqlite_catalog]}
+  - {state: annotations, owner: annotation_log, class: canonical_state, mirrors: [sqlite_catalog], validation_state: deferred_F2_storage_validation}
   - {state: manuscript_identity, owner: manuscript_manifest, class: canonical_state, mirrors: [sqlite_catalog]}
   - {state: manuscript_order, owner: manuscript_manifest, class: canonical_state, mirrors: [binder_projection, sqlite_catalog]}
+  - {state: manuscript_assembly_membership, owner: manuscript_manifest, class: canonical_state, mirrors: [compile_plan, sqlite_catalog]}
   - {state: manuscript_placement, owner: manuscript_manifest_node, class: canonical_state, mirrors: [sqlite_catalog]}
   - {state: compile_profile, owner: compile_profile_file, class: canonical_state, mirrors: [compile_cache]}
+  - {state: compile_plan, owner: frozen_compile_plan_artifact, class: derived, mirrors: []}
+  - {state: compile_workbench_ast, owner: workbench_ast_artifact, class: derived, mirrors: []}
   - {state: entity, owner: entity_record, class: canonical_state, mirrors: [sqlite_catalog, graph_projection]}
   - {state: claim, owner: claim_record, class: canonical_state, mirrors: [sqlite_catalog, graph_projection]}
   - {state: evidence, owner: evidence_record, class: canonical_state, mirrors: [sqlite_catalog]}
-  - {state: transformation_history, owner: mutation_and_patch_logs, class: canonical_event, mirrors: [sqlite_catalog]}
+  - {state: patch_review_history, owner: patch_session, class: canonical_event, mirrors: [sqlite_catalog]}
+  - {state: mutation_outcome_history, owner: mutation_event_log, class: canonical_event, mirrors: [sqlite_catalog]}
   - {state: migration_history, owner: migration_logs, class: canonical_event, mirrors: [sqlite_catalog]}
   - {state: snapshot_state, owner: snapshot_manifest, class: canonical_event, mirrors: [backup_status_index]}
-  - {state: conflict_resolution, owner: conflict_and_mutation_logs, class: canonical_event, mirrors: [sqlite_catalog]}
+  - {state: conflict_resolution_outcome, owner: mutation_event_log, class: canonical_event, mirrors: [sqlite_catalog]}
   - {state: publication_state, owner: publication_state_record, class: canonical_event, mirrors: [sqlite_catalog]}
   - {state: external_asset_locator, owner: asset_or_source_record, class: external_reference, mirrors: [availability_cache]}
   - {state: cursor_and_scroll, owner: local_user_state, class: ephemeral, mirrors: []}
+  - {state: pane_layout, owner: local_user_state, class: ephemeral, mirrors: []}
   - {state: recent_context, owner: local_user_state, class: ephemeral, mirrors: []}
   - {state: search_results, owner: search_index, class: derived, mirrors: []}
   - {state: graph_view, owner: graph_projection, class: derived, mirrors: []}
   - {state: semantic_index, owner: embedding_cache, class: derived, mirrors: []}
   - {state: compile_preview, owner: preview_cache, class: derived, mirrors: []}
-invariant: deleting_all_derived_and_ephemeral_state_must_not_destroy_project_truth
+invariants:
+  - deleting_all_derived_and_ephemeral_state_must_not_destroy_project_truth
+  - compile_profile_projection_must_not_change_canonical_manifest_membership
+  - patch_review_history_and_mutation_outcome_history_are_distinct_authorities
+  - recovery_artifacts_preserve_or_restore_state_but_do_not_form_a_parallel_canonical_application_path
