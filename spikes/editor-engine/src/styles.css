@@ -1,0 +1,39 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color-scheme: light dark;
+}
+* { box-sizing: border-box; }
+html, body, #app-shell { height: 100%; margin: 0; }
+body { background: Canvas; color: CanvasText; }
+#app-shell { display: grid; grid-template-columns: 220px minmax(0, 1fr) 260px; overflow: hidden; }
+#navigator, #inspector { padding: 16px; border-inline: 1px solid color-mix(in srgb, CanvasText 20%, transparent); }
+#main-surface { min-width: 0; display: grid; grid-template-rows: auto minmax(0, 1fr); }
+#toolbar { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 12px; border-bottom: 1px solid color-mix(in srgb, CanvasText 20%, transparent); }
+#toolbar button { min-height: 32px; }
+#status { margin-left: auto; }
+#editor-frame { min-height: 0; overflow: auto; }
+#editor-host { height: 100%; min-height: 0; }
+body.panes-hidden #navigator, body.panes-hidden #inspector { display: none; }
+body.panes-hidden #app-shell { grid-template-columns: minmax(0, 1fr); }
+body.panes-hidden #main-surface { grid-column: 1; }
+.ProseMirror {
+  max-width: 66ch;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 64px 40px 40vh;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.55;
+  outline: none;
+  white-space: pre-wrap;
+}
+.ProseMirror p { margin: 0 0 0.85em; }
+.revision-a { text-decoration: underline; text-decoration-thickness: 2px; }
+.revision-b { outline: 1px dotted currentColor; }
+@media (forced-colors: active) {
+  .revision-a { text-decoration-style: double; }
+  .revision-b { outline: 2px solid CanvasText; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; transition: none !important; }
+}

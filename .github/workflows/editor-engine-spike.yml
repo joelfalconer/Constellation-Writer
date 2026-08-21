@@ -1,0 +1,56 @@
+name: Editor engine spike
+
+on:
+  pull_request:
+    paths:
+      - 'spikes/editor-engine/**'
+      - 'docs/decisions/ADR-0005-editor-engine-codemirror-6.md'
+      - 'docs/delivery/RUN_PROMPT-04-EDITOR_ENGINE_SPIKE.md'
+      - '.github/workflows/editor-engine-spike.yml'
+  workflow_dispatch:
+
+jobs:
+  editor-engine:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install spike dependencies
+        working-directory: spikes/editor-engine
+        run: npm install
+      - name: Record resolved dependency graph
+        working-directory: spikes/editor-engine
+        run: |
+          mkdir -p results/raw
+          npm ls --json > "results/raw/${RUNNER_OS}-dependencies.json" || true
+      - name: Unit tests
+        working-directory: spikes/editor-engine
+        run: npm test
+      - name: Build renderer controls
+        working-directory: spikes/editor-engine
+        run: npm run build
+      - name: Install Chromium
+        working-directory: spikes/editor-engine
+        run: npx playwright install chromium
+      - name: Run bounded editor benchmarks
+        working-directory: spikes/editor-engine
+        run: npm run benchmark -- --platform=${{ runner.os }}
+      - name: Apply automated hard gates
+        working-directory: spikes/editor-engine
+        run: node scripts/evaluate-results.mjs "results/raw/${{ runner.os }}-editor-engine.json"
+      - name: Upload editor-engine evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: editor-engine-${{ runner.os }}
+          path: spikes/editor-engine/results/raw/*.json
+          if-no-files-found: error
