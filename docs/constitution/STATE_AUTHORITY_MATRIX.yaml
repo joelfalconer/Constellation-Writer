@@ -1,11 +1,14 @@
-version: 0.1.0
-status: candidate
+version: 0.2.0
+status: candidate_F1_machine_closure
+updated_at: 2026-08-22
 
 rules:
   - each_field_has_exactly_one_canonical_owner
   - mirrors_must_name_their_rebuild_source
   - ephemeral_user_state_must_not_churn_canonical_files
   - no_cache_may_overwrite_canonical_state_without_revision_validation
+  - compile_profiles_may_project_or_render_but_not_rewrite_manuscript_assembly
+  - canonical_mutation_application_has_one_owner
 
 authorities:
   sheet:
@@ -16,30 +19,51 @@ authorities:
     status: sheet_sidecar
     labels: sheet_sidecar
     goal: sheet_sidecar
-    revision: revision_service_and_logged_mutation
+    revision: revision_service_via_mutation_envelope
+
   manuscript:
     id: manuscript_manifest
     order: manuscript_manifest
     nesting: manuscript_manifest
-    inclusion: manuscript_manifest_with_compile_profile_override
+    inclusion: manuscript_manifest
     placement_title: manuscript_manifest_node
     structural_role: manuscript_manifest_node
+    semantic_break_intent: manuscript_manifest_node
+
   compile:
     profile: compile_profile_file
+    export_scope: compile_profile_scope
+    render_treatment: compile_profile_render_rules
     resolved_plan: derived_compile_plan
+    workbench_ast: derived_compile_ast
     output_source_map: compile_artifact_record
+    output_artifact: compile_artifact_record
+
   compendium:
     entity: entity_record
     relation: relation_record
     claim: claim_record
     evidence: evidence_record
     canon_state: canon_state_record_or_claim_field_per_final_schema
+
   mutation:
-    proposed_change: patch_session
-    applied_outcome: mutation_event_log
-    recovery_reference: mutation_envelope
+    proposal_and_review: patch_session_when_review_bearing
+    application_authority: mutation_envelope
+    preflight_and_revision_validation: mutation_envelope
+    resulting_revision: revision_service_via_mutation_envelope
+    applied_outcome_history: mutation_event_log
+    recovery_artifact: recovery_service
+    restore_application: mutation_envelope
+    derived_projection_invalidation: mutation_envelope_outcome
+
   user_state:
     cursor: local_user_state
     scroll: local_user_state
     pane_layout: local_user_state
     recent_items: local_user_state
+
+acceptance_notes:
+  - manifest inclusion is canonical assembly membership; a compile profile may only select an explicit output projection
+  - semantic role is a manifest placement property; compile profiles map roles to target treatment rather than redefining them
+  - PatchSession may carry proposals and review decisions but cannot become a second transaction engine
+  - Recovery preserves rollback and restore material; restoration itself is a governed mutation
