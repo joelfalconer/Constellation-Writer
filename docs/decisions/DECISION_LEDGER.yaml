@@ -1,4 +1,4 @@
-version: 0.4.0
+version: 0.5.0
 status: candidate
 updated_at: 2026-08-21
 decisions:
@@ -7,7 +7,7 @@ decisions:
   - {id: ADR-0003, title: Four-part identity model, status: proposed, file: ADR-0003-identity-model.md}
   - {id: ADR-0004, title: Electron selected as F2 desktop shell scaffold, status: accepted, file: ADR-0004-desktop-shell-tauri.md, evidence_issue: 3, evidence_run: 32085957984, fallback: Tauri_2}
   - {id: ADR-0005, title: CodeMirror 6 selected as F2 professional prose editor scaffold, status: accepted, file: ADR-0005-editor-engine-codemirror-6.md, evidence_issue: 4, evidence_run: 32460827533, fallback: ProseMirror}
-  - {id: ADR-0006, title: Workbench compile plan with Pandoc output adapter, status: proposed, file: ADR-0006-compile-pipeline-pandoc-adapter.md, evidence_issue: 5}
+  - {id: ADR-0006, title: Constellation-owned compile plan and Workbench AST with pinned Pandoc output adapter, status: accepted, file: ADR-0006-compile-pipeline-pandoc-adapter.md, evidence_issue: 5, evidence_run: 32468472581, adapter_baseline: Pandoc_3_10_1, fallback: direct_Markdown_HTML_and_replaceable_binary_adapter}
   - {id: ADR-0007, title: Mutation Envelope owns transaction application, status: proposed, file: ADR-0007-mutation-envelope-transaction-owner.md}
   - {id: ADR-0008, title: Dedicated annotation logs, status: proposed, file: ADR-0008-dedicated-annotation-logs.md}
   - {id: ADR-0009, title: Local user state is noncanonical, status: proposed, file: ADR-0009-local-user-state-noncanonical.md}
@@ -20,3 +20,5 @@ pending:
   - revision_id_generation_and_hash_coupling
   - Workbench_AST_schema
   - source_map_granularity
+  - citation_bibliography_ownership_and_CSL_boundary
+  - Pandoc_distribution_licensing_signing_security_update_policy
