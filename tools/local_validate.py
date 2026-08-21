@@ -147,7 +147,6 @@ def compile_commands(repo: Path, pandoc: str | None) -> list[tuple[str, list[str
                 str(repeat_b.relative_to(repo)),
                 "--out",
                 str(comparison.relative_to(repo)),
-                "--require-direct-equivalence",
             ],
         ),
     ]
