@@ -1,7 +1,7 @@
 project_id: constellation_writer
 project_name: Constellation Writer
 repository: joelfalconer/Constellation-Writer
-status: F1_machine_closure_ready_for_human_decision
+status: F1_machine_closure_promoted_waiting_human_decision
 phase: F1_architecture_coherent_human_gate
 updated_at: 2026-08-22
 
@@ -13,9 +13,10 @@ canonical_foundation_merge: 1f01da3c76611d9ad9b1b297c2b8f265a91a6daa
 canonical_F1_stack_merge: bc422e5bf0b6e5e668c3cead1f82e9b8c269a99c
 canonical_editor_decision_merge: d24a6dff4a97d1a1ad3437c3f33abbae43978409
 canonical_compile_decision_merge: cee98ddf7d3b32dd55aa3b4f5975d7d678df3bdb
-active_F1_closure_branch: f1/architecture-closure
+canonical_F1_machine_closure_merge: 754569a66cab72534386e9e21b9f8fa5850b2259
 foundation_pull_request: 1
 compile_pull_request: 14
+F1_closure_pull_request: 15
 foundation_issue: 2
 technology_spikes: [3, 4, 5]
 evidence_lineage_issue: 7
@@ -30,7 +31,7 @@ validation_runtime_policy:
   github_actions_quota_unavailable_is_failure: false
   automatic_actions_triggers: disabled
   policy: docs/validation/LOCAL_VALIDATION_POLICY.md
-  current_closure_revision_local_execution: not_run_in_current_chat_runtime
+  F1_closure_revision_local_execution: not_run_in_current_chat_runtime
   production_substrate_reliance_before_local_pass: prohibited
 
 completed:
@@ -75,19 +76,24 @@ completed:
   - CON_001_identifier_format_resolved_for_F1
   - CON_002_user_state_canonicality_resolved_for_F1
   - CON_003_mutation_ownership_resolved_for_F1
-  - state_authority_matrix_reconciled_after_compile_and_mutation_decisions
-  - canonicality_matrix_reconciled_after_compile_and_mutation_decisions
+  - Compendium_canon_state_assigned_to_claim_record
+  - Product_Constitution_atomicity_reconciled_with_recovery_backed_multi_file_operations
+  - ADR_0008_annotation_storage_kept_deferred_pending_F2_assay
+  - state_authority_matrix_reconciled_after_compile_mutation_and_compendium_decisions
+  - canonicality_matrix_reconciled_and_deferred_annotations_removed_from_canonical_entries
   - F1_adversarial_architecture_closure_complete
+  - F1_PR_15_two_P1_review_findings_repaired_and_threads_resolved
+  - F1_machine_closure_PR_15_merged
   - F1_gate_receipt_prepared_with_human_decision_pending
 
 in_progress:
-  - F1_closure_branch_promotion
   - F1_human_gate_decision
 
 queued_after_F1:
   - durable_substrate_vertical_slice_issue_6
   - F2_first_local_validation_receipt_for_promoted_substrate
   - F2_mutation_envelope_save_recovery_and_failure_injection
+  - F2_single_file_atomic_replacement_and_multi_file_crash_recovery_assays
   - F2_physical_shell_IME_accessibility_and_real_hardware_budget_controls
   - F2_physical_editor_IME_bidi_accessibility_native_interaction_controls
   - F2_representative_hardware_editor_latency_replication
@@ -98,9 +104,11 @@ queued_after_F1:
 next_gate:
   id: F1
   name: Architecture Coherent
-  state: ready_for_human_decision
+  state: waiting_explicit_human_decision
   receipt: docs/validation/F1_ARCHITECTURE_COHERENT_RECEIPT-2026-08-22.md
   adversarial_review: docs/validation/F1_ADVERSARIAL_ARCHITECTURE_CLOSURE-2026-08-22.md
+  run_receipt: docs/programme/RUN_RECEIPT-CW-F1-ARCH-CLOSURE-006.md
+  review_delta_receipt: docs/programme/RUN_RECEIPT-CW-F1-ARCH-CLOSURE-006-PR-REVIEW-DELTA.md
   human_decision: pending
 
 following_gate:
@@ -119,8 +127,13 @@ accepted_architecture:
   mutation_application_authority: Mutation_Envelope
   patch_review_authority: PatchSession_when_review_bearing
   recovery_mechanisms: Recovery
+  atomicity:
+    single_file: atomic_replacement_where_supported
+    multi_file: recovery_backed_unless_stronger_transactional_guarantee_is_proven
   local_user_state: noncanonical
   compendium_posture: subordinate_minimal_boundary
+  compendium_claim_canon_state_owner: claim_record.canon_state
+  annotation_storage_authority: deferred_pending_F2_assay
 
 machine_evidence:
   editor_spike_decision_run:
@@ -163,6 +176,8 @@ machine_evidence:
     profile: adversarial_review_with_update_delta_and_system_design_strategy
     execution_mode: SEQUENTIAL_LENS_SIMULATION
     critical_contradictions_open: 0
+    PR_15_blocking_findings_repaired: 2
+    PR_15_review_threads_resolved: 2
     result: ready_for_human_F1_gate
     fresh_repo_validation: not_run
 
@@ -183,7 +198,7 @@ F1_blockers:
     state: resolved_F1
     outcome: Mutation_Envelope_sole_canonical_application_authority
   - gate_review: F1_adversarial_architecture_closure
-    state: complete
+    state: complete_and_promoted
     outcome: ready_for_human_decision
   - human_decision: F1_Architecture_Coherent
     state: pending
@@ -211,16 +226,18 @@ known_gaps:
   - professional_DOCX_EPUB_accessibility_and_style_fidelity_not_yet_assayed
   - Pandoc_distribution_licensing_signing_security_update_policy_not_yet_completed
   - mutation_envelope_execution_and_autosave_latency_not_yet_tested
+  - single_file_atomic_replacement_and_multi_file_crash_recovery_not_yet_tested_on_supported_platforms
   - post_review_compile_v0_2_local_suite_not_yet_executed_in_a_repository_checkout
   - annotation_log_storage_model_not_yet_executably_validated
   - no_professional_writer_assay_has_run
 
 closure_posture: >-
-  F1 machine/adversarial closure is complete. PR #14 and issue #5 are merged/closed, ADR-0006 is canonical on main,
-  and CON-003 has been resolved by accepting the Mutation Envelope as the sole canonical transaction/application
-  authority while keeping PatchSession and Recovery in separate jurisdictions. ADR-0009 and ADR-0010 are also
-  accepted for F1. State-authority and canonicality matrices have been reconciled, and no critical contradiction
-  remains open. Hosted GitHub Actions is non-gating and manual-only; the project now relies on local deterministic
-  receipts. The current runtime cannot execute a fresh repository checkout, so no fresh closure validation pass is
-  claimed. F1 is ready for the explicit human gate decision. If approved, the first F2 action is a passing local
+  F1 machine/adversarial closure is promoted on main through PR #15. The compile decision is canonical,
+  the Mutation Envelope is the sole canonical application authority, Compendium canon state is owned only by
+  claim_record.canon_state, volatile user state is noncanonical, typed UUIDv7 is the accepted identity model,
+  and annotation storage authority remains explicitly deferred. The higher-order atomicity law now matches the
+  filesystem guarantees actually claimed: atomic single-file replacement where supported and recovery-backed
+  multi-file consistency otherwise. Hosted GitHub Actions is non-gating and manual-only. No fresh local closure
+  execution is claimed because the current runtime lacks a repository checkout. The project is now waiting only
+  for the explicit human F1 gate decision. If approved, the first F2 action is a passing local
   tools/local_validate.py --suite all receipt before executable-substrate reliance.
