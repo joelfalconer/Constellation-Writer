@@ -1,15 +1,8 @@
 name: Compile pipeline spike
 
+# Hosted GitHub Actions is retained only as an optional replication surface.
+# The canonical non-gating path is `python tools/local_validate.py --suite compile`.
 on:
-  pull_request:
-    paths:
-      - 'spikes/compile-pipeline/**'
-      - 'docs/decisions/ADR-0006-compile-pipeline-pandoc-adapter.md'
-      - 'docs/specifications/compile-contract-v0.2.md'
-      - 'docs/specifications/manuscript-manifest-v0.2.md'
-      - 'contracts/compile/compile-profile.schema.json'
-      - 'docs/delivery/RUN_PROMPT-05-COMPILE_PIPELINE_SPIKE.md'
-      - '.github/workflows/compile-pipeline-spike.yml'
   workflow_dispatch:
 
 jobs:
