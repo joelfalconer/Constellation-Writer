@@ -1,12 +1,8 @@
 name: Desktop shell spike
 
+# Hosted GitHub Actions is optional replication only and must not gate progress.
+# Reuse this workflow manually if hosted Windows/macOS capacity is available.
 on:
-  pull_request:
-    paths:
-      - 'spikes/desktop-shell/**'
-      - 'docs/decisions/ADR-0004-desktop-shell-tauri.md'
-      - 'docs/delivery/RUN_PROMPT-03-DESKTOP_SHELL_SPIKE.md'
-      - '.github/workflows/desktop-shell-spike.yml'
   workflow_dispatch:
 
 jobs:
