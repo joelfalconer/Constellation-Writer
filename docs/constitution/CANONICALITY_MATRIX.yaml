@@ -11,7 +11,6 @@ entries:
   - {state: sheet_identity, owner: sheet_frontmatter, class: canonical_state, mirrors: [sqlite_catalog]}
   - {state: sheet_prose, owner: sheet_markdown_body, class: canonical_state, mirrors: [editor_buffer, full_text_index]}
   - {state: sheet_local_metadata, owner: sheet_sidecar, class: canonical_state, mirrors: [sqlite_catalog]}
-  - {state: annotations, owner: annotation_log, class: canonical_state, mirrors: [sqlite_catalog], validation_state: deferred_F2_storage_validation}
   - {state: manuscript_identity, owner: manuscript_manifest, class: canonical_state, mirrors: [sqlite_catalog]}
   - {state: manuscript_order, owner: manuscript_manifest, class: canonical_state, mirrors: [binder_projection, sqlite_catalog]}
   - {state: manuscript_assembly_membership, owner: manuscript_manifest, class: canonical_state, mirrors: [compile_plan, sqlite_catalog]}
@@ -36,8 +35,19 @@ entries:
   - {state: graph_view, owner: graph_projection, class: derived, mirrors: []}
   - {state: semantic_index, owner: embedding_cache, class: derived, mirrors: []}
   - {state: compile_preview, owner: preview_cache, class: derived, mirrors: []}
+
+deferred_authority:
+  annotations:
+    current_direction: dedicated_annotation_log_with_optional_portable_inline_form
+    decision_record: ADR-0008
+    state: pending_F2_executable_validation
+    reason: >-
+      Canonical storage ownership is not promoted until file-count, generic file-sync,
+      re-anchoring, Sheet split/merge, compaction, and portability assays pass.
+
 invariants:
   - deleting_all_derived_and_ephemeral_state_must_not_destroy_project_truth
   - compile_profile_projection_must_not_change_canonical_manifest_membership
   - patch_review_history_and_mutation_outcome_history_are_distinct_authorities
   - recovery_artifacts_preserve_or_restore_state_but_do_not_form_a_parallel_canonical_application_path
+  - deferred_fields_must_not_be_presented_as_canonical_until_decision_acceptance
