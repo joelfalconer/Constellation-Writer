@@ -8,6 +8,9 @@ hosted CI dependency and emits a machine-readable receipt.
 Default usage:
     python tools/local_validate.py --suite all
 
+Substrate-only usage:
+    python tools/local_validate.py --suite substrate
+
 Optional Pandoc adapter exercise:
     python tools/local_validate.py --suite compile --pandoc /path/to/pandoc
 
@@ -54,7 +57,9 @@ def tail(value: str, limit: int = 8000) -> str:
     return "[...truncated...]\n" + value[-limit:]
 
 
-def run_command(repo: Path, command_id: str, command: Sequence[str]) -> CommandReceipt:
+def run_command(
+    repo: Path, command_id: str, command: Sequence[str]
+) -> CommandReceipt:
     print(f"\n== {command_id} ==")
     print("$", " ".join(command))
     completed = subprocess.run(
@@ -65,9 +70,16 @@ def run_command(repo: Path, command_id: str, command: Sequence[str]) -> CommandR
         check=False,
     )
     if completed.stdout:
-        print(completed.stdout, end="" if completed.stdout.endswith("\n") else "\n")
+        print(
+            completed.stdout,
+            end="" if completed.stdout.endswith("\n") else "\n",
+        )
     if completed.stderr:
-        print(completed.stderr, file=sys.stderr, end="" if completed.stderr.endswith("\n") else "\n")
+        print(
+            completed.stderr,
+            file=sys.stderr,
+            end="" if completed.stderr.endswith("\n") else "\n",
+        )
     return CommandReceipt(
         id=command_id,
         command=list(command),
@@ -91,7 +103,9 @@ def ensure_python_dependencies() -> tuple[bool, list[str]]:
     return not missing, missing
 
 
-def compile_commands(repo: Path, pandoc: str | None) -> list[tuple[str, list[str]]]:
+def compile_commands(
+    repo: Path, pandoc: str | None
+) -> list[tuple[str, list[str]]]:
     python = sys.executable
     build_root = repo / "build" / "local-validation" / "compile"
     repeat_a = build_root / "repeat-a"
@@ -101,7 +115,17 @@ def compile_commands(repo: Path, pandoc: str | None) -> list[tuple[str, list[str
     commands: list[tuple[str, list[str]]] = [
         (
             "compile_unit_tests",
-            [python, "-m", "unittest", "discover", "-s", "spikes/compile-pipeline", "-p", "test_*.py", "-v"],
+            [
+                python,
+                "-m",
+                "unittest",
+                "discover",
+                "-s",
+                "spikes/compile-pipeline",
+                "-p",
+                "test_*.py",
+                "-v",
+            ],
         ),
         (
             "compile_reference_repeat_a",
@@ -180,26 +204,73 @@ def compile_commands(repo: Path, pandoc: str | None) -> list[tuple[str, list[str
 def foundation_commands() -> list[tuple[str, list[str]]]:
     python = sys.executable
     return [
-        ("foundation_schema_validation", [python, "tools/validator/validate.py", "--repo", "."]),
-        ("foundation_contract_tests", [python, "-m", "pytest", "-q", "tests/contracts"]),
+        (
+            "foundation_schema_validation",
+            [python, "tools/validator/validate.py", "--repo", "."],
+        ),
+        (
+            "foundation_contract_tests",
+            [python, "-m", "pytest", "-q", "tests/contracts"],
+        ),
+    ]
+
+
+def substrate_commands(repo: Path) -> list[tuple[str, list[str]]]:
+    python = sys.executable
+    return [
+        (
+            "substrate_unit_tests",
+            [
+                python,
+                "-m",
+                "unittest",
+                "discover",
+                "-s",
+                "tests/substrate",
+                "-p",
+                "test_*.py",
+                "-v",
+            ],
+        ),
+        (
+            "substrate_reference_vertical_slice",
+            [
+                python,
+                "tools/f2_vertical_slice.py",
+                "--repo",
+                ".",
+                "--source",
+                "fixtures/reference-novel",
+                "--workdir",
+                "build/local-validation/substrate",
+            ],
+        ),
     ]
 
 
 def write_receipt(path: Path, receipt: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(receipt, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    path.write_text(
+        json.dumps(receipt, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Run deterministic Constellation Writer validation locally")
+    parser = argparse.ArgumentParser(
+        description="Run deterministic Constellation Writer validation locally"
+    )
     parser.add_argument("--repo", default=".", help="repository root")
     parser.add_argument(
         "--suite",
-        choices=("all", "foundation", "compile"),
+        choices=("all", "foundation", "compile", "substrate"),
         default="all",
         help="validation suite to execute",
     )
-    parser.add_argument("--pandoc", help="optional local Pandoc binary; no download is attempted")
+    parser.add_argument(
+        "--pandoc",
+        help="optional local Pandoc binary; no download is attempted",
+    )
     parser.add_argument(
         "--receipt",
         default="build/local-validation-receipt.json",
@@ -222,6 +293,8 @@ def main() -> int:
         commands.extend(foundation_commands())
     if args.suite in ("all", "compile"):
         commands.extend(compile_commands(repo, args.pandoc))
+    if args.suite in ("all", "substrate"):
+        commands.extend(substrate_commands(repo))
 
     command_receipts: list[CommandReceipt] = []
     if dependency_ok:
@@ -232,7 +305,11 @@ def main() -> int:
                 break
 
     completed = datetime.now(timezone.utc)
-    passed = dependency_ok and len(command_receipts) == len(commands) and all(item.passed for item in command_receipts)
+    passed = (
+        dependency_ok
+        and len(command_receipts) == len(commands)
+        and all(item.passed for item in command_receipts)
+    )
 
     receipt = {
         "schema": RECEIPT_SCHEMA,
@@ -251,12 +328,17 @@ def main() -> int:
         "dependencies": {
             "available": dependency_ok,
             "missing_imports": missing,
-            "install_hint": "python -m pip install -r tools/validator/requirements.txt" if missing else None,
+            "install_hint": (
+                "python -m pip install -r tools/validator/requirements.txt"
+                if missing
+                else None
+            ),
         },
         "commands": [asdict(item) for item in command_receipts],
         "acceptance_state": "passed" if passed else "failed",
         "notes": [
             "GitHub Actions availability is not part of this acceptance result.",
+            "The substrate suite executes issue #6 against a disposable copy of the reference project.",
             "Physical IME, accessibility, native interaction, and professional-writer assays remain separate evidence classes.",
             "Pandoc adapter execution is optional unless explicitly supplied with --pandoc.",
         ],
@@ -267,8 +349,9 @@ def main() -> int:
 
     if not dependency_ok:
         print(
-            "Missing Python dependencies: " + ", ".join(missing) +
-            "\nInstall from tools/validator/requirements.txt, then rerun.",
+            "Missing Python dependencies: "
+            + ", ".join(missing)
+            + "\nInstall from tools/validator/requirements.txt, then rerun.",
             file=sys.stderr,
         )
     return 0 if passed else 1
