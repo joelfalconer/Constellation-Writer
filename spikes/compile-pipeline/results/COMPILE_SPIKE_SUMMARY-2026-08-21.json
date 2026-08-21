@@ -1,0 +1,79 @@
+{
+  "schema": "cw_compile_spike_summary_v1",
+  "run_id": "CW-F1-COMPILE-SPIKE-005",
+  "decision": "accept_workbench_owned_compile_plan_with_pinned_pandoc_adapter",
+  "selected_adapter": {
+    "name": "pandoc",
+    "version": "3.10.1",
+    "scope": ["docx", "epub"],
+    "authority": "output_adapter_only"
+  },
+  "evidence": {
+    "workflow_run": 32468472581,
+    "foundation_validation_run": 32468472562,
+    "evidence_head": "68c4fc6564d8294c683211e3319025942da7666d",
+    "artifact_id": 9441576333,
+    "artifact_digest": "sha256:75c5018dcb748f0e2a843445955068cf359f9c6f9872a0a047e69b22eee68b34",
+    "golden_and_negative_tests": 13,
+    "golden_and_negative_tests_passed": 13,
+    "direct_repeat_equivalence": true,
+    "adapter_semantic_equivalence_across_versions": true
+  },
+  "direct_digests": {
+    "plan_semantic": "4e248c591d0060bed1b8ff81b2f687c9939f39851aae317f0121da6e364819ce",
+    "ast_semantic": "482047b0677ca22c6ffba2df32a0d55d9d1cc610703636016dec91488db39b4b",
+    "markdown": "750942ba12534d7d62bbf423b818f0d4d793d07e4a4ffb15fe46d7f6b475d79c",
+    "html": "340f902bdcb7f48559073ab65e420d39e1d3780a7d8d5e31b4066505682e5813",
+    "source_map": "c595054e2800180e083189792cb2bd4facb8a21f803fe64cc84af09712f7c410"
+  },
+  "adapter_comparison": {
+    "versions": ["3.10.1", "3.9.0.2"],
+    "semantic_roundtrip_sha256": "850f85e1f507a8a8e5d92ac73115a4a2df535a5dbeb1da3610680b29af949717",
+    "docx": {
+      "current_status": "passed",
+      "prior_status": "passed",
+      "semantic_equal": true,
+      "byte_equal": true,
+      "current_sha256": "2a4287e9760d07e4fee9c57969bb33890283c76ab71be68d6267d7246f6dd011"
+    },
+    "epub": {
+      "current_status": "passed",
+      "prior_status": "passed",
+      "semantic_equal": true,
+      "byte_equal": false,
+      "current_sha256": "7acb7a5d44eca87b8ca25ee4639f1f1515347eee55be41744cc473cceeb91855",
+      "prior_sha256": "57540ea7a5b15beefc08edc6f4a3f66a38923a7e79136ea2ffaeb5560ab45483"
+    }
+  },
+  "authority": {
+    "authored_source": "Sheet",
+    "assembly_order_membership_role": "Manuscript_Manifest",
+    "export_scope_target_treatment": "Compile_Profile",
+    "frozen_compile_plan": "Constellation_Writer",
+    "workbench_ast": "Constellation_Writer",
+    "qa_source_maps": "Constellation_Writer",
+    "docx_epub_conversion": "pinned_output_adapter"
+  },
+  "hard_gates": {
+    "manifest_order": "passed",
+    "profile_cannot_override_structure_or_role": "passed",
+    "source_map_coverage": "passed",
+    "adapter_failure_preserves_fallback": "passed",
+    "asset_path_escape": "passed",
+    "unsupported_syntax_visible_in_qa": "passed"
+  },
+  "unresolved": [
+    "production_markdown_parser",
+    "final_workbench_ast_schema",
+    "citation_bibliography_resolution",
+    "binary_source_map_granularity",
+    "professional_docx_style_fidelity",
+    "epub_accessibility",
+    "pdf_strategy",
+    "adapter_distribution_licensing_signing_update_policy",
+    "untrusted_resource_sandboxing",
+    "large_manuscript_performance",
+    "professional_writer_publisher_assay"
+  ],
+  "route": "F1_architecture_coherent_closure_review"
+}
