@@ -1,48 +1,66 @@
-version: 0.3.0
-status: candidate
-updated_at: 2026-08-17
+version: 0.4.0
+status: candidate_F1_machine_closure
+updated_at: 2026-08-22
 
 contradictions_and_tensions:
   - id: CON-001
     topic: identifier_format
     positions: [stable_UUIDs, ULIDs_for_readability, UUIDv7_candidate]
     current_direction: UUIDv7_with_typed_prefix
-    status: candidate_resolution_pending_F1_confirmation
+    status: accepted_F1_architecture_coherence
     severity: high
     decision_record: ADR-0010
-    revisit_trigger: before_persistent_prototype_data
+    acceptance_basis:
+      - stable identity remains independent of title path and placement
+      - typed UUIDv7 provides standard opaque identity with useful diagnostics and no manuscript-order semantics
+      - serious rivals remain documented in ADR-0010
+    revisit_trigger: before_public_durable_data_if_cross_language_or_prefix_implementation_fails
 
   - id: CON-002
     topic: user_state_canonicality
     positions: [cursor_in_sheet_sidecar, cursor_as_local_ephemeral_state]
     current_direction: local_ephemeral_state
-    status: candidate_resolution_pending_F1_confirmation
+    status: accepted_F1_architecture_coherence
     severity: high
     decision_record: ADR-0009
+    acceptance_basis:
+      - cursor_scroll_and_panes_do_not_describe_project_truth
+      - volatile user state would create canonical churn and sync conflicts
+      - portable handoff may be added later only as optional non_authoritative state
     revisit_trigger: if_multi_device_or_handoff_requires_portable_context_state
 
   - id: CON-003
     topic: mutation_ownership
     positions: [PatchSession_owns_transaction, Recovery_owns_transaction, shared_Mutation_Envelope]
     current_direction: shared_Mutation_Envelope
-    status: critical_candidate_resolution_pending_F1_confirmation
+    status: accepted_F1_architecture_coherence
     severity: critical
     decision_record: ADR-0007
     acceptance_condition: >-
-      F1 adversarial review confirms Mutation Envelope is the sole transaction/application
-      authority, PatchSession owns proposal/review/provenance, and Recovery owns preservation,
-      rollback and restore mechanisms without competing canonical transaction paths.
+      Mutation Envelope is the sole transaction/application authority, PatchSession owns
+      proposal/review/provenance, Recovery owns preservation and restore mechanisms, and
+      restore itself re-enters the Mutation Envelope rather than creating a second write path.
+    acceptance_basis:
+      - MUTATION_ENVELOPE already spans autosave human commands PatchSession imports migrations conflicts and restore
+      - PatchSession v0.2 explicitly delegates transaction mechanics
+      - Recovery v0.2 uses the Mutation Envelope for high consequence operations
+      - dependency rules forbid PatchSession and Recovery as competing transaction owners
+      - state authority matrix now names one owner for canonical application
+    validation_state: architecture_coherence_accepted_execution_pending_F2
     revisit_trigger: >-
-      F1 closure and again if F2 implementation creates blocking autosave overhead or a second
-      canonical mutation path.
+      Reopen if F2 shows blocking autosave overhead, inconsistent stale-base behavior,
+      recovery that cannot be represented through the envelope, or a necessary second canonical write path.
 
   - id: CON-004
     topic: annotations_storage
     positions: [inline_comments, Sheet_sidecar_comments, dedicated_annotation_log]
     current_direction: dedicated_annotation_log_with_optional_portable_inline_form
-    status: candidate_resolution_pending_F1_F2_validation
+    status: deferred_to_F2_validation_with_direction_preserved
     severity: medium
     decision_record: ADR-0008
+    defer_reason: >-
+      No F1 authority conflict remains, but file-count, sync, re-anchoring, split/merge and
+      compaction behavior require executable substrate evidence before acceptance.
     revisit_trigger: annotation_reanchor_split_merge_and_sync_tests
 
   - id: CON-005
@@ -93,11 +111,13 @@ research_uncertainties:
     severity: medium
     revisit_trigger: compile_spike_and_durable_substrate_tests
 
-open_critical:
-  - CON-003
+open_critical: []
+
+deferred_noncritical:
+  - CON-004
 
 closure_rule: >-
   A current_direction is not a resolved contradiction by itself. Critical contradictions remain
   open until the named gate accepts, revises, or explicitly defers the direction with evidence
-  and a falsifier. Research uncertainties remain visible until their named revisit trigger fires;
-  they are not silently converted into architecture truth.
+  and a falsifier. Noncritical tensions may be deferred only when they do not create competing
+  canonical authority and have an explicit executable revisit trigger.

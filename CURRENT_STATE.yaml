@@ -1,9 +1,9 @@
 project_id: constellation_writer
 project_name: Constellation Writer
 repository: joelfalconer/Constellation-Writer
-status: F0_accepted_F1_compile_review_repaired
-phase: F1_architecture_coherence_closure_preparation
-updated_at: 2026-08-21
+status: F1_machine_closure_ready_for_human_decision
+phase: F1_architecture_coherent_human_gate
+updated_at: 2026-08-22
 
 product_identity: local_first_professional_writing_workbench
 core_promise: calm_editor_brutal_recall_governed_transformation
@@ -12,9 +12,10 @@ canonical_branch: main
 canonical_foundation_merge: 1f01da3c76611d9ad9b1b297c2b8f265a91a6daa
 canonical_F1_stack_merge: bc422e5bf0b6e5e668c3cead1f82e9b8c269a99c
 canonical_editor_decision_merge: d24a6dff4a97d1a1ad3437c3f33abbae43978409
-active_compile_spike_branch: spike/compile-pipeline-decision
-active_compile_spike_PR: 14
+canonical_compile_decision_merge: cee98ddf7d3b32dd55aa3b4f5975d7d678df3bdb
+active_F1_closure_branch: f1/architecture-closure
 foundation_pull_request: 1
+compile_pull_request: 14
 foundation_issue: 2
 technology_spikes: [3, 4, 5]
 evidence_lineage_issue: 7
@@ -27,8 +28,10 @@ validation_runtime_policy:
   receipt: build/local-validation-receipt.json
   github_actions: optional_manual_replication_only
   github_actions_quota_unavailable_is_failure: false
-  automatic_actions_triggers: disabled_candidate_PR_14
+  automatic_actions_triggers: disabled
   policy: docs/validation/LOCAL_VALIDATION_POLICY.md
+  current_closure_revision_local_execution: not_run_in_current_chat_runtime
+  production_substrate_reliance_before_local_pass: prohibited
 
 completed:
   - F0_Project_Defined_accepted
@@ -53,46 +56,71 @@ completed:
   - ADR_0004_Electron_selected_for_F2_scaffold
   - issue_4_editor_spike_PR_13_merged_and_issue_closed
   - ADR_0005_CodeMirror_6_selected_for_F2_scaffold
+  - issue_5_compile_spike_PR_14_merged_and_issue_closed
+  - ADR_0006_Workbench_plan_AST_plus_Pandoc_adapter_accepted
   - issue_5_compile_golden_and_negative_controls_13_of_13_pass_at_evidence_head
   - issue_5_repeated_frozen_compile_equivalence_at_evidence_head
   - issue_5_Pandoc_3_10_1_and_3_9_0_2_verified_adapter_controls
   - issue_5_DOCX_EPUB_semantic_version_comparison
   - issue_5_adapter_failure_preserves_constellation_fallbacks
-  - issue_5_ADR_0006_Workbench_plan_AST_plus_Pandoc_adapter_candidate
-  - issue_5_compile_authority_contract_reconciliation_candidate
   - issue_5_six_P1_review_findings_repaired_in_compile_spike_v0_2
   - issue_5_six_targeted_regression_tests_added
   - issue_5_all_review_threads_resolved
   - local_first_validation_runner_added
-  - hosted_Actions_changed_to_manual_optional_replication_candidate
-  - Actions_quota_unavailability_removed_as_project_gate_candidate
+  - hosted_Actions_changed_to_manual_optional_replication
+  - Actions_quota_unavailability_removed_as_project_gate
+  - ADR_0007_Mutation_Envelope_accepted_as_sole_canonical_application_authority
+  - ADR_0009_local_user_state_accepted_noncanonical
+  - ADR_0010_typed_UUIDv7_accepted_before_durable_prototype_data
+  - CON_001_identifier_format_resolved_for_F1
+  - CON_002_user_state_canonicality_resolved_for_F1
+  - CON_003_mutation_ownership_resolved_for_F1
+  - state_authority_matrix_reconciled_after_compile_and_mutation_decisions
+  - canonicality_matrix_reconciled_after_compile_and_mutation_decisions
+  - F1_adversarial_architecture_closure_complete
+  - F1_gate_receipt_prepared_with_human_decision_pending
 
 in_progress:
-  - issue_5_compile_spike_PR_14_promotion
-  - F1_CON_003_mutation_ownership_confirmation
-  - F1_adversarial_architecture_review_after_spikes
-  - F1_clean_promotion_validation
+  - F1_closure_branch_promotion
   - F1_human_gate_decision
 
 queued_after_F1:
   - durable_substrate_vertical_slice_issue_6
   - F2_first_local_validation_receipt_for_promoted_substrate
+  - F2_mutation_envelope_save_recovery_and_failure_injection
   - F2_physical_shell_IME_accessibility_and_real_hardware_budget_controls
   - F2_physical_editor_IME_bidi_accessibility_native_interaction_controls
   - F2_representative_hardware_editor_latency_replication
   - F2_compile_plan_AST_production_parser_and_adapter_packaging
-  - F2_failure_injection_against_executable_substrate
+  - F2_annotation_log_storage_reanchor_sync_and_compaction_assay
   - later_professional_writer_assay_issue_8
 
 next_gate:
   id: F1
   name: Architecture Coherent
-  state: conditional_not_ready
+  state: ready_for_human_decision
+  receipt: docs/validation/F1_ARCHITECTURE_COHERENT_RECEIPT-2026-08-22.md
+  adversarial_review: docs/validation/F1_ADVERSARIAL_ARCHITECTURE_CLOSURE-2026-08-22.md
+  human_decision: pending
 
 following_gate:
   id: F2
   name: Substrate Executable
-  state: blocked_on_F1_and_vertical_slice_6
+  state: blocked_only_on_human_F1_approval_and_vertical_slice_execution
+  first_gate_action: python tools/local_validate.py --suite all
+
+accepted_architecture:
+  shell: Electron
+  editor_engine: CodeMirror_6
+  identity: typed_UUIDv7
+  manuscript_assembly_authority: Manuscript_Manifest
+  compile_plan_and_AST_authority: Constellation_Writer
+  compile_binary_adapter: Pandoc_3_10_1_replaceable_edge
+  mutation_application_authority: Mutation_Envelope
+  patch_review_authority: PatchSession_when_review_bearing
+  recovery_mechanisms: Recovery
+  local_user_state: noncanonical
+  compendium_posture: subordinate_minimal_boundary
 
 machine_evidence:
   editor_spike_decision_run:
@@ -130,33 +158,46 @@ machine_evidence:
     post_repair_hosted_actions: hosted_ci_unavailable_nonblocking
     post_repair_local_suite: not_run_in_current_chat_runtime
     exception_receipt: docs/programme/RUN_RECEIPT-CW-F1-COMPILE-SPIKE-005-REVIEW-DELTA.md
-  compile_decision: Workbench_owned_plan_AST_with_Pandoc_3_10_1_output_adapter_for_F2
+  F1_adversarial_closure:
+    run_id: CW-F1-ARCH-CLOSURE-006
+    profile: adversarial_review_with_update_delta_and_system_design_strategy
+    execution_mode: SEQUENTIAL_LENS_SIMULATION
+    critical_contradictions_open: 0
+    result: ready_for_human_F1_gate
+    fresh_repo_validation: not_run
 
 F1_blockers:
   - issue: 3
-    decision: desktop_shell_Tauri2_vs_Electron
     state: closed
     outcome: Electron_selected_for_F2_scaffold_with_explicit_revisit_triggers
   - issue: 4
-    decision: professional_prose_editor_engine
     state: closed
     outcome: CodeMirror_6_selected_for_F2_scaffold_with_explicit_physical_vetoes
   - issue: 5
-    decision: Workbench_AST_and_Pandoc_adapter_boundary
-    owner: joelfalconer
-    state: promotion_ready_under_recorded_post_review_validation_exception
+    state: closed
     outcome: Workbench_owned_plan_AST_with_Pandoc_3_10_1_as_pinned_DOCX_EPUB_adapter
   - issue: 7
-    decision: evidence_lineage_and_benchmark_refresh
     state: closed
     unresolved_nonblocking_limitation: SRC_DR_001_final_report_attachment_not_retrievable_for_exact_historical_spans
   - contradiction: CON-003
-    topic: mutation_ownership
-    state: candidate_resolution_pending_F1_confirmation
+    state: resolved_F1
+    outcome: Mutation_Envelope_sole_canonical_application_authority
   - gate_review: F1_adversarial_architecture_closure
-    state: pending_after_PR_14_promotion
+    state: complete
+    outcome: ready_for_human_decision
   - human_decision: F1_Architecture_Coherent
     state: pending
+
+open_critical_contradictions: []
+
+deferred_nonblocking_decisions:
+  - ADR_0008_annotation_storage_pending_F2_executable_assay
+  - Workbench_AST_final_schema
+  - citation_bibliography_CSL_boundary
+  - revision_id_generation_and_hash_coupling
+  - snapshot_storage_location
+  - sqlite_fts5_vs_tantivy_upgrade_path
+  - Pandoc_distribution_licensing_signing_security_update_policy
 
 known_gaps:
   - exact_historical_SRC_DR_001_spans_unresolved_with_explicit_source_unavailable_reason
@@ -169,18 +210,17 @@ known_gaps:
   - binary_DOCX_EPUB_source_map_is_semantic_segment_level_not_byte_addressed
   - professional_DOCX_EPUB_accessibility_and_style_fidelity_not_yet_assayed
   - Pandoc_distribution_licensing_signing_security_update_policy_not_yet_completed
-  - compile_recovery_and_mutation_are_not_executable_product_services
+  - mutation_envelope_execution_and_autosave_latency_not_yet_tested
   - post_review_compile_v0_2_local_suite_not_yet_executed_in_a_repository_checkout
+  - annotation_log_storage_model_not_yet_executably_validated
   - no_professional_writer_assay_has_run
 
 closure_posture: >-
-  F0 is accepted. Issues #3, #4, and #7 are closed and their promoted decisions select Electron and
-  CodeMirror 6 for the F2 shell/editor scaffold. Issue #5 has prior executed architecture evidence for
-  deterministic compile planning, current/prior Pandoc adapter comparison and adapter-failure fallback.
-  Independent review then found six implementation-fidelity defects; all six are repaired in spike v0.2,
-  each has a targeted regression test, and all six review threads are resolved. Hosted Actions quota is now
-  explicitly non-gating: workflows are retained as manual recipes while deterministic repository validation
-  moves to tools/local_validate.py. The v0.2 post-review suite is not claimed as executed in the current chat
-  runtime and is carried to F2 as the first executable-substrate receipt. F1 remains conditional_not_ready
-  until PR #14 is promoted, CON-003 is adjudicated, adversarial closure completes, and the human F1 gate
-  decision is recorded.
+  F1 machine/adversarial closure is complete. PR #14 and issue #5 are merged/closed, ADR-0006 is canonical on main,
+  and CON-003 has been resolved by accepting the Mutation Envelope as the sole canonical transaction/application
+  authority while keeping PatchSession and Recovery in separate jurisdictions. ADR-0009 and ADR-0010 are also
+  accepted for F1. State-authority and canonicality matrices have been reconciled, and no critical contradiction
+  remains open. Hosted GitHub Actions is non-gating and manual-only; the project now relies on local deterministic
+  receipts. The current runtime cannot execute a fresh repository checkout, so no fresh closure validation pass is
+  claimed. F1 is ready for the explicit human gate decision. If approved, the first F2 action is a passing local
+  tools/local_validate.py --suite all receipt before executable-substrate reliance.

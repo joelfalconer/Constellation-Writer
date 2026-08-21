@@ -29,7 +29,7 @@ Compile is a build pipeline. Identical canonical inputs and profile semantics pr
 
 ## Article VII: Recovery is product behavior
 
-Canonical writes are atomic. Conflicts preserve both versions. Destructive operations and migrations are guarded by recovery artifacts. Restore explains its consequences before applying them.
+Canonical **single-file replacement** is atomic at the file boundary wherever the supported filesystem provides the required replacement primitive. A multi-file operation must never claim cross-file atomicity unless the implementation can actually guarantee it. Instead, multi-file mutations are operation-planned, recovery-backed, crash-detectable, and must expose any partial application so the system can complete, roll back, or enter recovery review without silent loss. Conflicts preserve both versions. Destructive operations and migrations are guarded by recovery artifacts. Restore explains its consequences before applying them.
 
 ## Article VIII: Intelligence is derived
 

@@ -1,6 +1,6 @@
-version: 0.5.0
-status: candidate
-updated_at: 2026-08-21
+version: 0.6.0
+status: candidate_F1_machine_closure
+updated_at: 2026-08-22
 decisions:
   - {id: ADR-0001, title: Contract-first foundation programme, status: proposed, file: ADR-0001-architecture-method.md}
   - {id: ADR-0002, title: File-owned canonical state and rebuildable projections, status: proposed, file: ADR-0002-canonical-state.md}
@@ -8,11 +8,11 @@ decisions:
   - {id: ADR-0004, title: Electron selected as F2 desktop shell scaffold, status: accepted, file: ADR-0004-desktop-shell-tauri.md, evidence_issue: 3, evidence_run: 32085957984, fallback: Tauri_2}
   - {id: ADR-0005, title: CodeMirror 6 selected as F2 professional prose editor scaffold, status: accepted, file: ADR-0005-editor-engine-codemirror-6.md, evidence_issue: 4, evidence_run: 32460827533, fallback: ProseMirror}
   - {id: ADR-0006, title: Constellation-owned compile plan and Workbench AST with pinned Pandoc output adapter, status: accepted, file: ADR-0006-compile-pipeline-pandoc-adapter.md, evidence_issue: 5, evidence_run: 32468472581, adapter_baseline: Pandoc_3_10_1, fallback: direct_Markdown_HTML_and_replaceable_binary_adapter}
-  - {id: ADR-0007, title: Mutation Envelope owns transaction application, status: proposed, file: ADR-0007-mutation-envelope-transaction-owner.md}
-  - {id: ADR-0008, title: Dedicated annotation logs, status: proposed, file: ADR-0008-dedicated-annotation-logs.md}
-  - {id: ADR-0009, title: Local user state is noncanonical, status: proposed, file: ADR-0009-local-user-state-noncanonical.md}
-  - {id: ADR-0010, title: Typed UUIDv7 identifiers, status: proposed, file: ADR-0010-typed-uuidv7-identifiers.md}
-  - {id: ADR-0011, title: Minimal Compendium implementation boundary, status: proposed, file: ADR-0011-minimal-compendium-boundary.md}
+  - {id: ADR-0007, title: Mutation Envelope owns canonical transaction application, status: accepted, file: ADR-0007-mutation-envelope-transaction-owner.md, accepted_gate: F1_architecture_coherence, execution_validation: pending_F2}
+  - {id: ADR-0008, title: Dedicated annotation logs, status: deferred_pending_F2_validation, file: ADR-0008-dedicated-annotation-logs.md}
+  - {id: ADR-0009, title: Local user state is noncanonical, status: accepted, file: ADR-0009-local-user-state-noncanonical.md, accepted_gate: F1_architecture_coherence}
+  - {id: ADR-0010, title: Typed UUIDv7 identifiers, status: accepted, file: ADR-0010-typed-uuidv7-identifiers.md, accepted_gate: F1_architecture_coherence, revisit_before: public_durable_data_if_implementation_fails}
+  - {id: ADR-0011, title: Minimal Compendium implementation boundary, status: proposed_F0_baseline_preserved, file: ADR-0011-minimal-compendium-boundary.md}
 pending:
   - yaml_vs_json_for_each_manifest_class
   - sqlite_fts5_vs_tantivy_upgrade_path
@@ -22,3 +22,10 @@ pending:
   - source_map_granularity
   - citation_bibliography_ownership_and_CSL_boundary
   - Pandoc_distribution_licensing_signing_security_update_policy
+  - annotation_log_file_count_sync_reanchor_and_compaction_validation
+
+F1_machine_closure_notes:
+  open_critical_contradictions: 0
+  human_gate_decision: pending
+  production_substrate_claim: false
+  next_executable_gate: python tools/local_validate.py --suite all

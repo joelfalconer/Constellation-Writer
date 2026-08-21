@@ -1,13 +1,25 @@
 # Mutation Envelope v0.1
 
-**Status:** candidate  
-**Imports:** `INV-MUT-001`, `INV-REC-001`, identity, revision, anchor, provenance, consequence contracts
+**Status:** accepted F1 architecture contract; executable validation pending F2  
+**Imports:** `INV-MUT-001`, `INV-REC-001`, identity, revision, anchor, provenance, consequence contracts  
+**Decision:** ADR-0007
 
 ## Purpose
 
 The Mutation Envelope is the shared transaction contract beneath autosave, human commands, AI PatchSessions, imports, batch refactors, migrations, conflict resolution, and restore.
 
-PatchSession is the review-facing container. Recovery supplies preservation and rollback. The Mutation Envelope ensures both use one application model rather than neighbouring protocols.
+PatchSession is the review-facing container. Recovery supplies preservation and rollback material. The Mutation Envelope ensures both use one application model rather than neighbouring protocols.
+
+## Authority
+
+The Mutation Envelope is the sole canonical application authority. It owns preflight, canonical write application, resulting revision creation/validation, outcome recording, and links to recovery artifacts.
+
+It does **not** own proposal/editorial review or recovery storage:
+
+- PatchSession owns review-bearing proposal, provenance, and acceptance/rejection state.
+- Recovery owns buffers, snapshots, bundles, conflict copies, and restore preparation.
+- Restore itself is applied as a new Mutation Envelope operation.
+- Mutation event logs record outcomes but do not independently apply canonical writes.
 
 ## Contract
 
@@ -65,6 +77,12 @@ audit_events: []
 
 Any AI-originated canonical mutation requires explicit review regardless of apparent consequence.
 
+## Autosave rule
+
+The shared model must not turn every keystroke into a heavyweight transaction. The editor buffer remains immediate. Debounced/background persistence may coalesce writer-originated changes into a lightweight `canonical_low` envelope with implicit human authority and consequence-proportional recovery.
+
+If the envelope cannot support that without blocking the writing loop, ADR-0007 must be reopened.
+
 ## Application protocol
 
 1. Resolve stable targets.
@@ -84,8 +102,11 @@ A failed multi-file operation is never reported as clean. The envelope records c
 
 ## Acceptance tests
 
-- AI cannot bypass the envelope to write canonical files.
+- AI cannot bypass PatchSession review and the envelope to write canonical files.
 - A stale base revision blocks blind application.
 - A destructive operation has a pre-operation snapshot.
 - A partially failed operation can be rolled back or completed from its recovery bundle.
 - Reversal creates a new logged mutation rather than deleting history.
+- Restore is applied through the same canonical application model.
+- Direct/autosave persistence does not block the editor interaction loop.
+- Deleting derived indexes cannot create a competing write path during rebuild.

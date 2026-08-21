@@ -1,7 +1,7 @@
 id: clm_018f0000-0000-7000-8000-000000000001
-schema_version: 0.1.0
+schema_version: 0.2.0
 type: rule
-status: active
+canon_state: active
 confidence: observed
 statement: The Glass Orchard House responds when Mara crosses its threshold.
 subject_entity_id: ent_018f0000-0000-7000-8000-000000000001
