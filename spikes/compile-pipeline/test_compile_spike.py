@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -360,6 +361,142 @@ class CompileSpikeTests(unittest.TestCase):
         qa = self.read_json(out, "qa.json")
         self.assertEqual(receipt["status"], "blocked")
         self.assertTrue(any(item["code"] == "asset_path_escape" for item in qa["issues"]))
+
+    def test_review_regression_inline_comment_preserves_surrounding_prose(self):
+        project = self.make_project()
+        project.add_sheet(
+            sheet_id="sh_inline_comment",
+            placement_id="nd_inline_comment",
+            title="Inline Comment",
+            body="# Inline Comment\n\nBefore <!-- private note --> after.",
+        )
+        out = project.root / "build/test"
+        receipt = project.compile(out)
+        rendered = (out / "output.md").read_text(encoding="utf-8")
+        qa = self.read_json(out, "qa.json")
+        self.assertEqual(receipt["status"], "passed")
+        self.assertIn("Before", rendered)
+        self.assertIn("after.", rendered)
+        self.assertNotIn("private note", rendered)
+        self.assertTrue(any(item["code"] == "comment_excluded" for item in qa["issues"]))
+
+    def test_review_regression_structural_nodes_survive_into_ast(self):
+        project = self.make_project()
+        project.nodes.append(
+            {
+                "id": "nd_part",
+                "type": "container",
+                "title": "Part One",
+                "include": True,
+                "role": "part",
+                "children": [],
+            }
+        )
+        project.nodes.append(
+            {
+                "id": "nd_generated",
+                "type": "generated",
+                "title": "Contents",
+                "include": True,
+                "role": "frontmatter",
+                "generator": "toc",
+                "children": [],
+            }
+        )
+        out = project.root / "build/test"
+        receipt = project.compile(out)
+        ast = self.read_json(out, "workbench-ast.json")
+        kinds = {block["kind"] for block in ast["blocks"]}
+        rendered = (out / "output.md").read_text(encoding="utf-8")
+        self.assertEqual(receipt["status"], "passed")
+        self.assertIn("structure_title", kinds)
+        self.assertIn("generated_structure", kinds)
+        self.assertIn("Part One", rendered)
+        self.assertIn("Contents", rendered)
+
+    def test_review_regression_duplicate_placement_id_is_hard_gate(self):
+        project = self.make_project()
+        project.add_sheet(
+            sheet_id="sh_one",
+            placement_id="nd_duplicate",
+            title="One",
+            body="# One\n\nOne.",
+        )
+        project.add_sheet(
+            sheet_id="sh_two",
+            placement_id="nd_duplicate",
+            title="Two",
+            body="# Two\n\nTwo.",
+        )
+        out = project.root / "build/test"
+        receipt = project.compile(out)
+        qa = self.read_json(out, "qa.json")
+        self.assertEqual(receipt["status"], "blocked")
+        self.assertTrue(any(item["code"] == "duplicate_placement_id" for item in qa["issues"]))
+
+    def test_review_regression_profile_must_bind_selected_manuscript(self):
+        project = self.make_project()
+        project.add_sheet(
+            sheet_id="sh_bound",
+            placement_id="nd_bound",
+            title="Bound",
+            body="# Bound\n\nBound manuscript.",
+        )
+        out = project.root / "build/test"
+        receipt = project.compile(out, profile_overrides={"manuscript_id": "ms_other"})
+        qa = self.read_json(out, "qa.json")
+        self.assertEqual(receipt["status"], "blocked")
+        self.assertTrue(any(item["code"] == "profile_manuscript_mismatch" for item in qa["issues"]))
+
+    def test_review_regression_assets_are_content_frozen_for_adapter_input(self):
+        project = self.make_project()
+        asset = project.root / "assets/cover.png"
+        asset.parent.mkdir(parents=True, exist_ok=True)
+        asset_bytes = b"not-a-real-png-but-deterministic-fixture"
+        asset.write_bytes(asset_bytes)
+        project.add_sheet(
+            sheet_id="sh_asset_freeze",
+            placement_id="nd_asset_freeze",
+            title="Asset Freeze",
+            body="# Asset Freeze\n\n![Cover](assets/cover.png)",
+        )
+        out = project.root / "build/test"
+        receipt = project.compile(out)
+        plan = self.read_json(out, "compile-plan.json")
+        direct = (out / "output.md").read_text(encoding="utf-8")
+        adapter = (out / "adapter-input.md").read_text(encoding="utf-8")
+        expected_digest = hashlib.sha256(asset_bytes).hexdigest()
+        frozen = [item for item in plan["frozen_inputs"] if item.get("kind") == "asset"]
+        self.assertEqual(receipt["status"], "passed")
+        self.assertEqual(len(frozen), 1)
+        self.assertEqual(frozen[0]["sha256"], expected_digest)
+        self.assertIn("assets/cover.png", direct)
+        self.assertIn("frozen-assets/", adapter)
+        self.assertNotIn("assets/cover.png", adapter)
+        staged = list((out / "frozen-assets").iterdir())
+        self.assertEqual(len(staged), 1)
+        self.assertEqual(staged[0].read_bytes(), asset_bytes)
+
+    def test_review_regression_role_treatments_are_rendered(self):
+        project = self.make_project()
+        project.add_sheet(
+            sheet_id="sh_role",
+            placement_id="nd_role",
+            title="Role Treatment",
+            role="chapter",
+            body="# Role Treatment\n\nBody.",
+        )
+        out = project.root / "build/test"
+        receipt = project.compile(
+            out,
+            profile_overrides={"role_transforms": {"chapter": "heading_2", "scene": "concatenate_with_scene_break"}},
+        )
+        rendered_md = (out / "output.md").read_text(encoding="utf-8")
+        rendered_html = (out / "output.html").read_text(encoding="utf-8")
+        self.assertEqual(receipt["status"], "passed")
+        self.assertIn("## Role Treatment", rendered_md)
+        self.assertNotIn("# Role Treatment\n", rendered_md.replace("## Role Treatment\n", ""))
+        self.assertIn(">Role Treatment</h2>", rendered_html)
 
 
 if __name__ == "__main__":
