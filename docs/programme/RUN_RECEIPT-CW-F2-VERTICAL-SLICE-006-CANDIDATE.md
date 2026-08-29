@@ -1,176 +1,178 @@
 # Run Receipt — CW-F2-VERTICAL-SLICE-006-CANDIDATE
 
-**Date:** 2026-08-22  
+**Original run:** 2026-08-22  
+**Adversarial hardening delta:** 2026-08-29  
 **Issue:** #6 — durable Sheet persistence, manifest assembly, and recovery  
 **Phase:** F2 — Substrate Executable  
-**Profile:** `system_design_strategy` + `computational_analysis`  
+**Profile:** `system_design_strategy` + `computational_analysis` + `adversarial_review`  
 **State:** `candidate_not_full_repo_validated`
 
 ## Decision-relevant result
 
-The first executable substrate candidate is now implemented across the Vault, Mutation, Recovery, Manuscript, and Catalog boundaries, with a deterministic vertical-slice harness and a new `substrate` suite in `tools/local_validate.py`.
+The first durable-substrate candidate remains **unaccepted as F2**. It now includes the review-driven hardening required to exercise stale-base races, post-commit outcome ambiguity, abrupt process death, concurrent rollback divergence, canonical-path symlink rejection, corrupt SQLite rebuild, snapshot corruption, permission/ENOSPC failure and no-clobber moves.
 
-The candidate is **not yet accepted as F2 executable substrate**. The current ChatGPT runtime still cannot obtain a complete repository checkout because outbound DNS cannot resolve `github.com`. Therefore the mandatory full-repository command has not run on this branch and no full local pass is claimed.
-
-A prototype-equivalent isolated harness was executed in the local sandbox before promotion of the candidate source. Nine substrate tests passed, covering typed UUIDv7 generation, Sheet/sidecar loading, recovery-buffer save, single-file failure before replacement, manifest reorder without prose mutation, SQLite delete/rebuild equivalence, three-version conflict preservation, snapshot restore, rename/move identity preservation, and recovery-backed multi-file rollback.
-
-After finding that direct execution of `tools/f2_vertical_slice.py` initially lacked the repository root on `sys.path`, the harness was repaired. A local import smoke test (`python tools/f2_vertical_slice.py --help`) then passed and the nine isolated tests were rerun successfully. This is useful candidate evidence, but it remains distinct from the required full-repository receipt.
-
-## Implemented substrate
-
-### Vault
-
-`packages/vault/core.py` provides:
-
-- safe project-relative path resolution with traversal/symlink-escape rejection;
-- native YAML loading without timestamp coercion;
-- Sheet frontmatter parsing and content hashing;
-- recursive Sheet discovery by stable ID rather than filename/path;
-- duplicate Sheet and sidecar detection;
-- Sheet/sidecar identity and kind reconciliation;
-- project and manuscript discovery helpers.
-
-### Mutation Envelope application
-
-`packages/mutation/core.py` provides:
-
-- typed UUIDv7 operation IDs;
-- stale-base SHA-256 validation;
-- same-directory temporary write, file `fsync`, `os.replace`, and directory `fsync` where supported;
-- mutation receipts for applied and failed operations;
-- recovery-backed multi-file operation plans that persist before-images before writes;
-- controlled failure injection and reverse-order rollback of already-applied targets;
-- governed canonical move with stable object identity.
-
-No cross-file atomicity is claimed.
-
-### Recovery
-
-`packages/recovery/core.py` provides:
-
-- checksummed editor recovery buffers;
-- named point-in-time snapshots with file hashes;
-- restore through the Mutation Envelope with a pre-restore snapshot;
-- preservation of base, application, and external versions for conflicts;
-- conflict and restore receipts.
-
-### Manuscript
-
-`packages/manuscript/core.py` provides:
-
-- manifest loading;
-- recursive placement projection;
-- ordered Sheet-ID resolution;
-- governed root-placement reorder through the Mutation Envelope.
-
-Sheet prose is not the assembly authority and is not rewritten by reorder.
-
-### Derived catalog
-
-`packages/catalog/core.py` provides a rebuildable SQLite projection under `.workbench/cache/catalog.sqlite` containing:
-
-- project metadata needed to identify the rebuild source;
-- Sheet ID/path/title/kind/status and hashes;
-- manuscript identity/path/hash;
-- placement/manuscript relationships and order.
-
-The catalog is built from canonical files, may be deleted, and has a deterministic logical projection digest for rebuild comparison.
-
-### Executable issue #6 harness
-
-`tools/f2_vertical_slice.py` copies the reference project into a disposable build directory and exercises:
-
-1. validator before mutation;
-2. Sheet/frontmatter/sidecar read;
-3. recovery-buffer round trip and governed save;
-4. Manifest order and reorder without prose mutation;
-5. SQLite build/delete/validator/rebuild equivalence;
-6. external three-version conflict preservation;
-7. named snapshot and one-Sheet restore;
-8. rename/move identity preservation;
-9. single-file controlled write failure;
-10. recovery-backed multi-file controlled failure and rollback;
-11. validator after the vertical slice;
-12. machine-readable F2 vertical-slice receipt.
-
-## Deterministic validator integration
-
-`tools/local_validate.py` now accepts:
-
-```bash
-python tools/local_validate.py --suite substrate
-```
-
-and includes the substrate tests and reference vertical slice in:
+The mandatory full-repository proof contract is still:
 
 ```bash
 python tools/local_validate.py --suite all
 ```
 
-The runner remains local-only, does not install dependencies, does not require network access, and does not treat GitHub Actions availability as evidence.
+That command has **not** run against this PR from a complete checkout in the current ChatGPT runtime. Direct checkout remains unavailable from the execution container. GitHub Actions is not substituted and remains optional/manual-only. F2 therefore remains open.
 
-## Candidate test observation
+## Implemented substrate
 
-```yaml
-candidate_local_observation:
-  runtime: isolated_sandbox_prototype_equivalent_source
-  tests:
-    command: python -m unittest discover -s tests/substrate -p 'test_*.py' -v
-    count: 9
-    passed: 9
-    failed: 0
-  import_smoke:
-    command: python tools/f2_vertical_slice.py --help
-    state: passed_after_repo_import_root_fix
-  full_repository_validation:
-    command: python tools/local_validate.py --suite all
-    state: not_run
-    reason: current_runtime_cannot_checkout_repository_due_outbound_DNS
+### Vault
+
+`packages/vault/core.py` now treats canonical path safety as part of the data contract:
+
+- traversal and project-root escape are rejected;
+- symlinked path components are rejected;
+- canonical Sheet, sidecar, manifest and inventory files must be regular non-symlink files;
+- Sheet identity is resolved from durable IDs rather than filename/path.
+
+### Mutation application
+
+The stable `packages.mutation.core` API is now backed by separated atomic/application/reconciliation modules.
+
+For guarded writes with an expected base hash, supported platforms use an atomic exchange/replace-with-backup primitive so the exact file displaced at commit time is retained. The displaced version is checked against the expected base. A commit-time mismatch is rolled back while retaining the proposed application bytes separately rather than silently overwriting the external edit.
+
+Platform candidates are:
+
+- Linux: `renameat2(..., RENAME_EXCHANGE)`;
+- macOS: `renamex_np(..., RENAME_SWAP)`;
+- Windows: `ReplaceFileW` with backup.
+
+The displaced backup must remain on the same filesystem as the canonical target on POSIX. Unsupported semantics fail closed.
+
+Post-commit errors are represented as `applied_unconfirmed` when the intended bytes are already canonical. They are not mislabeled as failed operations.
+
+### Recovery-backed multi-file work
+
+Before canonical application, operation bundles persist before images, intended after images, hashes and target state. During application, target progress and displaced versions are persisted. Startup reconciliation can classify an interrupted target as `before`, `after` or `divergent`.
+
+Rollback restores a target only when the current canonical hash still equals the operation's applied hash. If another editor changed it, those divergent bytes are preserved and the operation enters recovery-required state rather than overwriting them.
+
+Hard process termination is part of the candidate fault model, not merely an in-process exception.
+
+### Recovery and snapshots
+
+Snapshot restore now verifies:
+
+- snapshot project identity;
+- exact path membership in `snapshot.yml`;
+- object identity when present;
+- source file is canonical and non-symlinked;
+- source bytes match the checksum recorded in the snapshot manifest before any canonical mutation;
+- restored target bytes match that recorded checksum.
+
+A corrupt snapshot therefore blocks restore before mutation.
+
+### Manifest and derived catalog
+
+Manifest order remains canonical assembly authority. Reorder is applied through the Mutation Envelope and is assayed against unchanged Sheet prose hashes.
+
+SQLite remains under `.workbench/cache/catalog.sqlite`, is derived entirely from canonical files, and is assayed for deletion and corrupt-file rebuild equivalence.
+
+### Canonical move
+
+The candidate move operation uses a no-clobber link/unlink strategy rather than `exists()` followed by an overwriting rename. Destination collision fails closed. Cross-filesystem or unsupported no-clobber moves also fail closed at this gate rather than risking replacement.
+
+## Candidate deterministic evidence
+
+A Linux isolated candidate-source harness was executed after the adversarial repairs:
+
+```text
+python -m unittest discover -s tests/substrate -p 'test_*.py' -v
+Ran 24 tests
+OK
 ```
 
-## Hard-gate status
+The 24-test observation combines the existing substrate cases and the new review-hardening regression suite. It includes:
 
-| Issue #6 hard gate | Candidate evidence | F2 acceptance state |
+- typed UUIDv7;
+- Sheet/sidecar recovery and guarded save;
+- precommit stale-base race with external-version preservation;
+- post-commit `applied_unconfirmed` semantics;
+- permission and ENOSPC failure before commit;
+- hard single-file process exit + restart reconciliation;
+- Manifest reorder without prose mutation;
+- SQLite delete/rebuild and corrupt-cache rebuild;
+- three-version conflict preservation;
+- snapshot restore and corrupt-snapshot rejection;
+- symlinked Sheet rejection;
+- move identity preservation and destination no-clobber;
+- synchronous multi-file rollback;
+- hard multi-file process exit + persisted-bundle recovery;
+- rollback under a concurrent divergent edit without overwriting that edit.
+
+This is `measurement/tested` evidence for the isolated Linux candidate source only. It is **not** the complete-repository acceptance receipt and does not establish the Windows/macOS implementations.
+
+## Vertical-slice receipt semantics
+
+`tools/f2_vertical_slice.py` now emits `cw_f2_vertical_slice_receipt_v2` and distinguishes:
+
+- `vertical_slice_state`; from
+- `f2_gate_state`.
+
+Even a passing vertical-slice command leaves F2 at `awaiting_full_local_validation_and_explicit_gate_decision` until the full local proof contract has run.
+
+The vertical slice now binds its success predicate to the substrate fault matrix and also exercises corrupt-catalog rebuild, controlled permission/ENOSPC failures, post-commit outcome semantics and a stale-base race.
+
+## Hard-gate posture
+
+| Issue #6 hard gate | Candidate state | F2 acceptance |
 |---|---|---|
-| zero silent loss | conflict test preserves base/app/external; recovery buffers/snapshots present | candidate, full vertical slice pending |
-| no SQLite-only durable field | catalog delete/rebuild logical equivalence test | candidate, full validator pending |
-| rename/move preserves Sheet identity | stable-ID move test | candidate |
-| recovery/conflict receipts | receipt-producing tests and harness | candidate |
-| validator before/after cache deletion | wired into executable harness | **not yet executed on complete repo** |
-| controlled failure injection | single-file pre-replace and multi-file rollback tests | candidate |
+| zero silent loss | conflict, stale-race and divergence-preservation controls implemented | pending full local receipt + platform replication |
+| no SQLite-only durable field | delete/rebuild + corrupt-rebuild controls implemented | pending full local receipt |
+| rename/move preserves Sheet identity | tested in isolated candidate | pending full local receipt |
+| recovery/conflict receipts | implemented | pending full local receipt |
+| validator before/after cache deletion | wired into vertical slice | **not yet executed on complete PR checkout** |
+| controlled failure injection | abrupt exits + race + permission + ENOSPC + postcommit controls implemented | pending full local receipt + platform replication |
 
-## Known limitations / review targets
+## Residual falsifiers
 
-- `os.replace` behavior and directory durability still require platform-specific execution on supported filesystems.
-- The `after_replace` failpoint represents post-replacement failure and needs recovery semantics before it can be treated as zero-loss crash proof.
-- Multi-file recovery is currently synchronous rollback after an injected exception; real process termination between targets must be exercised from persisted bundle state.
-- Snapshot file copying is an F2 implementation boundary, not yet a finalized archive/storage design.
-- Conflict detection here consumes explicit base/app/external bytes; filesystem watcher/editor integration is later work.
-- SQLite schema is deliberately minimal and derived; FTS/search is not required for this slice.
-- Physical Electron/CodeMirror behavior is outside this substrate candidate.
+The following remain deliberately open:
+
+1. Execute `python tools/local_validate.py --suite all` from a complete checkout with validator dependencies installed.
+2. Physically exercise guarded replacement on supported Windows and macOS filesystems; the current new exchange implementation is tested only on Linux.
+3. Exercise filesystem/mount edge cases including same-device backup assumptions and cross-volume moves.
+4. Re-run adversarial PR review against the hardened head and repair any new blocking findings.
+5. Only after those controls, adjudicate the explicit F2 gate. A mergeable PR is not itself F2 acceptance.
 
 ## Epistemic annotation
 
-- isolated nine-test result: `epistemic_basis: measurement`, `work_function: experiment`, `validation_state: tested` for the isolated prototype-equivalent harness;
-- candidate branch implementation: `epistemic_basis: derived_result`, `work_function: design`, `validation_state: unreviewed_by_full_repo_execution`;
-- full F2 acceptance: `validation_state: unreviewed` until a real checkout produces the required receipt.
+```yaml
+isolated_linux_substrate_tests:
+  epistemic_basis: measurement
+  work_function: experiment
+  validation_state: tested
+  count: 24
+  result: pass
+branch_implementation:
+  epistemic_basis: derived_result
+  work_function: design
+  validation_state: machine_checked_only_in_isolated_candidate_source
+full_repository_validation:
+  validation_state: unreviewed
+  command: python tools/local_validate.py --suite all
+  state: not_run
+F2_gate:
+  validation_state: unreviewed
+  state: open
+```
 
 ## Route
 
 ```yaml
 route:
-  destination: build
-  subject: issue_6_candidate
+  destination: F2_validation
   next_actions:
-    - open implementation PR and run adversarial code/authority review
-    - repair blocking review findings
-    - run python tools/local_validate.py --suite all from a complete local checkout
+    - rerun adversarial review on the hardened PR head
+    - repair blocking findings
+    - obtain complete local checkout execution
+    - run python tools/local_validate.py --suite all
     - preserve build/local-validation-receipt.json and F2_VERTICAL_SLICE_RECEIPT.json
-    - only then adjudicate F2 Substrate Executable acceptance
-  acceptance_test:
-    - full local validation passes
-    - issue_6 hard gates pass
-    - no competing canonical authority is introduced
+    - explicitly adjudicate F2 Substrate Executable
   rollback_or_reopen:
-    - reopen affected F1 ADR if implementation falsifies an accepted authority boundary
+    - reopen affected F1 ADR if executable evidence falsifies an accepted authority boundary
 ```
